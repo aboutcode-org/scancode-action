@@ -17,13 +17,12 @@ inputs:
     default: "json xlsx spdx cyclonedx"
 runs:
   using: "composite"
+  env:
+    SECRET_KEY: "abc"
   steps:
-    - name: Set the env
+    - name: Check the env
       shell: bash
-      run: |
-        export SECRET_KEY="TEST"
-        export SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3"
-        export SCANCODEIO_DB_NAME="sqlite3.db"
+      run: echo $SECRET_KEY
     - uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
