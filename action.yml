@@ -31,10 +31,10 @@ runs:
       shell: bash
       run: |
         pip install scancodeio
-        scanpipe migrate
+        SECRET_KEY="A" scanpipe migrate
     - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
       shell: bash
-      run: scanpipe create-project ${{ inputs.project-name }}
+      run: SECRET_KEY="A" scanpipe create-project ${{ inputs.project-name }}
         --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
         --pipeline ${{ inputs.pipeline-name }}
         --execute
