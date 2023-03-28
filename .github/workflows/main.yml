@@ -8,3 +8,4 @@ jobs:
       - uses: nexB/scancode-action@alpha
         with:
           project-name: "test"
+          output-formats: "json"
