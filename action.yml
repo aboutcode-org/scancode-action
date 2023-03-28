@@ -27,11 +27,13 @@ runs:
         pip install scancodeio
         scanpipe migrate
     - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
+      shell: bash
       run: scanpipe create-project ${{ inputs.project-name }}
         --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
         --pipeline ${{ inputs.pipeline-name }}
         --execute
     - name: Generate outputs
+      shell: bash
       run: scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }}
     - name: Upload outputs
       uses: actions/upload-artifact@v3
