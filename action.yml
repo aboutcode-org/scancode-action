@@ -18,17 +18,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: path = ${{ github.workspace }}
+    - name: path
       shell: bash
-      run: |
-        mkdir -p /tmp/tmpzjp3x9i0/projects/test-5559b14b/output/
-        touch /tmp/tmpzjp3x9i0/projects/test-5559b14b/output/results-2023-03-28-16-10-02.json
-    - name: Upload outputs
-      uses: actions/upload-artifact@v3
-      with:
-        name: scan-outputs
-        path: /tmp/**/projects/**/output/*
-
+      run: echo ${{ github.workspace }}
 #    - uses: actions/setup-python@v4
 #      with:
 #        python-version: ${{ inputs.python-version }}
