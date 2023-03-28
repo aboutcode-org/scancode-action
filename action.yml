@@ -1,0 +1,39 @@
+name: "ScanCode action"
+description: "Run ScanCode.io pipelines in your workflows"
+inputs:
+  pipeline-name:
+    description: "Name of the pipeline"
+    required: true
+    default: "scan_codebase"
+  project-name:
+    description: "Name of the project"
+    required: true
+    default: "TODO"
+  python-version:
+    description: "Python version"
+    default: "3.11"
+  output-formats:
+    description: "Output formats"
+    default: "json xlsx spdx cyclonedx"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install and setup ScanCode.io
+      run: |
+        pip install scancodeio
+        scanpipe migrate
+    - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
+      run: scanpipe create-project ${{ inputs.project-name }}
+        --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
+        --pipeline ${{ inputs.pipeline-name }}
+        --execute
+    - name: Generate outputs
+      run: scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }}
+    - name: Upload outputs
+      uses: actions/upload-artifact@v3
+      with:
+        name: scan-outputs
+        path: ${{ github.action_path }}/**/output/*
