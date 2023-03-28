@@ -22,7 +22,7 @@ runs:
       shell: bash
       run: |
         export SECRET_KEY="TEST"
-        export SCANCODEIO_DB_ENGINE"django.db.backends.sqlite3"
+        export SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3"
         export SCANCODEIO_DB_NAME="sqlite3.db"
     - uses: actions/setup-python@v4
       with:
