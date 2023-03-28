@@ -22,6 +22,7 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
     - name: Install and setup ScanCode.io
+      shell: bash
       run: |
         pip install scancodeio
         scanpipe migrate
