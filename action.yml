@@ -17,12 +17,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
 runs:
   using: "composite"
-  env:
-    SECRET_KEY: "abc"
   steps:
-    - name: Check the env
-      shell: bash
-      run: echo $SECRET_KEY
     - uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
