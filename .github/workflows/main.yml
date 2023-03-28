@@ -1,0 +1,10 @@
+on: [push]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    name: ScanCode-action
+    steps:
+      - uses: nexB/scancode-action@alpha
+        with:
+          project-name: "test"
