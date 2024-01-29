@@ -46,7 +46,7 @@ runs:
       shell: bash
       run: |
         output=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
-        echo "output-paths=$output" >> $GITHUB_OUTPUT
+        echo "output-paths=\"$output\"" >> $GITHUB_OUTPUT
     - name: Use scanpipe output in the next step
       shell: bash
       run: echo "${{ steps.scanpipe.outputs.output-paths }}"
