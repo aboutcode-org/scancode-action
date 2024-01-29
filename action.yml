@@ -28,7 +28,9 @@ runs:
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo ${{ env.SECRET_KEY }}
+        echo "${{ env.SECRET_KEY }}"
+        echo "$(openssl rand -base64 32)"
+        echo "$(echo $RANDOM)"
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
 
@@ -59,6 +61,10 @@ runs:
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4
+      id: artifact-upload-step
       with:
         name: scanpipe-outputs
         path: ${{ env.WORK_DIRECTORY }}/output/*
+
+    - name: Output artifact ID
+      run: echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
