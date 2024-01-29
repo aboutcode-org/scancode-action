@@ -47,7 +47,7 @@ runs:
     - name: Set project work directory path in the environment
       shell: bash
       run: |
-        project_status=$(./manage.py status --project ${{ inputs.project-name }})
+        project_status=$(scanpipe status --project ${{ inputs.project-name }})
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
@@ -63,6 +63,6 @@ runs:
         name: scanpipe-outputs
         path: ${{ env.WORK_DIRECTORY }}/output/*
 
-    - name: Output artifact ID
+    - name: Artifact download URL
       shell: bash
-      run: echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
+      run: echo "Artifact can be downloaded from ${{ steps.artifact-upload-step.outputs.artifact-url }}"
