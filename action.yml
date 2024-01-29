@@ -19,14 +19,15 @@ runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@v5
-      id: python
       with:
         python-version: ${{ inputs.python-version }}
+    - name: Set up environment
+      shell: bash
+      run: |
+        echo "SECRET_KEY=abcd" >> $GITHUB_ENV
     - name: Install and setup ScanCode.io
       shell: bash
       run: |
-        echo $SECRET_KEY
-        echo $RANDOM >> $SECRET_KEY
         echo $SECRET_KEY
         pip install scancodeio
         SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
