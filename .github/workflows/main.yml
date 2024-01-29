@@ -1,10 +1,10 @@
 on: [push]
 
 jobs:
-  scan:
+  scan-codebase:
     runs-on: ubuntu-latest
-    name: ScanCode-action
+    name: Scan codebase with ScanCode.io
     steps:
       - uses: nexB/scancode-action@alpha
         with:
-           output-formats: "json xlsx spdx cyclonedx"
+          pipeline-name: "scan_codebase"
