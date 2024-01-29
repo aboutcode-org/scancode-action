@@ -25,7 +25,7 @@ runs:
     - name: Install and setup ScanCode.io
       shell: bash
       run: |
-        echo "${{ steps.python.outputs.python-path }}"
+        ls -la ${{ steps.python.outputs.python-path }}
         GET_SECRET_KEY=`cat /dev/urandom | head -c 50  | base64` 
         echo "SECRET_KEY=GET_SECRET_KEY"
         # pip install scancodeio
