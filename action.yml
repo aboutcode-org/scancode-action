@@ -24,6 +24,8 @@ runs:
     - name: Install and setup ScanCode.io
       shell: bash
       run: |
+        touch /etc/scancodeio/.env
+        echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
         pip install scancodeio
         echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
         cat /etc/scancodeio/.env
