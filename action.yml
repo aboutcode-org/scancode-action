@@ -17,6 +17,8 @@ inputs:
     default: "json xlsx spdx cyclonedx"
 runs:
   using: "composite"
+  env:
+    SECRET_KEY: aaaa
   steps:
     - uses: actions/setup-python@v5
       id: python
@@ -25,12 +27,10 @@ runs:
     - name: Install and setup ScanCode.io
       shell: bash
       run: |
-        ls -la ${{ steps.python.outputs.python-path }}
-        GET_SECRET_KEY=`cat /dev/urandom | head -c 50  | base64` 
-        echo "SECRET_KEY=GET_SECRET_KEY"
-        # pip install scancodeio
-        echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
-        cat /etc/scancodeio/.env
+        echo $SECRET_KEY
+        echo $RANDOM >> $SECRET_KEY
+        echo $SECRET_KEY
+        pip install scancodeio
         SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
     - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
       shell: bash
