@@ -8,7 +8,7 @@ inputs:
   project-name:
     description: "Name of the project"
     required: true
-    default: "TODO"
+    default: "scancode-action"
   python-version:
     description: "Python version"
     default: "3.11"
@@ -18,28 +18,25 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: path
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install and setup ScanCode.io
       shell: bash
-      run: echo ${{ github.workspace }}
-#    - uses: actions/setup-python@v4
-#      with:
-#        python-version: ${{ inputs.python-version }}
-#    - name: Install and setup ScanCode.io
-#      shell: bash
-#      run: |
-#        pip install scancodeio
-#        SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
-#    - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
-#      shell: bash
-#      run: SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe create-project ${{ inputs.project-name }}
-#        --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-#        --pipeline ${{ inputs.pipeline-name }}
-#        --execute
-#    - name: Generate outputs
-#      shell: bash
-#      run: SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }}
-#    - name: Upload outputs
-#      uses: actions/upload-artifact@v3
-#      with:
-#        name: scan-outputs
-#        path: ${{ github.action_path }}/**/output/*
+      run: |
+        pip install scancodeio
+        SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
+    - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
+      shell: bash
+      run: SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe create-project ${{ inputs.project-name }}
+        --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
+        --pipeline ${{ inputs.pipeline-name }}
+        --execute
+    - name: Generate outputs
+      shell: bash
+      run: SECRET_KEY="abc" SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+    - name: Upload outputs
+      uses: actions/upload-artifact@v3
+      with:
+        name: scan-outputs
+        path: ${{ github.action_path }}/**/output/*
