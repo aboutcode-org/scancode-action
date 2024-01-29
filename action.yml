@@ -28,9 +28,6 @@ runs:
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "${{ env.SECRET_KEY }}"
-        echo "$(openssl rand -base64 32)"
-        echo "$(echo $RANDOM)"
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
 
@@ -49,15 +46,15 @@ runs:
 
     - name: Set project work directory path in the environment
       shell: bash
-      run: | 
-        work_directory=$(scanpipe status --project ${{ inputs.project-name }} | grep -oP 'Work directory:\s*\K[^\n]+')
+      run: |
+        project_status=$(./manage.py status --project ${{ inputs.project-name }})
+        work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: |
-        scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+      run: scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4
