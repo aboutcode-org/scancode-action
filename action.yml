@@ -17,8 +17,6 @@ inputs:
     default: "json xlsx spdx cyclonedx"
 runs:
   using: "composite"
-  env:
-    SECRET_KEY: aaaa
   steps:
     - uses: actions/setup-python@v5
       id: python
