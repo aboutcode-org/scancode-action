@@ -38,13 +38,13 @@ runs:
         --pipeline ${{ inputs.pipeline-name }}
         --execute
     - name: Generate outputs
-      shell: bash
       id: scanpipe
+      shell: bash
       run: |
         output=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
-        echo $output >> $GITHUB_OUTPUT
+        echo "output-paths=$output" >> $GITHUB_OUTPUT
     - name: Use scanpipe output in the next step
-      run: echo "${{ steps.scanpipe.outputs.scanpipe-output-paths }}"
+      run: echo "${{ steps.scanpipe.outputs.output-paths }}"
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       with:
