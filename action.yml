@@ -25,9 +25,8 @@ runs:
       shell: bash
       run: |
         pip install scancodeio
-        echo "SECRET_KEY=abcd" > .env
-        cat .env
-        echo ${{ github.action_path }}
+        echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
+        cat /etc/scancodeio/.env
         SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
     - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
       shell: bash
