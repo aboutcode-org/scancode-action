@@ -13,9 +13,9 @@ inputs:
   output-formats:
     description: "Output formats"
     default: "json xlsx spdx cyclonedx"
-outputs:
-  output-paths:
-    description: "Paths of the output files."
+#outputs:
+#  output-paths:
+#    description: "Paths of the output files."
 runs:
   using: "composite"
   steps:
@@ -48,9 +48,9 @@ runs:
         echo "output-paths=$output" >> $GITHUB_OUTPUT
     - name: Use scanpipe output in the next step
       shell: bash
-      run: echo "${{ outputs.output-paths }}"
-#    - name: Upload outputs
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: scan-outputs
-#        path: ${{ outputs.scanpipe.value }}
+      run: echo "${{ steps.scanpipe.outputs.output-paths }}"
+    - name: Upload outputs
+      uses: actions/upload-artifact@v4
+      with:
+        name: scan-outputs
+        path: ${{ steps.scanpipe.outputs.output-paths }}
