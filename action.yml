@@ -4,15 +4,15 @@ inputs:
   pipeline-name:
     description: "Name of the pipeline"
     default: "scan_codebase"
+  output-formats:
+    description: "Output formats"
+    default: "json xlsx spdx cyclonedx"
   project-name:
     description: "Name of the project"
     default: "scancode-action"
   python-version:
     description: "Python version"
     default: "3.11"
-  output-formats:
-    description: "Output formats"
-    default: "json xlsx spdx cyclonedx"
 
 runs:
   using: "composite"
