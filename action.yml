@@ -16,40 +16,49 @@ inputs:
 #outputs:
 #  output-paths:
 #    description: "Paths of the output files."
+
 runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python-version }}
+
     - name: Set up environment
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo $SECRET_KEY
+        echo ${{ env.SECRET_KEY }}
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
+
     - name: Install ScanCode.io
       shell: bash
       run: |
         pip install scancodeio
         scanpipe migrate
+
     - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
       shell: bash
       run: scanpipe create-project ${{ inputs.project-name }}
         --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
         --pipeline ${{ inputs.pipeline-name }}
         --execute
+
+    - name: Set project work directory path in the environment
+      shell: bash
+      run: | 
+        work_directory=$(scanpipe status --project ${{ inputs.project-name }} | grep -oP 'Work directory:\s*\K[^\n]+')
+        echo "WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+
     - name: Generate outputs
       id: scanpipe
       shell: bash
       run: |
         scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
-        work_directory=$(scanpipe status --project ${{ inputs.project-name }} | grep -oP 'Work directory:\s*\K[^\n]+')
-        echo "Work directory path: $work_directory"
-        echo "work-directory=$work_directory" >> $GITHUB_OUTPUT
+
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       with:
         name: scanpipe-outputs
-        path: ${{ steps.scanpipe.outputs.work-directory }}/output/*
+        path: ${{ env.WORK_DIRECTORY }}/output/*
