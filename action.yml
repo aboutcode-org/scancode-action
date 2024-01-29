@@ -62,7 +62,3 @@ runs:
       with:
         name: scanpipe-outputs
         path: ${{ env.WORK_DIRECTORY }}/output/*
-
-    - name: Artifact download URL
-      shell: bash
-      run: echo "Artifact can be downloaded from ${{ steps.artifact-upload-step.outputs.artifact-url }}"
