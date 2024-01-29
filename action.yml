@@ -22,7 +22,8 @@ runs:
     - name: Set up environment
       shell: bash
       run: |
-        echo "SECRET_KEY=$(cat /dev/urandom | head -c 50  | base64)" >> $GITHUB_ENV
+        echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
+        echo $SECRET_KEY
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
     - name: Install ScanCode.io
@@ -38,9 +39,15 @@ runs:
         --execute
     - name: Generate outputs
       shell: bash
-      run: scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+      id: scanpipe
+      run: |
+        output=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
+        echo "::set-output name=scanpipe-output-paths::$output"
+    - name: Use scanpipe output in the next step
+      run: echo "${{ steps.scanpipe.outputs.scanpipe-output-paths }}"
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       with:
         name: scan-outputs
-        path: ${{ github.action_path }}/**/output/*
+        path: ${{ steps.scanpipe.outputs.scanpipe-output-paths }}
+#        path: ${{ github.action_path }}/**/output/*
