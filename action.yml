@@ -26,7 +26,7 @@ runs:
       run: |
         echo "SECRET_KEY=ABCD" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
-        echo SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
     - name: Install ScanCode.io
       shell: bash
       run: |
