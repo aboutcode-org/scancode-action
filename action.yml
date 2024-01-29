@@ -13,9 +13,6 @@ inputs:
   output-formats:
     description: "Output formats"
     default: "json xlsx spdx cyclonedx"
-#outputs:
-#  output-paths:
-#    description: "Paths of the output files."
 
 runs:
   using: "composite"
