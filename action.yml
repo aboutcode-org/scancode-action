@@ -3,11 +3,9 @@ description: "Run ScanCode.io pipelines in your workflows"
 inputs:
   pipeline-name:
     description: "Name of the pipeline"
-    required: true
     default: "scan_codebase"
   project-name:
     description: "Name of the project"
-    required: true
     default: "scancode-action"
   python-version:
     description: "Python version"
@@ -24,7 +22,7 @@ runs:
     - name: Set up environment
       shell: bash
       run: |
-        echo "SECRET_KEY=ABCD" >> $GITHUB_ENV
+        echo "SECRET_KEY=$(cat /dev/urandom | head -c 50  | base64)" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
     - name: Install ScanCode.io
