@@ -67,4 +67,5 @@ runs:
         path: ${{ env.WORK_DIRECTORY }}/output/*
 
     - name: Output artifact ID
+      shell: bash
       run: echo 'Artifact URL is ${{ steps.artifact-upload-step.outputs.artifact-url }}'
