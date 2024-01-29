@@ -24,9 +24,9 @@ runs:
     - name: Install and setup ScanCode.io
       shell: bash
       run: |
-        touch /etc/scancodeio/.env
-        echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
-        pip install scancodeio
+        GET_SECRET_KEY=`cat /dev/urandom | head -c 50  | base64` 
+        echo "SECRET_KEY=GET_SECRET_KEY"
+        # pip install scancodeio
         echo "SECRET_KEY=abcd" > /etc/scancodeio/.env
         cat /etc/scancodeio/.env
         SCANCODEIO_DB_ENGINE="django.db.backends.sqlite3" SCANCODEIO_DB_NAME="sqlite3.db" scanpipe migrate
