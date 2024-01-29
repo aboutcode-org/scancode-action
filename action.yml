@@ -12,7 +12,8 @@ inputs:
     default: "3.11"
   output-formats:
     description: "Output formats"
-    default: "json xlsx spdx cyclonedx"
+#    default: "json xlsx spdx cyclonedx"
+    default: "json"
 #outputs:
 #  output-paths:
 #    description: "Paths of the output files."
