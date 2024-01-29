@@ -42,12 +42,11 @@ runs:
       id: scanpipe
       run: |
         output=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
-        echo "::set-output name=scanpipe-output-paths::$output"
+        echo $output >> $GITHUB_OUTPUT
     - name: Use scanpipe output in the next step
       run: echo "${{ steps.scanpipe.outputs.scanpipe-output-paths }}"
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       with:
         name: scan-outputs
-        path: ${{ steps.scanpipe.outputs.scanpipe-output-paths }}
-#        path: ${{ github.action_path }}/**/output/*
+        path: ${{ outputs.scanpipe.value }}
