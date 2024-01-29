@@ -45,13 +45,12 @@ runs:
       id: scanpipe
       shell: bash
       run: |
-        output=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
-        echo "output-paths=\"$output\"" >> $GITHUB_OUTPUT
-    - name: Use scanpipe output in the next step
-      shell: bash
-      run: echo "${{ steps.scanpipe.outputs.output-paths }}"
+        scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+        work_directory=$(./manage.py status --project ${{ inputs.project-name }} | grep -oP 'Work directory:\s*\K[^\n]+')
+        echo "Work directory path: $work_directory"
+        echo "work-directory=$work_directory" >> $GITHUB_OUTPUT
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       with:
         name: scan-outputs
-        path: ${{ steps.scanpipe.outputs.output-paths }}
+        path: ${{ steps.scanpipe.outputs.work-directory }}
