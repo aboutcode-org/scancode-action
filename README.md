@@ -82,7 +82,19 @@ steps:
 - uses: nexB/scancode-action@alpha
   with:
     pipelines: "scan_codebase,find_vulnerabilities"
+  env:
+    VULNERABLECODE_URL: https://public.vulnerablecode.io/
 ```
+
+#### Configuring `find_vulnerabilities` Pipeline
+
+The `find_vulnerabilities` pipeline requires access to a VulnerableCode instance, 
+which can be defined using the `VULNERABLECODE_URL` environment variable.
+
+In the example provided, a public instance is referenced. 
+However, you also have the option to run your own VulnerableCode instance. 
+For details on setting up and configuring your own instance, please refer to the 
+[VulnerableCode documentation](https://vulnerablecode.readthedocs.io/en/latest/index.html).
 
 ### Choose the output formats
 
