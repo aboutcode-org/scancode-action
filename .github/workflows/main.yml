@@ -15,8 +15,7 @@ jobs:
 #          VULNERABLECODE_URL: https://public.vulnerablecode.io/
       - name: Download repository archive to scancode-inputs/ directory
         run: |
-          mkdir -p scancode-inputs
           wget -P scancode-inputs/ https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
       - uses: nexB/scancode-action@alpha
         with:
-          pipelines: "scan_single_package"
+          pipelines: "scan_package"
