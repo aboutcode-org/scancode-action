@@ -2,7 +2,7 @@ name: "ScanCode action"
 description: "Run ScanCode.io pipelines in your workflows"
 inputs:
   pipelines:
-    description: "Names of the pipelines (comma-separated)"
+    description: "Names of the pipelines (comma-separated) and in order."
     default: "scan_codebase"
   output-formats:
     description: "Output formats"
@@ -47,12 +47,10 @@ runs:
     - name: Create project and run the ${{ inputs.pipelines }} pipelines
       shell: bash
       run: |
-        set -e
         scanpipe create-project ${{ inputs.project-name }} \
           --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip \
           ${{ env.PIPELINE_CLI_ARGS }} \
           --execute
-        set +e
 
     - name: Set project work directory path in the environment
       shell: bash

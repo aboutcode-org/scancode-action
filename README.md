@@ -15,7 +15,8 @@ Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workf
   - [Inputs](#inputs)
 - [Examples](#examples)
   - [Scan repo codebase](#scan-repo-codebase)
-  - [Use a specific pipeline](#use-a-specific-pipeline)
+  - [Run a specific pipeline](#run-a-specific-pipeline)
+  - [Run multiple pipelines](#run-multiple-pipelines)
   - [Choose the output formats](#choose-the-output-formats)
   - [Define a custom project name](#define-a-custom-project-name)
 - [Where does the scan results go?](#where-does-the-scan-results-go)
@@ -38,7 +39,7 @@ steps:
 ```yaml
 - uses: nexB/scancode-action@alpha
   with:
-    # Name of the pipeline.
+    # Names of the pipelines (comma-separated) and in order.
     # Default is 'scan_codebase'
     pipelines:
 
@@ -64,12 +65,20 @@ steps:
 - uses: nexB/scancode-action@alpha
 ```
 
-### Use a specific pipeline
+### Run a specific pipeline
 
 ```yaml
 - uses: nexB/scancode-action@alpha
   with:
     pipelines: "scan_codebase"
+```
+
+### Run multiple pipelines
+
+```yaml
+- uses: nexB/scancode-action@alpha
+  with:
+    pipelines: "scan_codebase,find_vulnerabilities"
 ```
 
 ### Choose the output formats
