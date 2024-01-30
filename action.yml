@@ -50,7 +50,6 @@ runs:
         echo $GITHUB_WORKSPACE
         ls -la $GITHUB_WORKSPACE
         scanpipe create-project ${{ inputs.project-name }} \
-#          --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip \
           --copy-codebase $GITHUB_WORKSPACE \
           ${{ env.PIPELINE_CLI_ARGS }} \
           --execute
