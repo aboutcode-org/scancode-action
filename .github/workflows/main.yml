@@ -7,4 +7,4 @@ jobs:
     steps:
       - uses: nexB/scancode-action@alpha
         with:
-          pipelines: "scan_codebase"
+          pipelines: "scan_codebase,find_vulnerabilities"
