@@ -18,6 +18,7 @@ Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workf
   - [Run a specific pipeline](#run-a-specific-pipeline)
   - [Run multiple pipelines](#run-multiple-pipelines)
   - [Choose the output formats](#choose-the-output-formats)
+  - [Fetch pipelines inputs](#fetch-pipelines-inputs)
   - [Define a custom project name](#define-a-custom-project-name)
 - [Where does the scan results go?](#where-does-the-scan-results-go)
 
@@ -28,6 +29,8 @@ Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workf
 ```yaml
 steps:
 - uses: actions/checkout@v4
+  with:
+    path: scancode-inputs
 - uses: nexB/scancode-action@alpha
   with:
     pipelines: "scan_codebase"
@@ -46,6 +49,10 @@ steps:
     # The list of output formats to generate.
     # Default is 'json xlsx spdx cyclonedx'
     output-formats:
+      
+    # Relative path within the $GITHUB_WORKSPACE for pipeline inputs.
+    # Default is 'scancode-inputs'
+    inputs-path:
 
     # Name of the project.
     # Default is 'scancode-action'
@@ -63,6 +70,8 @@ steps:
 ```yaml
 steps:
 - uses: actions/checkout@v4
+  with:
+    path: scancode-inputs
 - uses: nexB/scancode-action@alpha
 ```
 
@@ -102,6 +111,18 @@ For details on setting up and configuring your own instance, please refer to the
 - uses: nexB/scancode-action@alpha
   with:
     output-formats: "json xlsx spdx cyclonedx"
+```
+
+### Fetch pipelines inputs
+
+```yaml
+- name: Download repository archive to scancode-inputs/ directory
+  run: |
+    mkdir -p scancode-inputs
+    curl -o scancode-inputs/ https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
+- uses: nexB/scancode-action@alpha
+  with:
+    pipelines: "scan_single_package"
 ```
 
 ### Define a custom project name

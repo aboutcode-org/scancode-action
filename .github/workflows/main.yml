@@ -5,11 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     name: Scan codebase with ScanCode.io
     steps:
-      - uses: actions/checkout@v4
-        with:
-          path: scancode-inputs
+#      - uses: actions/checkout@v4
+#        with:
+#          path: scancode-inputs
+#      - uses: nexB/scancode-action@alpha
+#        with:
+#          pipelines: "scan_codebase,find_vulnerabilities"
+#        env:
+#          VULNERABLECODE_URL: https://public.vulnerablecode.io/
+      - name: Download repository archive to scancode-inputs/ directory
+        run: |
+          mkdir -p scancode-inputs
+          curl -o scancode-inputs/ https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
       - uses: nexB/scancode-action@alpha
         with:
-          pipelines: "scan_codebase,find_vulnerabilities"
-        env:
-          VULNERABLECODE_URL: https://public.vulnerablecode.io/
+          pipelines: "scan_single_package"
