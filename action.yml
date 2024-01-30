@@ -16,6 +16,15 @@ inputs:
 
 runs:
   using: "composite"
+  services:
+    postgres:
+      image: postgres:latest
+      env:
+        POSTGRES_DB: mydatabase
+        POSTGRES_USER: myuser
+        POSTGRES_PASSWORD: mypassword
+      ports:
+        - 5432:5432
   steps:
     - uses: actions/setup-python@v5
       with:
