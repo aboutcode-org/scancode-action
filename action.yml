@@ -1,8 +1,8 @@
 name: "ScanCode action"
 description: "Run ScanCode.io pipelines in your workflows"
 inputs:
-  pipeline-name:
-    description: "Name of the pipeline"
+  pipelines:
+    description: "Names of the pipelines (comma-separated)"
     default: "scan_codebase"
   output-formats:
     description: "Output formats"
@@ -34,11 +34,21 @@ runs:
         pip install scancodeio
         scanpipe migrate
 
-    - name: Create project and run the ${{ inputs.pipeline-name }} pipeline
+    - name: Generate pipelines CLI arguments
+      shell: bash
+      run: |
+        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipeline-names }}"
+        options=""
+        for pipeline in "${PIPELINES[@]}"; do
+          options+="--pipeline $pipeline "
+        done
+        echo "PIPELINE_CLI_ARGS=$options" >> $GITHUB_ENV
+
+    - name: Create project and run the ${{ inputs.pipelines }} pipelines
       shell: bash
       run: scanpipe create-project ${{ inputs.project-name }}
         --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-        --pipeline ${{ inputs.pipeline-name }}
+        ${{ env.PIPELINE_CLI_ARGS }}
         --execute
 
     - name: Set project work directory path in the environment

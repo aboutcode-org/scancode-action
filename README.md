@@ -29,7 +29,7 @@ steps:
 - uses: actions/checkout@v4
 - uses: nexB/scancode-action@alpha
   with:
-    pipeline-name: "scan_codebase"
+    pipelines: "scan_codebase"
     output-formats: "json xlsx spdx cyclonedx"
 ```
 
@@ -40,7 +40,7 @@ steps:
   with:
     # Name of the pipeline.
     # Default is 'scan_codebase'
-    pipeline-name:
+    pipelines:
 
     # The list of output formats to generate.
     # Default is 'json xlsx spdx cyclonedx'
@@ -69,7 +69,7 @@ steps:
 ```yaml
 - uses: nexB/scancode-action@alpha
   with:
-    pipeline-name: "scan_codebase"
+    pipelines: "scan_codebase"
 ```
 
 ### Choose the output formats
