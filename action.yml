@@ -27,7 +27,6 @@ runs:
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
-        echo $VULNERABLECODE_URL
         echo ${{ env.VULNERABLECODE_URL }}
 
     - name: Install ScanCode.io
@@ -52,7 +51,7 @@ runs:
         echo $GITHUB_WORKSPACE
         ls -la $GITHUB_WORKSPACE
         scanpipe create-project ${{ inputs.project-name }} \
-          --copy-codebase $GITHUB_WORKSPACE \
+          --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip \
           ${{ env.PIPELINE_CLI_ARGS }} \
           --execute
 
@@ -61,16 +60,19 @@ runs:
       run: |
         project_status=$(scanpipe status --project ${{ inputs.project-name }})
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
-        echo "WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+      run: scanpipe output 
+        --project ${{ inputs.project-name }} 
+        --format ${{ inputs.output-formats }} 
+        --no-color
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
         name: scanpipe-outputs
-        path: ${{ env.WORK_DIRECTORY }}/output/*
+        path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*

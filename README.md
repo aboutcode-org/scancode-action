@@ -68,6 +68,8 @@ steps:
 
 ### Run a specific pipeline
 
+[Built-in pipelines list](https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html)
+
 ```yaml
 - uses: nexB/scancode-action@alpha
   with:
