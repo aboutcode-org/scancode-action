@@ -16,15 +16,6 @@ inputs:
 
 runs:
   using: "composite"
-  services:
-    postgres:
-      image: postgres:latest
-      env:
-        POSTGRES_DB: mydatabase
-        POSTGRES_USER: myuser
-        POSTGRES_PASSWORD: mypassword
-      ports:
-        - 5432:5432
   steps:
     - uses: actions/setup-python@v5
       with:
@@ -36,13 +27,16 @@ runs:
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
-        echo ${{ env.VULNERABLECODE_URL }}
+        echo $GITHUB_WORKSPACE
+        ls -la $GITHUB_WORKSPACE
 
     - name: Install ScanCode.io
       shell: bash
       run: |
         pip install scancodeio
         scanpipe migrate
+        echo $GITHUB_WORKSPACE
+        ls -la $GITHUB_WORKSPACE
 
     - name: Generate pipelines CLI arguments
       shell: bash
