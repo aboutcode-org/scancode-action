@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Scan codebase with ScanCode.io
     steps:
+      - uses: actions/checkout@v4
       - uses: nexB/scancode-action@alpha
         with:
           pipelines: "scan_codebase,find_vulnerabilities"

@@ -62,6 +62,7 @@ steps:
 
 ```yaml
 steps:
+- uses: actions/checkout@v4
 - uses: nexB/scancode-action@alpha
 ```
 
