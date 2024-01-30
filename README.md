@@ -118,8 +118,7 @@ For details on setting up and configuring your own instance, please refer to the
 ```yaml
 - name: Download repository archive to scancode-inputs/ directory
   run: |
-    mkdir -p scancode-inputs
-    curl -o scancode-inputs/ https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
+    wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
 - uses: nexB/scancode-action@alpha
   with:
     pipelines: "scan_single_package"

@@ -36,10 +36,6 @@ runs:
       run: |
         pip install scancodeio
         scanpipe migrate
-        echo $GITHUB_WORKSPACE
-        ls -la $GITHUB_WORKSPACE
-        echo ${{ inputs.inputs-path }}
-        ls -la ${{ inputs.inputs-path }}
 
     - name: Generate pipelines CLI arguments
       shell: bash
@@ -54,10 +50,9 @@ runs:
     - name: Create project and run the ${{ inputs.pipelines }} pipelines
       shell: bash
       run: |
-        echo $GITHUB_WORKSPACE
-        ls -la $GITHUB_WORKSPACE
+        echo ${{ inputs.inputs-path }}
+        ls -la ${{ inputs.inputs-path }}
         scanpipe create-project ${{ inputs.project-name }} \
-          --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip \
           ${{ env.PIPELINE_CLI_ARGS }} \
           --execute
 
