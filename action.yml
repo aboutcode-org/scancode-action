@@ -47,21 +47,24 @@ runs:
         done
         echo "PIPELINE_CLI_ARGS=${options}" >> $GITHUB_ENV
 
-    - name: Create project and run the ${{ inputs.pipelines }} pipelines
+    - name: Create project with ${{ inputs.pipelines }} pipelines
       shell: bash
       run: |
-        echo ${{ inputs.inputs-path }}
-        ls -la ${{ inputs.inputs-path }}
-        scanpipe create-project ${{ inputs.project-name }} \
-          ${{ env.PIPELINE_CLI_ARGS }} \
-          --execute
+        scanpipe create-project ${{ inputs.project-name }} ${{ env.PIPELINE_CLI_ARGS }}
 
-    - name: Set project work directory path in the environment
+    - name: Set project work directory in the environment
       shell: bash
       run: |
         project_status=$(scanpipe status --project ${{ inputs.project-name }})
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+
+    - name: Run the pipelines
+      shell: bash
+      run: |
+        echo ${{ inputs.inputs-path }}
+        ls -la ${{ inputs.inputs-path }}
+        scanpipe execute --project ${{ inputs.project-name }} --no-color
 
     - name: Generate outputs
       id: scanpipe
