@@ -9,7 +9,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
-    default: ${{ github.workspace }}/scancode-inputs
+    default: "${{ github.workspace }}/scancode-inputs"
   project-name:
     description: "Name of the project"
     default: "scancode-action"
@@ -61,12 +61,7 @@ runs:
 
     - name: Copy input files to project work directory
       shell: bash
-      run: |
-        echo ${{ inputs.inputs-path }}
-        ls -la ${{ inputs.inputs-path }}
-        cp -r ${{ inputs.inputs-path }}/* ${{ env.PROJECT_WORK_DIRECTORY }}/input/
-        echo ${{ env.PROJECT_WORK_DIRECTORY }}/input
-        ls -la ${{ env.PROJECT_WORK_DIRECTORY }}/input
+      run: cp -r ${{ inputs.inputs-path }}/* ${{ env.PROJECT_WORK_DIRECTORY }}/input/
 
     - name: Run the pipelines
       shell: bash

@@ -3,16 +3,8 @@ on: [push]
 jobs:
   scan-codebase:
     runs-on: ubuntu-latest
-    name: Scan codebase with ScanCode.io
+    name: Scan package with ScanCode.io
     steps:
-#      - uses: actions/checkout@v4
-#        with:
-#          path: scancode-inputs
-#      - uses: nexB/scancode-action@alpha
-#        with:
-#          pipelines: "scan_codebase,find_vulnerabilities"
-#        env:
-#          VULNERABLECODE_URL: https://public.vulnerablecode.io/
       - name: Download repository archive to scancode-inputs/ directory
         run: |
           wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
