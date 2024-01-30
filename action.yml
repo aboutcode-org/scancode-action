@@ -27,7 +27,8 @@ runs:
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
-        echo ${{ env.$VULNERABLECODE_URL }}
+        echo $VULNERABLECODE_URL
+        echo ${{ env.VULNERABLECODE_URL }}
 
     - name: Install ScanCode.io
       shell: bash
