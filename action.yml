@@ -40,10 +40,9 @@ runs:
         IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
         options=""
         for pipeline in "${PIPELINES[@]}"; do
-          echo "loop"
           options+="--pipeline $pipeline "
         done
-        echo "PIPELINE_CLI_ARGS=$pipeline" >> $GITHUB_ENV
+        echo "PIPELINE_CLI_ARGS=${options}" >> $GITHUB_ENV
 
     - name: Create project and run the ${{ inputs.pipelines }} pipelines
       shell: bash
