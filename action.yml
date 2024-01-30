@@ -9,7 +9,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
   project-name:
     description: "Name of the project"
-    default: "${{ github.event.repository.name || 'scancode-action' }}"
+    default: ${{ GITHUB_REPOSITORY | sed 's/\//_/g' }}
   python-version:
     description: "Python version"
     default: "3.11"
