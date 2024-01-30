@@ -1,6 +1,6 @@
 # `@nexB/scancode-action`
 
-Run [ScanCode.io](https://github.com/nexB/scancode.io) on your repo from your Workflows.
+Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workflows.
 
 > [!IMPORTANT]
 > The scancode-action is currently in the **alpha stage**, and we invite you to 
@@ -47,7 +47,7 @@ steps:
     output-formats:
 
     # Name of the project.
-    # Default is 'scancode-action'
+    # Default is ${GITHUB_REPOSITORY}
     project-name:
 
     # Python version that will be installed to run ScanCode.io
