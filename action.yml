@@ -46,10 +46,13 @@ runs:
 
     - name: Create project and run the ${{ inputs.pipelines }} pipelines
       shell: bash
-      run: scanpipe create-project ${{ inputs.project-name }}
-        --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-        ${{ env.PIPELINE_CLI_ARGS }}
-        --execute
+      run: |
+        set -e
+        scanpipe create-project ${{ inputs.project-name }} \
+          --input-url https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip \
+          ${{ env.PIPELINE_CLI_ARGS }} \
+          --execute
+        set +e
 
     - name: Set project work directory path in the environment
       shell: bash
