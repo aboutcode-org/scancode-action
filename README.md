@@ -47,7 +47,7 @@ steps:
     output-formats:
 
     # Name of the project.
-    # Default is $GITHUB_REPOSITORY
+    # Default is 'scancode-action'
     project-name:
 
     # Python version that will be installed to run ScanCode.io
