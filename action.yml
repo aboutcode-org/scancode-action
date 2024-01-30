@@ -59,12 +59,18 @@ runs:
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
-    - name: Run the pipelines
+    - name: Copy input files to project work directory
       shell: bash
       run: |
         echo ${{ inputs.inputs-path }}
         ls -la ${{ inputs.inputs-path }}
-        scanpipe execute --project ${{ inputs.project-name }} --no-color
+        cp -r ${{ inputs.inputs-path }}/* ${{ env.PROJECT_WORK_DIRECTORY }}/input/
+        echo ${{ env.PROJECT_WORK_DIRECTORY }}/input
+        ls -la ${{ env.PROJECT_WORK_DIRECTORY }}/input
+
+    - name: Run the pipelines
+      shell: bash
+      run: scanpipe execute --project ${{ inputs.project-name }} --no-color
 
     - name: Generate outputs
       id: scanpipe
