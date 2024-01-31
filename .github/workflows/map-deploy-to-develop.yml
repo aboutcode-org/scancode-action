@@ -13,5 +13,5 @@ jobs:
         with:
           pipelines: "deploy_to_develop"
           input-urls: |
-            - https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz#from
-            - https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz#to
+            https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz#from
+            https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz#to
