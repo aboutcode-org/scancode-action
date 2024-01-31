@@ -1,0 +1,15 @@
+on: [push]
+
+jobs:
+  scan-codebase:
+    runs-on: ubuntu-latest
+    name: Map deploy to develop with ScanCode.io
+    steps:
+      # TODO: Add a download_urls/input_urls input option to simplify this
+      - name: Fetch source (develop) and binaries (deploy) archives to scancode-inputs/ directory
+        run: |
+          wget --directory-prefix=scancode-inputs https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz#from
+          wget --directory-prefix=scancode-inputs https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz#to
+      - uses: nexB/scancode-action@alpha
+        with:
+          pipelines: "deploy_to_develop"
