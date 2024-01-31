@@ -55,10 +55,13 @@ runs:
       shell: bash
       run: |
         URLS=${{ inputs.input-urls }}
+        URLS="${URLS:-"[]"}"
+        URL_ARRAY=($(echo "$URLS" | jq -r '.[]'))
         INPUT_URL_CLI_ARGS=""
-        for URL in $(echo "URLS" | jq -r '.[]'); do
+        for URL in "${URL_ARRAY[@]}"; do
           INPUT_URL_CLI_ARGS+="--input-url $URL "
         done
+        echo ${INPUT_URL_CLI_ARGS}
         echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project
