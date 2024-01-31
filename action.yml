@@ -54,19 +54,20 @@ runs:
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        echo ${{ inputs.input-urls }}
-        URLS=${{ inputs.input-urls }}
+        IFS=$'\n' read -r -d '' -a URLS <<< "${{ inputs.input-urls }}"
         echo $URLS
-        URLS="${URLS:-"[]"}"
-        echo $URLS
-        URL_ARRAY=($(echo "$URLS" | jq -r '.[]'))
-        echo $URL_ARRAY
-        INPUT_URL_CLI_ARGS=""
-        for URL in "${URL_ARRAY[@]}"; do
-          INPUT_URL_CLI_ARGS+="--input-url $URL "
-        done
-        echo ${INPUT_URL_CLI_ARGS}
-        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+#        URLS=${{ inputs.input-urls }}
+#        echo $URLS
+#        URLS="${URLS:-"[]"}"
+#        echo $URLS
+#        URL_ARRAY=($(echo "$URLS" | jq -r '.[]'))
+#        echo $URL_ARRAY
+#        INPUT_URL_CLI_ARGS=""
+#        for URL in "${URL_ARRAY[@]}"; do
+#          INPUT_URL_CLI_ARGS+="--input-url $URL "
+#        done
+#        echo ${INPUT_URL_CLI_ARGS}
+#        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project
       shell: bash
