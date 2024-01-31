@@ -55,7 +55,7 @@ runs:
       shell: bash
       run: |
         echo ${{ inputs.input-urls }}
-        IFS=$'\n' read -r -d '' URLS <<< "${{ inputs.input-urls }}"
+        IFS=$' ' read -r -d '' URLS <<< "${{ inputs.input-urls }}"
         echo $URLS
 #        URLS=${{ inputs.input-urls }}
 #        echo $URLS
