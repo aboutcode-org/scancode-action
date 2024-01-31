@@ -54,8 +54,7 @@ runs:
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        echo ${{ inputs.input-urls }}
-        IFS=$' ' read -r -d '' URLS <<< "${{ inputs.input-urls }}"
+        IFS=',' read -ra URLS <<< "${{ inputs.input-urls }}"
         echo $URLS
 #        URLS=${{ inputs.input-urls }}
 #        echo $URLS
