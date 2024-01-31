@@ -45,26 +45,28 @@ runs:
       shell: bash
       run: |
         IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
-        options=""
+        PIPELINE_CLI_ARGS=""
         for pipeline in "${PIPELINES[@]}"; do
-          options+="--pipeline $pipeline "
+          PIPELINE_CLI_ARGS+="--pipeline $pipeline "
         done
-        echo "PIPELINE_CLI_ARGS=${options}" >> $GITHUB_ENV
+        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        IFS=" " read -ra URLS <<< "${{ inputs.input-urls }}"
-        options=""
-        for url in "${URLS[@]}"; do
-          options+="--input-url $url "
+        URLS=${{ inputs.input-urls }}
+        INPUT_URL_CLI_ARGS=""
+        for URL in $(echo "URLS" | jq -r '.[]'); do
+          INPUT_URL_CLI_ARGS+="--input-url $URL "
         done
-        echo "INPUT_URL_CLI_ARGS=${options}" >> $GITHUB_ENV
+        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
-    - name: Create project with ${{ inputs.pipelines }} pipelines
+    - name: Create project
       shell: bash
       run: |
-        scanpipe create-project ${{ inputs.project-name }} ${{ env.PIPELINE_CLI_ARGS }}
+        scanpipe create-project ${{ inputs.project-name }} \
+        ${{ env.PIPELINE_CLI_ARGS }} \
+        ${{ env.INPUT_URL_CLI_ARGS }}
 
     - name: Set project work directory in the environment
       shell: bash
@@ -75,7 +77,12 @@ runs:
 
     - name: Copy input files to project work directory
       shell: bash
-      run: cp -r ${{ inputs.inputs-path }}/* ${{ env.PROJECT_WORK_DIRECTORY }}/input/
+      run: |
+        SOURCE_PATH="${{ inputs.inputs-path }}"
+        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        if [ -d "$SOURCE_PATH" ]; then
+          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+        fi
 
     - name: Run the pipelines
       shell: bash
