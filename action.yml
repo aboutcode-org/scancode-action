@@ -10,6 +10,10 @@ inputs:
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
     default: "${{ github.workspace }}/scancode-inputs"
+  input-urls:
+    description: 'Provide one or more URLs to download for the pipeline run execution'
+    required: false
+    default: "[]"
   project-name:
     description: "Name of the project"
     default: "scancode-action"
@@ -37,7 +41,7 @@ runs:
         pip install scancodeio
         scanpipe migrate
 
-    - name: Generate pipelines CLI arguments
+    - name: Generate `--pipeline` CLI arguments
       shell: bash
       run: |
         IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
@@ -46,6 +50,16 @@ runs:
           options+="--pipeline $pipeline "
         done
         echo "PIPELINE_CLI_ARGS=${options}" >> $GITHUB_ENV
+
+    - name: Generate `--input-url` CLI arguments
+      shell: bash
+      run: |
+        IFS=" " read -ra URLS <<< "${{ inputs.input-urls }}"
+        options=""
+        for url in "${URLS[@]}"; do
+          options+="--input-url $url "
+        done
+        echo "INPUT_URL_CLI_ARGS=${options}" >> $GITHUB_ENV
 
     - name: Create project with ${{ inputs.pipelines }} pipelines
       shell: bash
