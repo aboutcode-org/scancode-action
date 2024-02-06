@@ -38,7 +38,7 @@ runs:
     - name: Install ScanCode.io
       shell: bash
       run: |
-        pip install scancodeio
+        pip install --upgrade scancodeio
         scanpipe migrate
 
     - name: Generate `--pipeline` CLI arguments
@@ -99,7 +99,7 @@ runs:
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: scanpipe output 
+      run: scanpipe output
         --project ${{ inputs.project-name }} 
         --format ${{ inputs.output-formats }} 
         --no-color
