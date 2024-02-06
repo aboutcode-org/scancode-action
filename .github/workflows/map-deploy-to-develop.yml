@@ -7,8 +7,8 @@ jobs:
     steps:
       - name: Fetch source (develop) and binaries (deploy) archives to scancode-inputs/ directory
         run: |
-          wget --directory-prefix=scancode-inputs https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz#from
-          wget --directory-prefix=scancode-inputs https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz#to
+          wget --directory-prefix=scancode-inputs -O from-apache-flume-1.11.0-src.tar.gz https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz
+          wget --directory-prefix=scancode-inputs -O to-apache-flume-1.11.0-bin.tar.gz https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz
       - uses: nexB/scancode-action@4-d2d-examples
         with:
           pipelines: "map_deploy_to_develop"
