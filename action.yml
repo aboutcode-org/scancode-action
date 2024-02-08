@@ -32,17 +32,17 @@ runs:
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
-#        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
-#        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
 
     - name: Start and setup the PostgreSQL service
       shell: bash
       run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
-        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password 'scancodeio'"
-        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 scancodeio
+        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password '${{ env.SCANCODEIO_DB_PASSWORD }}'"
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
     - name: Install ScanCode.io
       shell: bash
