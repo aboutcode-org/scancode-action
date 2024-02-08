@@ -10,4 +10,4 @@ jobs:
           wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
       - uses: nexB/scancode-action@4-d2d-examples
         with:
-          pipelines: "scan_single_package"
+          pipelines: scan_single_package
