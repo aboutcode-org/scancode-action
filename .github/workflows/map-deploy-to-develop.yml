@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-22.04
     name: Map deploy to develop with ScanCode.io
     steps:
-      - uses: nexB/scancode-action@4-d2d-examples
+      - uses: nexB/scancode-action@$GITHUB_REF
         with:
-          pipelines: map_deploy_to_develop
+          pipelines: "map_deploy_to_develop"
           input-urls:
             https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
             https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to

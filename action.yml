@@ -56,14 +56,9 @@ runs:
     - name: Generate `--pipeline` CLI arguments
       shell: bash
       run: |
-#        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
-#        PIPELINE_CLI_ARGS=""
-#        for pipeline in "${PIPELINES[@]}"; do
-#          PIPELINE_CLI_ARGS+="--pipeline $pipeline "
-#        done
-#        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
+        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
         PIPELINE_CLI_ARGS=""
-        for pipeline in ${{ inputs.pipelines }}; do
+        for pipeline in "${PIPELINES[@]}"; do
           PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
         done
         echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV

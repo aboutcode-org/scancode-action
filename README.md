@@ -18,6 +18,7 @@ Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workf
   - [Run a specific pipeline](#run-a-specific-pipeline)
   - [Run multiple pipelines](#run-multiple-pipelines)
   - [Choose the output formats](#choose-the-output-formats)
+  - [Provide download URLs inputs](#provide-download-urls-inputs)
   - [Fetch pipelines inputs](#fetch-pipelines-inputs)
   - [Define a custom project name](#define-a-custom-project-name)
 - [Where does the scan results go?](#where-does-the-scan-results-go)
@@ -118,6 +119,17 @@ For details on setting up and configuring your own instance, please refer to the
 - uses: nexB/scancode-action@alpha
   with:
     output-formats: "json xlsx spdx cyclonedx"
+```
+
+### Provide download URLs inputs
+
+```yaml
+- uses: nexB/scancode-action@alpha
+  with:
+    pipelines: "map_deploy_to_develop"
+    input-urls:
+      https://domain.url/source.zip#from
+      https://domain.url/binaries.zip#to
 ```
 
 ### Fetch pipelines inputs
