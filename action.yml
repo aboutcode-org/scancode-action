@@ -33,7 +33,7 @@ runs:
       run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb scancodeio
-        sudo -u postgres psql -c "alter user scancodeio with encrypted password scancodeio;"
+        sudo -u postgres psql -c "alter user scancodeio with encrypted password 'scancodeio'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 scancodeio
 
     - name: Set up environment
