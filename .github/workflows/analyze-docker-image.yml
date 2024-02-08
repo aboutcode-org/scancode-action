@@ -9,4 +9,4 @@ jobs:
         with:
           pipelines: "analyze_docker_image"
           input-urls:
-            https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/docker-images.tar.gz
+            https://github.com/nexB/scancode.io/blob/main/scanpipe/tests/data/docker-mini-with-license-alpine.tar.xz
