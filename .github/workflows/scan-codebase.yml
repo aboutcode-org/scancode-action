@@ -10,6 +10,8 @@ jobs:
           path: scancode-inputs
       - uses: nexB/scancode-action@4-d2d-examples
         with:
-          pipelines: "scan_codebase,find_vulnerabilities"
+          pipelines:
+            "scan_codebase"
+            "find_vulnerabilities"
         env:
           VULNERABLECODE_URL: https://public.vulnerablecode.io/

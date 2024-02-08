@@ -56,10 +56,15 @@ runs:
     - name: Generate `--pipeline` CLI arguments
       shell: bash
       run: |
-        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
+#        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
+#        PIPELINE_CLI_ARGS=""
+#        for pipeline in "${PIPELINES[@]}"; do
+#          PIPELINE_CLI_ARGS+="--pipeline $pipeline "
+#        done
+#        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
         PIPELINE_CLI_ARGS=""
-        for pipeline in "${PIPELINES[@]}"; do
-          PIPELINE_CLI_ARGS+="--pipeline $pipeline "
+        for pipeline in ${{ inputs.pipelines }}; do
+          PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
         done
         echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
 
@@ -68,9 +73,9 @@ runs:
       run: |
         INPUT_URL_CLI_ARGS=""
         for url in ${{ inputs.input-urls }}; do
-          INPUT_URL_CLI_ARGS+="--input-url ${url} "
+          INPUT_URL_CLI_ARGS+=" --input-url $url"
         done
-        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}"
+        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project
       shell: bash
