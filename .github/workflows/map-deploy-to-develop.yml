@@ -8,6 +8,8 @@ jobs:
       - uses: nexB/scancode-action@4-d2d-examples
         with:
           pipelines: "map_deploy_to_develop"
-          input-urls: "https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from,https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to"
+          input-urls:
+            https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
+            https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
         env:
           PURLDB_URL: https://public.purldb.io/

@@ -17,6 +17,9 @@ inputs:
   project-name:
     description: "Name of the project"
     default: "scancode-action"
+  outputs-archive-name:
+    description: "Name of the outputs archive"
+    default: "scancode-outputs"
   python-version:
     description: "Python version"
     default: "3.11"
@@ -63,12 +66,18 @@ runs:
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        IFS=',' read -ra URLS <<< "${{ inputs.input-urls }}"
+        IFS=$'\n' read -d '' -ra INPUT_URLS <<< "${{ toJson(inputs.input-urls) }}"
+        echo $INPUT_URLS
         INPUT_URL_CLI_ARGS=""
-        for url in "${URLS[@]}"; do
+        for url in "${INPUT_URLS[@]}"; do
           INPUT_URL_CLI_ARGS+="--input-url $url "
         done
-        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+#       IFS=',' read -ra URLS <<< "${{ inputs.input-urls }}"
+#        INPUT_URL_CLI_ARGS=""
+#        for url in "${URLS[@]}"; do
+#          INPUT_URL_CLI_ARGS+="--input-url $url "
+#        done
+#        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project
       shell: bash
@@ -109,5 +118,5 @@ runs:
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
-        name: scanpipe-outputs
+        name: ${{ inputs.outputs-archive-name }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
