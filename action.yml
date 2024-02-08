@@ -28,13 +28,18 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
+    - name: Start the PostgreSQL service
+      shell: bash
+      run: sudo systemctl start postgresql.service
+
     - name: Set up environment
       shell: bash
       run: |
-        sudo systemctl start postgresql.service
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
+        echo "POSTGRES_USER=postgres" >> $GITHUB_ENV
+        echo "POSTGRES_PASSWORD=" >> $GITHUB_ENV
+#        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
+#        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
 
     - name: Install ScanCode.io
       shell: bash
