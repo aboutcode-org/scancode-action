@@ -13,7 +13,7 @@ inputs:
   input-urls:
     description: 'Provide one or more URLs to download for the pipeline run execution'
     required: false
-    default: "[]"
+    default: ""
   project-name:
     description: "Name of the project"
     default: "scancode-action"
@@ -55,12 +55,10 @@ runs:
       shell: bash
       run: |
         IFS=',' read -ra URLS <<< "${{ inputs.input-urls }}"
-        echo $URLS
         INPUT_URL_CLI_ARGS=""
         for url in "${URLS[@]}"; do
           INPUT_URL_CLI_ARGS+="--input-url $url "
         done
-        echo ${INPUT_URL_CLI_ARGS}
         echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project

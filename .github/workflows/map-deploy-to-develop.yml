@@ -5,11 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Map deploy to develop with ScanCode.io
     steps:
-#      - name: Fetch source (develop) and binaries (deploy) archives to scancode-inputs/ directory
-#        run: |
-#          wget --directory-prefix=scancode-inputs -O from-apache-flume-1.11.0-src.tar.gz https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz
-#          wget --directory-prefix=scancode-inputs -O to-apache-flume-1.11.0-bin.tar.gz https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz
       - uses: nexB/scancode-action@4-d2d-examples
         with:
           pipelines: "map_deploy_to_develop"
-          input-urls: "https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-src.tar.gz#from,https://dist.apache.org/repos/dist/release/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz#to"
+          input-urls: "https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from,https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to"
