@@ -36,8 +36,8 @@ runs:
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "POSTGRES_USER=postgres" >> $GITHUB_ENV
-        echo "POSTGRES_PASSWORD=" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_USER=postgres" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_PASSWORD=" >> $GITHUB_ENV
 #        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
 #        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
 
