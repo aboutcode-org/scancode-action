@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Scan package with ScanCode.io
     steps:
       - name: Download repository archive to scancode-inputs/ directory
@@ -10,4 +10,4 @@ jobs:
           wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
       - uses: nexB/scancode-action@alpha
         with:
-          pipelines: "scan_package"
+          pipelines: "scan_single_package"

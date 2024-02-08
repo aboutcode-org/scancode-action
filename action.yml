@@ -10,9 +10,16 @@ inputs:
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
     default: "${{ github.workspace }}/scancode-inputs"
+  input-urls:
+    description: 'Provide one or more URLs to download for the pipeline run execution'
+    required: false
+    default: ""
   project-name:
     description: "Name of the project"
     default: "scancode-action"
+  outputs-archive-name:
+    description: "Name of the outputs archive"
+    default: "scancode-outputs"
   python-version:
     description: "Python version"
     default: "3.11"
@@ -28,29 +35,49 @@ runs:
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
+        echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
+
+    - name: Start and setup the PostgreSQL service
+      shell: bash
+      run: |
+        sudo systemctl start postgresql.service
+        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
+        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password '${{ env.SCANCODEIO_DB_PASSWORD }}'"
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
     - name: Install ScanCode.io
       shell: bash
       run: |
-        pip install scancodeio
+        pip install --upgrade scancodeio
         scanpipe migrate
 
-    - name: Generate pipelines CLI arguments
+    - name: Generate `--pipeline` CLI arguments
       shell: bash
       run: |
         IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
-        options=""
+        PIPELINE_CLI_ARGS=""
         for pipeline in "${PIPELINES[@]}"; do
-          options+="--pipeline $pipeline "
+          PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
         done
-        echo "PIPELINE_CLI_ARGS=${options}" >> $GITHUB_ENV
+        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
 
-    - name: Create project with ${{ inputs.pipelines }} pipelines
+    - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        scanpipe create-project ${{ inputs.project-name }} ${{ env.PIPELINE_CLI_ARGS }}
+        INPUT_URL_CLI_ARGS=""
+        for url in ${{ inputs.input-urls }}; do
+          INPUT_URL_CLI_ARGS+=" --input-url $url"
+        done
+        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+
+    - name: Create project
+      shell: bash
+      run: |
+        scanpipe create-project ${{ inputs.project-name }} \
+        ${{ env.PIPELINE_CLI_ARGS }} \
+        ${{ env.INPUT_URL_CLI_ARGS }}
 
     - name: Set project work directory in the environment
       shell: bash
@@ -61,7 +88,12 @@ runs:
 
     - name: Copy input files to project work directory
       shell: bash
-      run: cp -r ${{ inputs.inputs-path }}/* ${{ env.PROJECT_WORK_DIRECTORY }}/input/
+      run: |
+        SOURCE_PATH="${{ inputs.inputs-path }}"
+        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        if [ -d "$SOURCE_PATH" ]; then
+          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+        fi
 
     - name: Run the pipelines
       shell: bash
@@ -70,7 +102,7 @@ runs:
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: scanpipe output 
+      run: scanpipe output
         --project ${{ inputs.project-name }} 
         --format ${{ inputs.output-formats }} 
         --no-color
@@ -79,5 +111,5 @@ runs:
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
-        name: scanpipe-outputs
+        name: ${{ inputs.outputs-archive-name }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*

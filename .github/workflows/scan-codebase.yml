@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Scan codebase with ScanCode.io
     steps:
       - uses: actions/checkout@v4
