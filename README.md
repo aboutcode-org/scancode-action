@@ -2,6 +2,9 @@
 
 Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workflows.
 
+See https://github.com/nexB/scancode-action/tree/main/.github/workflows for Workflows
+examples.
+
 > [!IMPORTANT]
 > The scancode-action is currently in the **alpha stage**, and we invite you to 
 > contribute to its improvement. Please feel free to submit bug reports or share 

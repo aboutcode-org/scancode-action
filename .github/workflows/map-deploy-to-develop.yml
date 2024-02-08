@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: Map deploy to develop with ScanCode.io
     steps:
-      - uses: "nexB/scancode-action@${GITHUB_REF}"
+      - uses: "nexB/scancode-action@4-d2d-examples"
         with:
           pipelines: "map_deploy_to_develop"
           input-urls:
