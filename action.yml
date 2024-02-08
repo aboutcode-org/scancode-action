@@ -31,13 +31,6 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
-    - name: Generate `--input-url` CLI arguments
-      shell: bash
-      run: |
-        for url in ${{ inputs.input-urls }}; do
-          echo ${url}
-        done
-
     - name: Set up environment
       shell: bash
       run: |
@@ -70,12 +63,14 @@ runs:
         done
         echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
 
-#       IFS=',' read -ra URLS <<< "${{ inputs.input-urls }}"
-#        INPUT_URL_CLI_ARGS=""
-#        for url in "${URLS[@]}"; do
-#          INPUT_URL_CLI_ARGS+="--input-url $url "
-#        done
-#        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+    - name: Generate `--input-url` CLI arguments
+      shell: bash
+      run: |
+        INPUT_URL_CLI_ARGS=""
+        for url in ${{ inputs.input-urls }}; do
+          INPUT_URL_CLI_ARGS+="--input-url ${url} "
+        done
+        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}"
 
     - name: Create project
       shell: bash
