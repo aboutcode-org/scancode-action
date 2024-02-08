@@ -28,16 +28,18 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
-    - name: Start the PostgreSQL service
+    - name: Start and setup the PostgreSQL service
       shell: bash
-      run: sudo systemctl start postgresql.service
+      run: |
+        sudo systemctl start postgresql.service
+        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb scancodeio
+        sudo -u postgres psql -c "alter user scancodeio with encrypted password scancodeio;"
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 scancodeio
 
     - name: Set up environment
       shell: bash
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_USER=postgres" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_PASSWORD=postgres" >> $GITHUB_ENV
 #        echo "SCANCODEIO_DB_ENGINE=django.db.backends.sqlite3" >> $GITHUB_ENV
 #        echo "SCANCODEIO_DB_NAME=sqlite3.db" >> $GITHUB_ENV
 
