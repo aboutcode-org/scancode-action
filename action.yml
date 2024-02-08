@@ -34,8 +34,7 @@ runs:
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        IFS=$' \n'
-        read -ra URLS <<< "${{ toJson(inputs.input-urls) }}"
+        IFS=$'\n' read -d '' -ra URLS <<< "${{ inputs.input-urls }}"
         INPUT_URL_CLI_ARGS=""
         for url in "${URLS[@]}"; do
           INPUT_URL_CLI_ARGS+="--input-url $url "
