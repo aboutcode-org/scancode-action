@@ -34,11 +34,13 @@ runs:
     - name: Generate `--input-url` CLI arguments
       shell: bash
       run: |
-        IFS=$' ' read -d '' -ra INPUT_URLS <<< "${{ toJson(inputs.input-urls) }}"
+        IFS=$' \n'
+        read -ra URLS <<< "${{ toJson(inputs.input-urls) }}"
         INPUT_URL_CLI_ARGS=""
-        for url in "${INPUT_URLS[@]}"; do
+        for url in "${URLS[@]}"; do
           INPUT_URL_CLI_ARGS+="--input-url $url "
         done
+        echo "INPUT_URL_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Set up environment
       shell: bash
