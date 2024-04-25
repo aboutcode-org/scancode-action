@@ -26,6 +26,9 @@ import os
 DEJACODE_URL = os.environ["DEJACODE_URL"]
 DEJACODE_API_KEY = os.environ["DEJACODE_API_KEY"]
 
+if not (DEJACODE_URL and DEJACODE_API_KEY):
+    raise EnvironmentError("Missing required env vars.")
+
 DEJACODE_API_URL = f"{DEJACODE_URL.rstrip('/')}/api/"
 PRODUCTS_API_URL = f"{DEJACODE_API_URL}v2/products/"
 DEFAULT_TIMEOUT = 10
@@ -68,6 +71,6 @@ if __name__ == "__main__":
     }
     product_uuid = create_product(product_data)
 
-    scan_location = "./scancodeio_packageurl-python-0.15.0.tar.gz.json"
+    scan_location = "./scripts/scancodeio_packageurl-python-0.15.0.tar.gz.json"
     files = {"upload_file": open(scan_location, "rb")}
     push_scan_to_product(files)

@@ -18,6 +18,7 @@ jobs:
       - name: Push to DejaCode
         shell: bash
         run: |
+          ls -la ${{ env.PROJECT_WORK_DIRECTORY }}/output/
           python ${{ github.workspace }}/scripts/push_to_dejacode.py
         env:
           DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
