@@ -56,7 +56,6 @@ def request_post(url, **kwargs):
 
 def create_product(product_data):
     response = request_post(PRODUCTS_API_URL, data=product_data)
-    print(response)
     return response["uuid"]
 
 
@@ -75,6 +74,7 @@ if __name__ == "__main__":
 
     # Replace by args
     PROJECT_OUTPUT_DIRECTORY = os.environ["PROJECT_OUTPUT_DIRECTORY"]
+    print(PROJECT_OUTPUT_DIRECTORY)
     scan_location = list(Path(PROJECT_OUTPUT_DIRECTORY).glob("*.json"))[0]
     print(scan_location)
 

@@ -19,6 +19,8 @@ jobs:
         shell: bash
         run: |
           python ${{ github.workspace }}/scripts/push_to_dejacode.py
+          echo ${{ env.PROJECT_OUTPUT_DIRECTORY }}
+
         env:
           DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
           DEJACODE_API_KEY: ${{ secrets.DEJACODE_API_KEY }}
