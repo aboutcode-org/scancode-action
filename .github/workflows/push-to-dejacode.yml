@@ -14,13 +14,11 @@ jobs:
           project-name: "packageurl-python"
           input-urls:
             https://github.com/package-url/packageurl-python/releases/download/v0.15.0/packageurl-python-0.15.0.tar.gz
-        env:
-          DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
-          DEJACODE_API_KEY: ${{ secrets.DEJACODE_API_KEY }}
 
       - name: Push to DejaCode
         shell: bash
         run: |
-          pip install requests
-          ls -la ${{ github.workspace }}
           python ${{ github.workspace }}/scripts/push_to_dejacode.py
+        env:
+          DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
+          DEJACODE_API_KEY: ${{ secrets.DEJACODE_API_KEY }}
