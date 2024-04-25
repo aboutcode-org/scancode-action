@@ -85,12 +85,14 @@ runs:
         project_status=$(scanpipe status --project ${{ inputs.project-name }})
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+        echo "PROJECT_INPUT_DIRECTORY=$work_directory/input" >> $GITHUB_ENV
+        echo "PROJECT_OUTPUT_DIRECTORY=$work_directory/output" >> $GITHUB_ENV
 
     - name: Copy input files to project work directory
       shell: bash
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
-        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        DESTINATION_PATH="${{ env.PROJECT_INPUT_DIRECTORY }}"
         if [ -d "$SOURCE_PATH" ]; then
           cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
         fi
@@ -106,7 +108,7 @@ runs:
         scanpipe output --no-color \
           --project ${{ inputs.project-name }} \ 
           --format ${{ inputs.output-formats }}
-        project_outputs=$(ls ${{ env.PROJECT_WORK_DIRECTORY }}/output/))
+        project_outputs=$(ls ${{ env.PROJECT_OUTPUT_DIRECTORY }}))
         echo "PROJECT_OUTPUTS=$project_outputs" >> $GITHUB_ENV
 
     - name: Upload outputs
@@ -114,4 +116,4 @@ runs:
       id: artifact-upload-step
       with:
         name: ${{ inputs.outputs-archive-name }}
-        path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
+        path: ${{ env.PROJECT_OUTPUT_DIRECTORY }}/*

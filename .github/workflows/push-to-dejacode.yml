@@ -22,4 +22,4 @@ jobs:
         env:
           DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
           DEJACODE_API_KEY: ${{ secrets.DEJACODE_API_KEY }}
-          PROJECT_OUTPUTS: ${{ env.PROJECT_OUTPUTS }}
+          PROJECT_OUTPUT_DIRECTORY: ${{ env.PROJECT_OUTPUT_DIRECTORY }}

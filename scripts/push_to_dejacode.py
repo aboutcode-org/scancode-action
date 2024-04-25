@@ -21,6 +21,7 @@
 # Visit https://github.com/nexB/scancode.io for support and download.
 
 from pathlib import Path
+import uuid
 import requests
 import os
 
@@ -68,13 +69,13 @@ def push_scan_to_product(files):
 if __name__ == "__main__":
     product_data = {
         "name": "Demo Push Product",
-        "version": "1.0",
+        "version": uuid.uuid4(),
     }
     product_uuid = create_product(product_data)
 
     # Replace by args
-    PROJECT_OUTPUTS = os.environ["PROJECT_OUTPUTS"]
-    scan_location = list(Path(PROJECT_OUTPUTS).glob("*.json"))[0]
+    PROJECT_OUTPUT_DIRECTORY = os.environ["PROJECT_OUTPUT_DIRECTORY"]
+    scan_location = list(Path(PROJECT_OUTPUT_DIRECTORY).glob("*.json"))[0]
     print(scan_location)
 
     files = {"upload_file": open(scan_location, "rb")}
