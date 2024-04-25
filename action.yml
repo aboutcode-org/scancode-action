@@ -102,11 +102,12 @@ runs:
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: |
-        project_outputs=$(scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color)
-        echo $project_outputs
-        echo "PROJECT_OUTPUTS=$(ls ${{ env.PROJECT_WORK_DIRECTORY }}/output/))" >> $GITHUB_ENV
-        echo ${{ env.PROJECT_OUTPUTS }}
+      run: | 
+        scanpipe output --no-color \
+          --project ${{ inputs.project-name }} \ 
+          --format ${{ inputs.output-formats }}
+        project_outputs=$(ls ${{ env.PROJECT_WORK_DIRECTORY }}/output/))
+        echo "PROJECT_OUTPUTS=$project_outputs" >> $GITHUB_ENV
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4

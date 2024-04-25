@@ -20,6 +20,7 @@
 # ScanCode.io is a free software code scanning tool from nexB Inc. and others.
 # Visit https://github.com/nexB/scancode.io for support and download.
 
+from pathlib import Path
 import requests
 import os
 
@@ -71,6 +72,10 @@ if __name__ == "__main__":
     }
     product_uuid = create_product(product_data)
 
-    scan_location = "./scripts/scancodeio_packageurl-python-0.15.0.tar.gz.json"
+    # Replace by args
+    PROJECT_OUTPUTS = os.environ["PROJECT_OUTPUTS"]
+    scan_location = list(Path(PROJECT_OUTPUTS).glob("*.json"))[0]
+    print(scan_location)
+
     files = {"upload_file": open(scan_location, "rb")}
     push_scan_to_product(files)
