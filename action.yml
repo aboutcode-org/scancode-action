@@ -105,10 +105,7 @@ runs:
       id: scanpipe
       shell: bash
       run: | 
-        scanpipe output \
-          --project ${{ inputs.project-name }} \ 
-          --format ${{ inputs.output-formats }} \
-          --no-color
+        scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
         project_outputs=$(ls ${{ env.PROJECT_OUTPUT_DIRECTORY }}))
         echo "PROJECT_OUTPUTS=$project_outputs" >> $GITHUB_OUTPUT
         echo ${{ env.PROJECT_OUTPUT_DIRECTORY }}
