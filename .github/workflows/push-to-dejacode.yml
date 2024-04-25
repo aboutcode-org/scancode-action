@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: nexB/scancode-action@alpha
+      - uses: nexB/scancode-action@push-to-dejacode
         with:
           pipelines: "scan_codebase"
           output-formats: "json"

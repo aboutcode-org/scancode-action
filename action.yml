@@ -109,8 +109,7 @@ runs:
           --project ${{ inputs.project-name }} \ 
           --format ${{ inputs.output-formats }}
         project_outputs=$(ls ${{ env.PROJECT_OUTPUT_DIRECTORY }}))
-        echo "PROJECT_OUTPUTS=$project_outputs" >> $GITHUB_ENV
-        echo "DEBUG"
+        echo "PROJECT_OUTPUTS=$project_outputs" >> $GITHUB_OUTPUT
         echo ${{ env.PROJECT_OUTPUT_DIRECTORY }}
         echo ${{ env.PROJECT_OUTPUTS }}
 
