@@ -1,12 +1,11 @@
 on: [push]
 
 jobs:
-  scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Analyze a Docker image with ScanCode.io
-    steps:
-      - uses: nexB/scancode-action@alpha
-        with:
-          pipelines: "analyze_docker_image"
-          input-urls:
-            https://github.com/nexB/scancode.io-tutorial/releases/download/sample-images/30-alpine-nickolashkraus-staticbox-latest.tar
+    scan-codebase:
+        runs-on: ubuntu-22.04
+        name: Analyze a Docker image with ScanCode.io
+        steps:
+            - uses: nexB/scancode-action@alpha
+              with:
+                  pipelines: 'analyze_docker_image'
+                  input-urls: https://github.com/aboutcode-org/scancode.io-tutorial/releases/download/sample-images/30-alpine-nickolashkraus-staticbox-latest.tar
