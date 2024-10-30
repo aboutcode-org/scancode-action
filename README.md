@@ -1,6 +1,7 @@
 # `@nexB/scancode-action`
 
-Run [ScanCode.io](https://github.com/nexB/scancode.io) pipelines from your Workflows.
+Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines from your 
+Workflows.
 
 > [!IMPORTANT]
 > The scancode-action is currently in the **alpha stage**, and we invite you to 
@@ -73,8 +74,8 @@ steps:
 
 ## Examples
 
-See https://github.com/nexB/scancode-action/tree/main/.github/workflows for Workflows
-examples.
+See https://github.com/aboutcode-org/scancode-action/tree/main/.github/workflows for 
+Workflows examples.
 
 ### Scan repo codebase
 

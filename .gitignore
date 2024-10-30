@@ -96,3 +96,6 @@ typings/
 
 # Editor
 .idea
+
+# Various junk and temp files
+.DS_Store

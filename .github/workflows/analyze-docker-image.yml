@@ -9,4 +9,4 @@ jobs:
         with:
           pipelines: "analyze_docker_image"
           input-urls:
-            https://github.com/nexB/scancode.io-tutorial/releases/download/sample-images/30-alpine-nickolashkraus-staticbox-latest.tar
+            https://github.com/aboutcode-org/scancode.io-tutorial/releases/download/sample-images/30-alpine-nickolashkraus-staticbox-latest.tar
