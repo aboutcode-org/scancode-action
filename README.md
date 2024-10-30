@@ -125,6 +125,10 @@ For details on setting up and configuring your own instance, please refer to the
     output-formats: "json xlsx spdx cyclonedx"
 ```
 
+> [!NOTE]
+> To specify a CycloneDX spec version (default to latest), use the syntax
+  ``cyclonedx:VERSION`` as format value. For example: ``cyclonedx:1.5``.
+
 ### Provide download URLs inputs
 
 ```yaml
