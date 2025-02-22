@@ -59,7 +59,7 @@ runs:
       shell: bash
       run: |
         pip install --upgrade scancodeio
-        scanpipe migrate
+        scanpipe migrate --verbosity 0
 
     - name: Generate `--pipeline` CLI arguments
       shell: bash
@@ -112,8 +112,7 @@ runs:
       shell: bash
       run: scanpipe output
         --project ${{ inputs.project-name }} 
-        --format ${{ inputs.output-formats }} 
-        --no-color
+        --format ${{ inputs.output-formats }}
 
     - name: Check compliance
       if: inputs.check-compliance == 'true'
@@ -121,7 +120,6 @@ runs:
       run: scanpipe check-compliance
         --project ${{ inputs.project-name }}
         --fail-level ${{ inputs.compliance-fail-level }}
-        --no-color
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4

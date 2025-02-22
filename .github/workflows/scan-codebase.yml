@@ -12,3 +12,4 @@ jobs:
         with:
           pipelines: "scan_codebase"
           check-compliance: true
+          compliance-fail-level: "WARNING"
