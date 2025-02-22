@@ -11,17 +11,25 @@ inputs:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
     default: "${{ github.workspace }}/scancode-inputs"
   input-urls:
-    description: 'Provide one or more URLs to download for the pipeline run execution'
+    description: "Provide one or more URLs to download for the pipeline run execution."
     required: false
     default: ""
   project-name:
-    description: "Name of the project"
+    description: "Name of the project."
     default: "scancode-action"
   outputs-archive-name:
-    description: "Name of the outputs archive"
+    description: "Name of the outputs archive."
     default: "scancode-outputs"
+  check-compliance:
+    description: |
+      Check for compliance issues in the project.
+      Exits with a non-zero status if compliance issues are detected.
+  compliance-fail-level:
+    description: "Failure level for compliance check. Options: ERROR, WARNING, MISSING."
+    default: "ERROR"
+    required: false
   python-version:
-    description: "Python version"
+    description: "Python version."
     default: "3.11"
 
 runs:
@@ -105,6 +113,14 @@ runs:
       run: scanpipe output
         --project ${{ inputs.project-name }} 
         --format ${{ inputs.output-formats }} 
+        --no-color
+
+    - name: Check compliance
+      if: inputs.check-compliance == 'true'
+      shell: bash
+      run: scanpipe check-compliance
+        --project ${{ inputs.project-name }}
+        --fail-level ${{ inputs.compliance-fail-level }}
         --no-color
 
     - name: Upload outputs
