@@ -67,6 +67,15 @@ steps:
     # Default is 'scancode-outputs'
     outputs-archive-name:
 
+    # Check for compliance issues in the project.
+    # Exits with a non-zero status if compliance issues are detected.
+    # Default is false
+    check-compliance:
+
+    # Failure level for compliance check. Options: ERROR, WARNING, MISSING.
+    # Default is 'ERROR'
+    compliance-fail-level:
+
     # Python version that will be installed to run ScanCode.io
     # Default is '3.11'
     python-version:
@@ -78,6 +87,8 @@ See https://github.com/aboutcode-org/scancode-action/tree/main/.github/workflows
 Workflows examples.
 
 ### Scan repo codebase
+
+TODO: Why, file only!
 
 ```yaml
 steps:
