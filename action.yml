@@ -23,6 +23,10 @@ inputs:
   python-version:
     description: "Python version"
     default: "3.11"
+  scancodeio-repo-branch:
+    description: "Branch to install ScanCode.io from the GitHub repository (optional)"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -50,8 +54,17 @@ runs:
     - name: Install ScanCode.io
       shell: bash
       run: |
-        pip install --upgrade scancodeio
-        scanpipe migrate
+        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
+          echo "Installing the latest ScanCode.io release from PyPI"
+          pip install --upgrade scancodeio
+        else
+          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+        fi
+
+    - name: Run migrations to prepare the database
+      shell: bash
+      run: scanpipe migrate
 
     - name: Generate `--pipeline` CLI arguments
       shell: bash
