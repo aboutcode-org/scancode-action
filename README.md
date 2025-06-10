@@ -22,6 +22,7 @@ Workflows.
   - [Provide download URLs inputs](#provide-download-urls-inputs)
   - [Fetch pipelines inputs](#fetch-pipelines-inputs)
   - [Define a custom project name](#define-a-custom-project-name)
+  - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
 - [Where does the scan results go?](#where-does-the-scan-results-go)
 
 ## Usage
@@ -168,6 +169,14 @@ For details on setting up and configuring your own instance, please refer to the
 - uses: nexB/scancode-action@alpha
   with:
     project-name: "my-project-name"
+```
+
+### Install ScanCode.io from a repository branch
+
+```yaml
+- uses: nexB/scancode-action@alpha
+  with:
+    scancodeio-repo-branch: "main"
 ```
 
 ## Where are the Scan Results?
