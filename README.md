@@ -79,7 +79,7 @@ steps:
     compliance-fail-level:
 
     # Python version that will be installed to run ScanCode.io
-    # Default is '3.11'
+    # Default is '3.12'
     python-version:
 ```
 
