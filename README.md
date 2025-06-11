@@ -1,4 +1,4 @@
-# `@nexB/scancode-action`
+# `@aboutcode-org/scancode-action`
 
 Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines from your 
 Workflows.
@@ -35,7 +35,7 @@ steps:
 - uses: actions/checkout@v4
   with:
     path: scancode-inputs
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     pipelines: "scan_codebase"
     output-formats: "json xlsx spdx cyclonedx"
@@ -44,7 +44,7 @@ steps:
 ### Inputs
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     # Names of the pipelines (comma-separated) and in order.
     # Default is 'scan_codebase'
@@ -95,7 +95,7 @@ steps:
 - uses: actions/checkout@v4
   with:
     path: scancode-inputs
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
 ```
 
 ### Run a specific pipeline
@@ -103,7 +103,7 @@ steps:
 [Built-in pipelines list](https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html)
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     pipelines: "scan_codebase"
 ```
@@ -111,7 +111,7 @@ steps:
 ### Run multiple pipelines
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     pipelines: "scan_codebase,find_vulnerabilities"
   env:
@@ -131,7 +131,7 @@ For details on setting up and configuring your own instance, please refer to the
 ### Choose the output formats
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     output-formats: "json xlsx spdx cyclonedx"
 ```
@@ -143,7 +143,7 @@ For details on setting up and configuring your own instance, please refer to the
 ### Provide download URLs inputs
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     pipelines: "map_deploy_to_develop"
     input-urls:
@@ -157,7 +157,7 @@ For details on setting up and configuring your own instance, please refer to the
 - name: Download repository archive to scancode-inputs/ directory
   run: |
     wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     pipelines: "scan_single_package"
 ```
@@ -165,7 +165,7 @@ For details on setting up and configuring your own instance, please refer to the
 ### Check for compliance issues
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     check-compliance: true
     compliance-fail-level: "WARNING"
@@ -179,7 +179,7 @@ For details on setting up and configuring your own instance, please refer to the
 ### Define a custom project name
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     project-name: "my-project-name"
 ```
@@ -187,7 +187,7 @@ For details on setting up and configuring your own instance, please refer to the
 ### Install ScanCode.io from a repository branch
 
 ```yaml
-- uses: nexB/scancode-action@beta
+- uses: aboutcode-org/scancode-action@beta
   with:
     scancodeio-repo-branch: "main"
 ```
