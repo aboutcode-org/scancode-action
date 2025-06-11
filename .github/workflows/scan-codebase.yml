@@ -2,14 +2,15 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Scan codebase with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Scan codebase and check for compliance issues
     steps:
       - uses: actions/checkout@v4
         with:
           path: scancode-inputs
-      - uses: nexB/scancode-action@alpha
+      - name: Run scancode-action from current branch
+        uses: ./scancode-inputs
         with:
-          pipelines: "scan_codebase,find_vulnerabilities"
-        env:
-          VULNERABLECODE_URL: https://public.vulnerablecode.io/
+          pipelines: "scan_codebase"
+          check-compliance: true
+          compliance-fail-level: "WARNING"

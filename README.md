@@ -21,6 +21,7 @@ Workflows.
   - [Choose the output formats](#choose-the-output-formats)
   - [Provide download URLs inputs](#provide-download-urls-inputs)
   - [Fetch pipelines inputs](#fetch-pipelines-inputs)
+  - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
 - [Where does the scan results go?](#where-does-the-scan-results-go)
@@ -67,6 +68,15 @@ steps:
     # Name of the outputs archive.
     # Default is 'scancode-outputs'
     outputs-archive-name:
+
+    # Check for compliance issues in the project.
+    # Exits with a non-zero status if compliance issues are detected.
+    # Default is false
+    check-compliance:
+
+    # Failure level for compliance check. Options: ERROR, WARNING, MISSING.
+    # Default is 'ERROR'
+    compliance-fail-level:
 
     # Python version that will be installed to run ScanCode.io
     # Default is '3.11'
@@ -151,6 +161,20 @@ For details on setting up and configuring your own instance, please refer to the
   with:
     pipelines: "scan_single_package"
 ```
+
+### Check for compliance issues
+
+```yaml
+- uses: nexB/scancode-action@alpha
+  with:
+    check-compliance: true
+    compliance-fail-level: "WARNING"
+```
+
+> [!NOTE]
+> This feature requires to provide Project policies. 
+> For details on setting up and configuring your own instance, please refer to the 
+> [ScanCode.io Policies documentation](https://scancodeio.readthedocs.io/en/latest/policies.html).
 
 ### Define a custom project name
 
