@@ -8,8 +8,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: scancode-inputs
+      - name: DEBUG
+        shell: bash
+        run: |
+          ls ./
+          ls ../
+          ls ../../
       - name: Run the action from current branch
-        uses: ./
+        uses: ../
         with:
           pipelines: "scan_codebase"
           check-compliance: true
