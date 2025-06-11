@@ -5,9 +5,15 @@ jobs:
     runs-on: ubuntu-24.04
     name: Scan a package source archive
     steps:
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
       - name: Download repository archive to scancode-inputs/ directory
         run: |
           wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-      - uses: nexB/scancode-action@alpha
+      - uses: ./
         with:
           pipelines: "scan_single_package"

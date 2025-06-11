@@ -5,7 +5,13 @@ jobs:
     runs-on: ubuntu-24.04
     name: Map deploy to develop
     steps:
-      - uses: nexB/scancode-action@alpha
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - uses: ./
         with:
           pipelines: "map_deploy_to_develop"
           input-urls:
