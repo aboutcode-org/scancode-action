@@ -3,7 +3,7 @@ on: [push]
 jobs:
   scan-codebase:
     runs-on: ubuntu-24.04
-    name: Scan codebase and look for vulnerabilities
+    name: Scan codebase and find vulnerabilities
     steps:
       - name: Get the action.yml from the current branch
         uses: actions/checkout@v4
