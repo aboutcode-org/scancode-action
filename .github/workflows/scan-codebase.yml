@@ -9,7 +9,7 @@ jobs:
         with:
           path: scancode-inputs
       - name: Run scancode-action from current branch
-        uses: ./scancode-inputs/action.yml
+        uses: ./scancode-inputs
         with:
           pipelines: "scan_codebase"
           check-compliance: true
