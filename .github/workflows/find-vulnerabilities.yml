@@ -2,8 +2,8 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Scan codebase with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Scan codebase and look for vulnerabilities
     steps:
       - uses: actions/checkout@v4
         with:

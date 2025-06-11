@@ -2,8 +2,8 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Map deploy to develop with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Map deploy to develop
     steps:
       - uses: nexB/scancode-action@alpha
         with:

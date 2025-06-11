@@ -2,8 +2,8 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Scan package with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Scan a package source archive
     steps:
       - name: Download repository archive to scancode-inputs/ directory
         run: |
