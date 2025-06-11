@@ -2,12 +2,17 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Scan package with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Scan a package archive
     steps:
-      - name: Download repository archive to scancode-inputs/ directory
-        run: |
-          wget --directory-prefix=scancode-inputs https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip
-      - uses: nexB/scancode-action@alpha
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - uses: ./
         with:
           pipelines: "scan_single_package"
+          input-urls:
+            https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF}.zip

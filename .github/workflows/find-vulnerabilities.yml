@@ -2,13 +2,19 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Scan codebase with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Scan codebase and find vulnerabilities
     steps:
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
       - uses: actions/checkout@v4
         with:
           path: scancode-inputs
-      - uses: nexB/scancode-action@alpha
+      - uses: ./
         with:
           pipelines: "scan_codebase,find_vulnerabilities"
         env:
