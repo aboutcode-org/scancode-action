@@ -6,15 +6,10 @@ jobs:
     name: Scan codebase and check for compliance issues
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: scancode-inputs
-      - name: DEBUG
-        shell: bash
-        run: |
-          ls ./scancode-inputs
       - name: Run the action from current branch
-        uses: ./scancode-inputs
+        uses: ./action.yml
         with:
+          inputs-path: ./
           pipelines: "scan_codebase"
           check-compliance: true
           compliance-fail-level: "WARNING"
