@@ -1,0 +1,26 @@
+on: [push]
+
+jobs:
+  scan-codebase:
+    runs-on: ubuntu-22.04
+    name: Scan codebase with ScanCode.io
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nexB/scancode-action@push-to-dejacode
+        with:
+          pipelines: "scan_codebase"
+          output-formats: "json"
+          project-name: "packageurl-python"
+          input-urls:
+            https://github.com/package-url/packageurl-python/releases/download/v0.15.0/packageurl-python-0.15.0.tar.gz
+
+      - name: Push to DejaCode
+        shell: bash
+        run: |
+          python ${{ github.workspace }}/scripts/push_to_dejacode.py
+
+        env:
+          DEJACODE_URL: ${{ secrets.DEJACODE_URL }}
+          DEJACODE_API_KEY: ${{ secrets.DEJACODE_API_KEY }}
+          PROJECT_OUTPUT_DIRECTORY: ${{ env.PROJECT_OUTPUT_DIRECTORY }}

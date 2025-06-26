@@ -1,0 +1,4521 @@
+{
+"headers": [
+{
+  "tool_name": "scanpipe",
+  "tool_version": "v34.4.0-21-gee313f29f",
+  "other_tools": [
+    "pkg:pypi/scancode-toolkit@32.1.0"
+  ],
+  "notice": "Generated with ScanCode.io and provided on an \"AS IS\" BASIS, WITHOUT WARRANTIES\nOR CONDITIONS OF ANY KIND, either express or implied.\nNo content created from ScanCode.io should be considered or used as legal advice.\nConsult an Attorney for any legal advice.\nScanCode.io is a free software code scanning tool from nexB Inc. and others\nlicensed under the Apache License version 2.0.\nScanCode is a trademark of nexB Inc.\nVisit https://github.com/nexB/scancode.io for support and download.\n",
+  "uuid": "af67917a-e155-46f1-a81e-8fe65a8e76b5",
+  "created_date": "2024-04-25T14:07:38.834Z",
+  "notes": "",
+  "settings": {},
+  "input_sources": [
+    {
+      "uuid": "904d7feb-cd01-4b4f-8f77-e482fccc9ad8",
+      "filename": "packageurl-python-0.15.0.tar.gz",
+      "download_url": "https://github.com/package-url/packageurl-python/releases/download/v0.15.0/packageurl-python-0.15.0.tar.gz",
+      "is_uploaded": false,
+      "tag": "",
+      "size": 38953,
+      "is_file": true,
+      "exists": true
+    }
+  ],
+  "runs": [
+    {
+      "pipeline_name": "scan_codebase",
+      "status": "success",
+      "description": "Scan a codebase for application packages, licenses, and copyrights.",
+      "uuid": "3e14fac6-6860-4066-b3ae-d4344b121364",
+      "created_date": "2024-04-25T14:07:49.210928Z",
+      "scancodeio_version": "v34.4.0-21-gee313f29f",
+      "task_id": "3e14fac6-6860-4066-b3ae-d4344b121364",
+      "task_start_date": "2024-04-25T14:07:49.238932Z",
+      "task_end_date": "2024-04-25T14:07:58.311154Z",
+      "task_exitcode": 0,
+      "task_output": "",
+      "log": "2024-04-25 14:07:49.24 Pipeline [scan_codebase] starting\n2024-04-25 14:07:49.24 Step [download_missing_inputs] starting\n2024-04-25 14:07:49.24 Fetching input from https://github.com/package-url/packageurl-python/releases/download/v0.15.0/packageurl-python-0.15.0.tar.gz\n2024-04-25 14:07:50.04 Step [download_missing_inputs] completed in 1 seconds\n2024-04-25 14:07:50.04 Step [copy_inputs_to_codebase_directory] starting\n2024-04-25 14:07:50.05 Step [copy_inputs_to_codebase_directory] completed in 0 seconds\n2024-04-25 14:07:50.05 Step [extract_archives] starting\n2024-04-25 14:07:50.23 Step [extract_archives] completed in 0 seconds\n2024-04-25 14:07:50.24 Step [collect_and_create_codebase_resources] starting\n2024-04-25 14:07:50.43 Step [collect_and_create_codebase_resources] completed in 0 seconds\n2024-04-25 14:07:50.43 Step [flag_empty_files] starting\n2024-04-25 14:07:50.45 Step [flag_empty_files] completed in 0 seconds\n2024-04-25 14:07:50.45 Step [flag_ignored_resources] starting\n2024-04-25 14:07:50.45 Step [flag_ignored_resources] completed in 0 seconds\n2024-04-25 14:07:50.46 Step [scan_for_application_packages] starting\n2024-04-25 14:07:50.50 Progress: 11% (5/44)\n2024-04-25 14:07:50.52 Progress: 22% (10/44)\n2024-04-25 14:07:50.52 Progress: 34% (15/44)\n2024-04-25 14:07:50.53 Progress: 45% (20/44)\n2024-04-25 14:07:50.53 Progress: 56% (25/44)\n2024-04-25 14:07:50.53 Progress: 68% (30/44)\n2024-04-25 14:07:50.53 Progress: 79% (35/44)\n2024-04-25 14:07:50.53 Progress: 90% (40/44)\n2024-04-25 14:07:53.22 Progress: 100% (44/44)\n2024-04-25 14:07:55.91 Step [scan_for_application_packages] completed in 5 seconds\n2024-04-25 14:07:55.91 Step [scan_for_files] starting\n2024-04-25 14:07:56.44 Progress: 10% (4/39) ETA: 5 seconds\n2024-04-25 14:07:56.44 Progress: 20% (8/39) ETA: 2 seconds\n2024-04-25 14:07:56.73 Progress: 30% (12/39) ETA: 2 seconds\n2024-04-25 14:07:56.81 Progress: 41% (16/39) ETA: 1 seconds\n2024-04-25 14:07:56.94 Progress: 51% (20/39) ETA: 1 seconds\n2024-04-25 14:07:57.07 Progress: 61% (24/39) ETA: 1 seconds\n2024-04-25 14:07:57.12 Progress: 71% (28/39)\n2024-04-25 14:07:57.42 Progress: 82% (32/39)\n2024-04-25 14:07:57.65 Progress: 92% (36/39)\n2024-04-25 14:07:58.30 Step [scan_for_files] completed in 2 seconds\n2024-04-25 14:07:58.30 Pipeline completed in 9 seconds\n",
+      "execution_time": 9
+    }
+  ],
+  "extra_data": {}
+}],
+"packages": [
+{
+  "purl": "pkg:pypi/packageurl-python@0.15.0",
+  "type": "pypi",
+  "namespace": "",
+  "name": "packageurl-python",
+  "version": "0.15.0",
+  "qualifiers": "",
+  "subpath": "",
+  "tag": "",
+  "primary_language": "Python",
+  "description": "A purl aka. Package URL parser and builder\n=================\npackageurl-python\n=================\n\nPython library to parse and build \"purl\" aka. Package URLs.\nSee https://github.com/package-url/purl-spec for details.\n\nJoin the discussion at https://gitter.im/package-url/Lobby or enter a ticket for support.\n\nLicense: MIT\n\nTests and build status\n======================\n\n+----------------------+\n| **Tests and build**  |\n+======================+\n| |ci-tests|           |\n+----------------------+\n\nInstall\n=======\n::\n\n    pip install packageurl-python\n\nUsage\n=====\n::\n\n    >>> from packageurl import PackageURL\n\n    >>> purl = PackageURL.from_string(\"pkg:maven/org.apache.commons/io@1.3.4\")\n    >>> print(purl.to_dict())\n    {'type': 'maven', 'namespace': 'org.apache.commons', 'name': 'io', 'version': '1.3.4', 'qualifiers': None, 'subpath': None}\n\n    >>> print(purl.to_string())\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(str(purl))\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(repr(purl))\n    PackageURL(type='maven', namespace='org.apache.commons', name='io', version='1.3.4', qualifiers={}, subpath=None)\n\nUtilities\n=========\n\nDjango models\n^^^^^^^^^^^^^\n\n`packageurl.contrib.django.models.PackageURLMixin` is a Django abstract model mixin to\nuse Package URLs in Django.\n\nSQLAlchemy mixin\n^^^^^^^^^^^^^^^^\n\n`packageurl.contrib.sqlalchemy.mixin.PackageURLMixin` is a SQLAlchemy declarative mixin\nto use Package URLs in SQLAlchemy models.\n\nURL to PURL\n^^^^^^^^^^^\n\n`packageurl.contrib.url2purl.get_purl(url)` returns a Package URL inferred from an URL.\n\n::\n\n    >>> from packageurl.contrib import url2purl\n    >>> url2purl.get_purl(\"https://github.com/package-url/packageurl-python\")\n    PackageURL(type='github', namespace='package-url', name='packageurl-python', version=None, qualifiers={}, subpath=None)\n\nPURL to URL\n^^^^^^^^^^^\n\n- `packageurl.contrib.purl2url.get_repo_url(purl)` returns a repository URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_download_url(purl)` returns a download URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_inferred_urls(purl)` return all inferred URLs\n  (repository, download) from a Package URL.\n\n::\n\n    >>> from packageurl.contrib import purl2url\n\n    >>> purl2url.get_repo_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/gems/bundler/versions/2.3.23\"\n\n    >>> purl2url.get_download_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/downloads/bundler-2.3.23.gem\"\n\n    >>> purl2url.get_inferred_urls(\"pkg:gem/bundler@2.3.23\")\n    [\"https://rubygems.org/gems/bundler/versions/2.3.23\", \"https://rubygems.org/downloads/bundler-2.3.23.gem\"]\n\nRun tests\n=========\n\nInstall test dependencies::\n\n    python3 thirdparty/virtualenv.pyz --never-download --no-periodic-update .\n    bin/pip install -e .\"[test]\"\n\nRun tests::\n\n    bin/py.test tests\n\nMake a new release\n==================\n\n- Start a new release branch\n- Update the CHANGELOG.rst, AUTHORS.rst, and README.rst if needed\n- Bump version in setup.cfg\n- Run all tests\n- Install restview and validate that all .rst docs are correct\n- Commit and push this branch\n- Make a PR and merge once approved\n- Tag and push that tag. This triggers the pypi-release.yml workflow that takes care of\n  building the dist release files and upload those to pypi::\n\n    VERSION=v0.x.x\n    git tag -a $VERSION -m \"Tag $VERSION\"\n    git push origin $VERSION\n\n- Review the GitHub release created by the workflow at\n  https://github.com/package-url/packageurl-python/releases\n\n.. |ci-tests| image:: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml/badge.svg?branch=main\n    :target: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml\n    :alt: CI Tests and build status",
+  "release_date": null,
+  "parties": [
+    {
+      "url": null,
+      "name": "the purl authors",
+      "role": "author",
+      "type": "person",
+      "email": null
+    }
+  ],
+  "keywords": [
+    "package",
+    "url",
+    "package manager",
+    "package url",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "Typing :: Typed"
+  ],
+  "homepage_url": "https://github.com/package-url/packageurl-python",
+  "download_url": "",
+  "bug_tracking_url": "",
+  "code_view_url": "",
+  "vcs_url": "",
+  "repository_homepage_url": "https://pypi.org/project/packageurl-python",
+  "repository_download_url": "https://pypi.org/packages/source/p/packageurl-python/packageurl-python-0.15.0.tar.gz",
+  "api_data_url": "https://pypi.org/pypi/packageurl-python/0.15.0/json",
+  "size": null,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "copyright": "",
+  "holder": "",
+  "declared_license_expression": "mit",
+  "declared_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 1,
+          "rule_url": null,
+          "from_file": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+          "start_line": 1,
+          "matched_text": "MIT",
+          "match_coverage": 100.0,
+          "matched_length": 1,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-5da48780aba670b0860c46d899ed42a0f243ff06",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-a822f434-d61f-f2b1-c792-8b8cb9e7b9bf",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    },
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-hash",
+          "end_line": 1,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/pypi_mit_license.RULE",
+          "from_file": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+          "start_line": 1,
+          "matched_text": "- 'License :: OSI Approved :: MIT License'",
+          "match_coverage": 100.0,
+          "matched_length": 5,
+          "rule_relevance": 100,
+          "rule_identifier": "pypi_mit_license.RULE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-24a5293c-14d7-5403-efac-1a8b7532c0e8",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "other_license_expression": "",
+  "other_license_expression_spdx": "",
+  "other_license_detections": [],
+  "extracted_license_statement": "license: MIT\nclassifiers:\n  - 'License :: OSI Approved :: MIT License'\n",
+  "compliance_alert": "ok",
+  "notice_text": "",
+  "source_packages": [],
+  "extra_data": {},
+  "package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datasource_ids": [
+    "pypi_sdist_pkginfo"
+  ],
+  "datafile_paths": [
+    "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO"
+  ],
+  "file_references": [],
+  "missing_resources": [],
+  "modified_resources": [],
+  "affected_by_vulnerabilities": []
+}],
+"dependencies": [
+{
+  "purl": "pkg:pypi/black",
+  "extracted_requirement": "black; extra == \"lint\"",
+  "scope": "lint",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/black?uuid=bfe7be3c-18c6-426c-912f-0e3ec035c4a1",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/isort",
+  "extracted_requirement": "isort; extra == \"lint\"",
+  "scope": "lint",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/isort?uuid=abdd8763-8587-42d2-8d9b-beb8b73a04cd",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/mypy",
+  "extracted_requirement": "mypy; extra == \"lint\"",
+  "scope": "lint",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/mypy?uuid=4f6b0619-21bb-4aa4-9123-aef532925b93",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/pytest",
+  "extracted_requirement": "pytest; extra == \"test\"",
+  "scope": "test",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/pytest?uuid=88d9530c-a561-4dd3-a173-e96af12c916b",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/setuptools",
+  "extracted_requirement": "setuptools; extra == \"build\"",
+  "scope": "build",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/setuptools?uuid=0986a93f-85e5-4e99-b712-3400fc409f6c",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/sqlalchemy",
+  "extracted_requirement": "sqlalchemy>=2.0.0; extra == \"sqlalchemy\"",
+  "scope": "sqlalchemy",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/sqlalchemy?uuid=89643f64-a760-4f97-a768-e5524bc4a15e",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+},
+{
+  "purl": "pkg:pypi/wheel",
+  "extracted_requirement": "wheel; extra == \"build\"",
+  "scope": "build",
+  "is_runtime": true,
+  "is_optional": true,
+  "is_resolved": false,
+  "dependency_uid": "pkg:pypi/wheel?uuid=afbf110f-753b-4c73-a2e8-bb676bf47ee0",
+  "for_package_uid": "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1",
+  "datafile_path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "datasource_id": "pypi_sdist_pkginfo",
+  "package_type": "pypi",
+  "affected_by_vulnerabilities": []
+}],
+"files": [
+{
+  "path": "packageurl-python-0.15.0.tar.gz",
+  "type": "file",
+  "name": "packageurl-python-0.15.0.tar.gz",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".tar.gz",
+  "size": 38953,
+  "md5": "c603d45dcc4e50cb40a8303d8cb3efc7",
+  "sha1": "1402cd8350ca2dc51850832187b0c1a7dc2b44f6",
+  "sha256": "f219b2ce6348185a27bd6a72e6fdc9f984e6c9fa157effa7cb93e341c49cdcc2",
+  "sha512": "",
+  "mime_type": "application/gzip",
+  "file_type": "gzip compressed data, was \"packageurl-python-0.15.0.tar\", last modified: Tue Mar 12 16:01:10 2024, max compression, original size modulo 2^32 266240",
+  "programming_language": "",
+  "is_binary": true,
+  "is_text": false,
+  "is_archive": true,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract",
+  "type": "directory",
+  "name": "packageurl-python-0.15.0.tar.gz-extract",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".tar.gz-extract",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0",
+  "type": "directory",
+  "name": "packageurl-python-0.15.0",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".0",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/CHANGELOG.rst",
+  "type": "file",
+  "name": "CHANGELOG.rst",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".rst",
+  "size": 6758,
+  "md5": "6096563a22da19f62282521dfc269079",
+  "sha1": "585819b122e04f5fd93a423341a6b12aa06e5d09",
+  "sha256": "f73aefe61da42b0118bf16f3e5850a00043be17f3e4c7ad67fda68629f47e0bc",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/nexB/purldb/issues/259",
+      "end_line": 17,
+      "start_line": 17
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/pull/114",
+      "end_line": 20,
+      "start_line": 20
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/issues/139",
+      "end_line": 26,
+      "start_line": 26
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/pull/135",
+      "end_line": 44,
+      "start_line": 44
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/pull/115/",
+      "end_line": 50,
+      "start_line": 50
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/pull/128",
+      "end_line": 62,
+      "start_line": 62
+    },
+    {
+      "url": "https://rubygems.org/",
+      "end_line": 64,
+      "start_line": 64
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/pull/114/",
+      "end_line": 66,
+      "start_line": 66
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/issues/133",
+      "end_line": 72,
+      "start_line": 72
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/CONTRIBUTING.rst",
+  "type": "file",
+  "name": "CONTRIBUTING.rst",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".rst",
+  "size": 1051,
+  "md5": "6650416b53ba2d4a271efcdcbe81bf1b",
+  "sha1": "3d51e49720a6c05298d9e5abef56a96d22c6bbff",
+  "sha256": "1fdc2338f374e93a898156d5385a3396e516afc87f79a3570aa915be5d1d482a",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "dco-1.1 AND mit",
+  "detected_license_expression_spdx": "LicenseRef-scancode-dco-1.1 AND MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 9,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/dco-1.1_9.RULE",
+          "from_file": null,
+          "start_line": 9,
+          "matched_text": "agree to the Developer Certificate of Origin http://developercertificate.org/",
+          "match_coverage": 100.0,
+          "matched_length": 3,
+          "rule_relevance": 100,
+          "rule_identifier": "dco-1.1_9.RULE",
+          "license_expression": "dco-1.1",
+          "spdx_license_expression": "LicenseRef-scancode-dco-1.1"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 10,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_27.RULE",
+          "from_file": null,
+          "start_line": 10,
+          "matched_text": "and its license (see the mit.LICENSE file).  The same approach is used",
+          "match_coverage": 100.0,
+          "matched_length": 3,
+          "rule_relevance": 100,
+          "rule_identifier": "mit_27.RULE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "dco_1_1_and_mit-cac369fa-205e-6652-5880-aa7c8682d6ed",
+      "license_expression": "dco-1.1 AND mit",
+      "license_expression_spdx": "LicenseRef-scancode-dco-1.1 AND MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 3.73,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "http://developercertificate.org/",
+      "end_line": 9,
+      "start_line": 9
+    },
+    {
+      "url": "https://chris.beams.io/posts/git-commit/",
+      "end_line": 28,
+      "start_line": 28
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/Makefile",
+  "type": "file",
+  "name": "Makefile",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 2525,
+  "md5": "b14eef1661e71b302ba1b2fab92f0651",
+  "sha1": "d149eb15b7802bbb263a683bcbb0bb57de02eb2f",
+  "sha256": "ef40ba8d003488e92b034653b602b2147c4bbd18e2c5e98c2a7b67ac0e2d9f67",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 2,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 2,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 20,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 46.48,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 22,
+      "start_line": 22
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/MANIFEST.in",
+  "type": "file",
+  "name": "MANIFEST.in",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".in",
+  "size": 218,
+  "md5": "ac723efa720e88a763f5771ffffbf6d0",
+  "sha1": "832cc6b07fd7da4a0143536499e6e5a86572afed",
+  "sha256": "0b5cb8411e128678cbcf6e1b35a42eed3032f04815bf8e37809fbe88fbc27b7a",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 4,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_14.RULE",
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "include mit.LICENSE",
+          "match_coverage": 100.0,
+          "matched_length": 2,
+          "rule_relevance": 100,
+          "rule_identifier": "mit_14.RULE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9967e727-165e-9bb5-f090-7de5e47a3929",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 6.45,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/mit.LICENSE",
+  "type": "file",
+  "name": "mit.LICENSE",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".LICENSE",
+  "size": 1054,
+  "md5": "ec425c78d8beabdb209b01c5fbcd38e0",
+  "sha1": "8a003bd4f1a9dce0acb513119f11137d32bb1a6a",
+  "sha256": "8e442c79545ac0c0a1a2cf0cf213312a45826acd6cdc6af223447dd5f708ee5d",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 18,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 3,
+          "matched_text": "Permission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-cacd5c0c-204a-85c2-affc-e4c125b2492a",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 96.99,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/PKG-INFO",
+  "type": "file",
+  "name": "PKG-INFO",
+  "status": "application-package",
+  "tag": "",
+  "extension": "",
+  "size": 5089,
+  "md5": "660fa8b16d9fe52496e1b394c99e0a37",
+  "sha1": "4afdbea5e86ccaf19ad508ded1ca5e2ff67c22e5",
+  "sha256": "f0522e387aafcec09c5d0a8fa2b1d60601eb86c49667a35749c51481030036cf",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "Objective-C",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [
+    {
+      "md5": null,
+      "name": "packageurl-python",
+      "purl": "pkg:pypi/packageurl-python@0.15.0",
+      "sha1": null,
+      "size": null,
+      "type": "pypi",
+      "holder": null,
+      "sha256": null,
+      "sha512": null,
+      "parties": [
+        {
+          "url": null,
+          "name": "the purl authors",
+          "role": "author",
+          "type": "person",
+          "email": null
+        }
+      ],
+      "subpath": null,
+      "vcs_url": null,
+      "version": "0.15.0",
+      "keywords": [
+        "package",
+        "url",
+        "package manager",
+        "package url",
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities",
+        "Typing :: Typed"
+      ],
+      "copyright": null,
+      "namespace": null,
+      "extra_data": {},
+      "qualifiers": {},
+      "description": "A purl aka. Package URL parser and builder\n=================\npackageurl-python\n=================\n\nPython library to parse and build \"purl\" aka. Package URLs.\nSee https://github.com/package-url/purl-spec for details.\n\nJoin the discussion at https://gitter.im/package-url/Lobby or enter a ticket for support.\n\nLicense: MIT\n\nTests and build status\n======================\n\n+----------------------+\n| **Tests and build**  |\n+======================+\n| |ci-tests|           |\n+----------------------+\n\nInstall\n=======\n::\n\n    pip install packageurl-python\n\nUsage\n=====\n::\n\n    >>> from packageurl import PackageURL\n\n    >>> purl = PackageURL.from_string(\"pkg:maven/org.apache.commons/io@1.3.4\")\n    >>> print(purl.to_dict())\n    {'type': 'maven', 'namespace': 'org.apache.commons', 'name': 'io', 'version': '1.3.4', 'qualifiers': None, 'subpath': None}\n\n    >>> print(purl.to_string())\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(str(purl))\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(repr(purl))\n    PackageURL(type='maven', namespace='org.apache.commons', name='io', version='1.3.4', qualifiers={}, subpath=None)\n\nUtilities\n=========\n\nDjango models\n^^^^^^^^^^^^^\n\n`packageurl.contrib.django.models.PackageURLMixin` is a Django abstract model mixin to\nuse Package URLs in Django.\n\nSQLAlchemy mixin\n^^^^^^^^^^^^^^^^\n\n`packageurl.contrib.sqlalchemy.mixin.PackageURLMixin` is a SQLAlchemy declarative mixin\nto use Package URLs in SQLAlchemy models.\n\nURL to PURL\n^^^^^^^^^^^\n\n`packageurl.contrib.url2purl.get_purl(url)` returns a Package URL inferred from an URL.\n\n::\n\n    >>> from packageurl.contrib import url2purl\n    >>> url2purl.get_purl(\"https://github.com/package-url/packageurl-python\")\n    PackageURL(type='github', namespace='package-url', name='packageurl-python', version=None, qualifiers={}, subpath=None)\n\nPURL to URL\n^^^^^^^^^^^\n\n- `packageurl.contrib.purl2url.get_repo_url(purl)` returns a repository URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_download_url(purl)` returns a download URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_inferred_urls(purl)` return all inferred URLs\n  (repository, download) from a Package URL.\n\n::\n\n    >>> from packageurl.contrib import purl2url\n\n    >>> purl2url.get_repo_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/gems/bundler/versions/2.3.23\"\n\n    >>> purl2url.get_download_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/downloads/bundler-2.3.23.gem\"\n\n    >>> purl2url.get_inferred_urls(\"pkg:gem/bundler@2.3.23\")\n    [\"https://rubygems.org/gems/bundler/versions/2.3.23\", \"https://rubygems.org/downloads/bundler-2.3.23.gem\"]\n\nRun tests\n=========\n\nInstall test dependencies::\n\n    python3 thirdparty/virtualenv.pyz --never-download --no-periodic-update .\n    bin/pip install -e .\"[test]\"\n\nRun tests::\n\n    bin/py.test tests\n\nMake a new release\n==================\n\n- Start a new release branch\n- Update the CHANGELOG.rst, AUTHORS.rst, and README.rst if needed\n- Bump version in setup.cfg\n- Run all tests\n- Install restview and validate that all .rst docs are correct\n- Commit and push this branch\n- Make a PR and merge once approved\n- Tag and push that tag. This triggers the pypi-release.yml workflow that takes care of\n  building the dist release files and upload those to pypi::\n\n    VERSION=v0.x.x\n    git tag -a $VERSION -m \"Tag $VERSION\"\n    git push origin $VERSION\n\n- Review the GitHub release created by the workflow at\n  https://github.com/package-url/packageurl-python/releases\n\n.. |ci-tests| image:: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml/badge.svg?branch=main\n    :target: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml\n    :alt: CI Tests and build status",
+      "notice_text": null,
+      "api_data_url": "https://pypi.org/pypi/packageurl-python/0.15.0/json",
+      "dependencies": [
+        {
+          "purl": "pkg:pypi/isort",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "isort; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/black",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "black; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/mypy",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "mypy; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/pytest",
+          "scope": "test",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "pytest; extra == \"test\""
+        },
+        {
+          "purl": "pkg:pypi/setuptools",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "setuptools; extra == \"build\""
+        },
+        {
+          "purl": "pkg:pypi/wheel",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "wheel; extra == \"build\""
+        },
+        {
+          "purl": "pkg:pypi/sqlalchemy",
+          "scope": "sqlalchemy",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "sqlalchemy>=2.0.0; extra == \"sqlalchemy\""
+        }
+      ],
+      "download_url": null,
+      "homepage_url": "https://github.com/package-url/packageurl-python",
+      "release_date": null,
+      "code_view_url": null,
+      "datasource_id": "pypi_sdist_pkginfo",
+      "file_references": [],
+      "source_packages": [],
+      "bug_tracking_url": null,
+      "primary_language": "Python",
+      "license_detections": [
+        {
+          "matches": [
+            {
+              "score": 100.0,
+              "matcher": "1-spdx-id",
+              "end_line": 1,
+              "rule_url": null,
+              "from_file": null,
+              "start_line": 1,
+              "matched_text": "MIT",
+              "match_coverage": 100.0,
+              "matched_length": 1,
+              "rule_relevance": 100,
+              "rule_identifier": "spdx-license-identifier-mit-5da48780aba670b0860c46d899ed42a0f243ff06",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            }
+          ],
+          "identifier": "mit-a822f434-d61f-f2b1-c792-8b8cb9e7b9bf",
+          "license_expression": "mit",
+          "license_expression_spdx": "MIT"
+        },
+        {
+          "matches": [
+            {
+              "score": 100.0,
+              "matcher": "1-hash",
+              "end_line": 1,
+              "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/pypi_mit_license.RULE",
+              "from_file": null,
+              "start_line": 1,
+              "matched_text": "- 'License :: OSI Approved :: MIT License'",
+              "match_coverage": 100.0,
+              "matched_length": 5,
+              "rule_relevance": 100,
+              "rule_identifier": "pypi_mit_license.RULE",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            }
+          ],
+          "identifier": "mit-24a5293c-14d7-5403-efac-1a8b7532c0e8",
+          "license_expression": "mit",
+          "license_expression_spdx": "MIT"
+        }
+      ],
+      "repository_download_url": "https://pypi.org/packages/source/p/packageurl-python/packageurl-python-0.15.0.tar.gz",
+      "repository_homepage_url": "https://pypi.org/project/packageurl-python",
+      "other_license_detections": [],
+      "other_license_expression": null,
+      "declared_license_expression": "mit",
+      "extracted_license_statement": "license: MIT\nclassifiers:\n  - 'License :: OSI Approved :: MIT License'\n",
+      "other_license_expression_spdx": null,
+      "declared_license_expression_spdx": "MIT"
+    }
+  ],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/README.rst",
+  "type": "file",
+  "name": "README.rst",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".rst",
+  "size": 3720,
+  "md5": "41a4e63b45757f136b75ee3380253b10",
+  "sha1": "f9f7321a97f4fb46ade9c08684083e0ebc48eee6",
+  "sha256": "674e4fdb7beeb3aee0f0eb0c06b74e433fc27b06aea8e99e392d3c2e40e0cfee",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 10,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_30.RULE",
+          "from_file": null,
+          "start_line": 10,
+          "matched_text": "License: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 2,
+          "rule_relevance": 100,
+          "rule_identifier": "mit_30.RULE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-3fce6ea2-8abd-6c6b-3ede-a37af7c6efee",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 0.4,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [
+    {
+      "author": "the workflow at https://github.com/package-url/packageurl-python/releases",
+      "end_line": 125,
+      "start_line": 124
+    }
+  ],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/purl-spec",
+      "end_line": 6,
+      "start_line": 6
+    },
+    {
+      "url": "https://gitter.im/package-url/Lobby",
+      "end_line": 8,
+      "start_line": 8
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 69,
+      "start_line": 69
+    },
+    {
+      "url": "https://rubygems.org/gems/bundler/versions/2.3.23",
+      "end_line": 87,
+      "start_line": 87
+    },
+    {
+      "url": "https://rubygems.org/downloads/bundler-2.3.23.gem",
+      "end_line": 90,
+      "start_line": 90
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/releases",
+      "end_line": 125,
+      "start_line": 125
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/actions/workflows/ci.yml/badge.svg?branch=main",
+      "end_line": 127,
+      "start_line": 127
+    },
+    {
+      "url": "https://github.com/package-url/packageurl-python/actions/workflows/ci.yml",
+      "end_line": 128,
+      "start_line": 128
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/setup.cfg",
+  "type": "file",
+  "name": "setup.cfg",
+  "status": "application-package",
+  "tag": "",
+  "extension": ".cfg",
+  "size": 1940,
+  "md5": "b004bd45a91bfe063973b1c369a9f7be",
+  "sha1": "8f45102da6c35151b640ecd97ca0b71371856f6b",
+  "sha256": "1ff8e37015e4b891c634e4b9d2b7cc72f0c7cf25c4c61345d0a53c1e51a63a52",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [
+    {
+      "md5": null,
+      "name": "packageurl-python",
+      "purl": "pkg:pypi/packageurl-python@0.15.0",
+      "sha1": null,
+      "size": null,
+      "type": "pypi",
+      "holder": null,
+      "sha256": null,
+      "sha512": null,
+      "parties": [
+        {
+          "url": null,
+          "name": "the purl authors",
+          "role": "author",
+          "type": "person",
+          "email": null
+        }
+      ],
+      "subpath": null,
+      "vcs_url": null,
+      "version": "0.15.0",
+      "keywords": [],
+      "copyright": null,
+      "namespace": null,
+      "extra_data": {},
+      "qualifiers": {},
+      "description": null,
+      "notice_text": null,
+      "api_data_url": null,
+      "dependencies": [
+        {
+          "purl": "pkg:generic/python",
+          "scope": "python",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "python_requires>=3.7"
+        },
+        {
+          "purl": "pkg:pypi/isort",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "isort"
+        },
+        {
+          "purl": "pkg:pypi/black",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "black"
+        },
+        {
+          "purl": "pkg:pypi/mypy",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "mypy"
+        },
+        {
+          "purl": "pkg:pypi/pytest",
+          "scope": "test",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "pytest"
+        },
+        {
+          "purl": "pkg:pypi/setuptools",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "setuptools"
+        },
+        {
+          "purl": "pkg:pypi/wheel",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "wheel"
+        },
+        {
+          "purl": "pkg:pypi/sqlalchemy",
+          "scope": "sqlalchemy",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "sqlalchemy>=2.0.0"
+        }
+      ],
+      "download_url": null,
+      "homepage_url": "https://github.com/package-url/packageurl-python",
+      "release_date": null,
+      "code_view_url": null,
+      "datasource_id": "pypi_setup_cfg",
+      "file_references": [],
+      "source_packages": [],
+      "bug_tracking_url": null,
+      "primary_language": "Python",
+      "license_detections": [
+        {
+          "matches": [
+            {
+              "score": 100.0,
+              "matcher": "2-aho",
+              "end_line": 1,
+              "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_14.RULE",
+              "from_file": null,
+              "start_line": 1,
+              "matched_text": "MIT license_files:",
+              "match_coverage": 100.0,
+              "matched_length": 2,
+              "rule_relevance": 100,
+              "rule_identifier": "mit_14.RULE",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            },
+            {
+              "score": 100.0,
+              "matcher": "2-aho",
+              "end_line": 2,
+              "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_14.RULE",
+              "from_file": null,
+              "start_line": 2,
+              "matched_text": "- mit.LICENSE",
+              "match_coverage": 100.0,
+              "matched_length": 2,
+              "rule_relevance": 100,
+              "rule_identifier": "mit_14.RULE",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            }
+          ],
+          "identifier": "mit-c50f9352-032a-ddb1-9025-a7ee1bf1bc68",
+          "license_expression": "mit",
+          "license_expression_spdx": "MIT"
+        }
+      ],
+      "repository_download_url": null,
+      "repository_homepage_url": null,
+      "other_license_detections": [],
+      "other_license_expression": null,
+      "declared_license_expression": "mit",
+      "extracted_license_statement": "MIT license_files: \n- mit.LICENSE\n- AUTHORS.rst\n- README.rst\n- CONTRIBUTING.rst\n- CHANGELOG.rst",
+      "other_license_expression_spdx": null,
+      "declared_license_expression_spdx": "MIT"
+    }
+  ],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/setup.py",
+  "type": "file",
+  "name": "setup.py",
+  "status": "application-package",
+  "tag": "",
+  "extension": ".py",
+  "size": 150,
+  "md5": "5522449033f0e4d035750f4c78c395be",
+  "sha1": "ba2059200c8f34eeaa71ec97de37d44e175d8461",
+  "sha256": "40fd3d4c62b2364c48b90e4cad0d0e5d751e2166548f89f474a4cca1dad91100",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [
+    {
+      "md5": null,
+      "name": null,
+      "purl": null,
+      "sha1": null,
+      "size": null,
+      "type": "pypi",
+      "holder": null,
+      "sha256": null,
+      "sha512": null,
+      "parties": [],
+      "subpath": null,
+      "vcs_url": null,
+      "version": null,
+      "keywords": [],
+      "copyright": null,
+      "namespace": null,
+      "extra_data": {},
+      "qualifiers": {},
+      "description": "",
+      "notice_text": null,
+      "api_data_url": null,
+      "dependencies": [],
+      "download_url": null,
+      "homepage_url": null,
+      "release_date": null,
+      "code_view_url": null,
+      "datasource_id": "pypi_setup_py",
+      "file_references": [],
+      "source_packages": [],
+      "bug_tracking_url": null,
+      "primary_language": "Python",
+      "license_detections": [],
+      "repository_download_url": null,
+      "repository_homepage_url": null,
+      "other_license_detections": [],
+      "other_license_expression": null,
+      "declared_license_expression": null,
+      "extracted_license_statement": null,
+      "other_license_expression_spdx": null,
+      "declared_license_expression_spdx": null
+    }
+  ],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src",
+  "type": "directory",
+  "name": "src",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl",
+  "type": "directory",
+  "name": "packageurl",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib",
+  "type": "directory",
+  "name": "contrib",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/django",
+  "type": "directory",
+  "name": "django",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/django/filters.py",
+  "type": "file",
+  "name": "filters.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 2215,
+  "md5": "16b672375c2deee03cdc46301514b81e",
+  "sha1": "269fdb3e97e6048bede0ca947bce343ec95b7f9a",
+  "sha256": "8d572e63e28340f59322feb8b2e6a7a168242640b06a3021fb68f856c27461ed",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 53.92,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/django/__init__.py",
+  "type": "file",
+  "name": "__init__.py",
+  "status": "ignored-empty-file",
+  "tag": "",
+  "extension": ".py",
+  "size": null,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "inode/x-empty",
+  "file_type": "empty",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/django/models.py",
+  "type": "file",
+  "name": "models.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 5123,
+  "md5": "c6273c8ebcbc13e5b0dddcb38159cbf6",
+  "sha1": "f5fbba3cb5aa6cf4d66411b42e16b87e9bf5cbd4",
+  "sha256": "6a0fa5a4bce37aa5ddd42cd7154d6034c1db5f9ab06d1c9f03000dfaba069b87",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 26.48,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/django/utils.py",
+  "type": "file",
+  "name": "utils.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 2134,
+  "md5": "7c1e3c4d2df7f994cf904508ab5da1a9",
+  "sha1": "397ff7d844de4b5ca0961364ba0ef971e4e318f9",
+  "sha256": "34759831efe5b12927168220abcd1269d9dd0d68d6a5473a60184e718f5db878",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 53.57,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/__init__.py",
+  "type": "file",
+  "name": "__init__.py",
+  "status": "ignored-empty-file",
+  "tag": "",
+  "extension": ".py",
+  "size": null,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "inode/x-empty",
+  "file_type": "empty",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/purl2url.py",
+  "type": "file",
+  "name": "purl2url.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 10686,
+  "md5": "728315155ba56ed7f5b8cd981b2ef293",
+  "sha1": "b8d836d8c3b51f7b70672f0389c664dfca03cc73",
+  "sha256": "0fb037a3d4b2bc758829cafc18cf1cc87ecd3ef1a7b42fdb0ddfb2d53c01df78",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 11.57,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://github.com/%7Bnamespace%7D/%7Bname%7D/archive/refs/tags/%7Bversion%7D.%7Barchive_extension",
+      "end_line": 43,
+      "start_line": 43
+    },
+    {
+      "url": "https://bitbucket.org/%7Bnamespace%7D/%7Bname%7D/get/%7Bversion%7D.%7Barchive_extension",
+      "end_line": 44,
+      "start_line": 44
+    },
+    {
+      "url": "https://gitlab.com/%7Bnamespace%7D/%7Bname%7D/-/archive/%7Bversion%7D/%7Bname%7D-%7Bversion%7D.%7Barchive_extension",
+      "end_line": 45,
+      "start_line": 45
+    },
+    {
+      "url": "https://crates.io/crates/%7Bname%7D/%7Bversion",
+      "end_line": 116,
+      "start_line": 116
+    },
+    {
+      "url": "https://crates.io/crates/%7Bname",
+      "end_line": 118,
+      "start_line": 118
+    },
+    {
+      "url": "https://bitbucket.org/%7Bnamespace%7D/%7Bname",
+      "end_line": 132,
+      "start_line": 132
+    },
+    {
+      "url": "https://github.com/%7Bnamespace%7D/%7Bname",
+      "end_line": 150,
+      "start_line": 150
+    },
+    {
+      "url": "https://gitlab.com/%7Bnamespace%7D/%7Bname",
+      "end_line": 170,
+      "start_line": 170
+    },
+    {
+      "url": "https://rubygems.org/gems/%7Bname%7D/versions/%7Bversion",
+      "end_line": 184,
+      "start_line": 184
+    },
+    {
+      "url": "https://rubygems.org/gems/%7Bname",
+      "end_line": 186,
+      "start_line": 186
+    },
+    {
+      "url": "https://cran.r-project.org/src/contrib/%7Bname%7D_%7Bversion%7D.tar.gz",
+      "end_line": 199,
+      "start_line": 199
+    },
+    {
+      "url": "https://www.npmjs.com/package/",
+      "end_line": 213,
+      "start_line": 213
+    },
+    {
+      "url": "https://pypi.org/project/%7Bname%7D/%7Bversion%7D/",
+      "end_line": 236,
+      "start_line": 236
+    },
+    {
+      "url": "https://pypi.org/project/%7Bname%7D/",
+      "end_line": 238,
+      "start_line": 238
+    },
+    {
+      "url": "https://www.nuget.org/packages/%7Bname%7D/%7Bversion",
+      "end_line": 252,
+      "start_line": 252
+    },
+    {
+      "url": "https://www.nuget.org/packages/%7Bname",
+      "end_line": 254,
+      "start_line": 254
+    },
+    {
+      "url": "https://hackage.haskell.org/package/%7Bname%7D-%7Bversion",
+      "end_line": 268,
+      "start_line": 268
+    },
+    {
+      "url": "https://hackage.haskell.org/package/%7Bname",
+      "end_line": 270,
+      "start_line": 270
+    },
+    {
+      "url": "https://pkg.go.dev/%7Bnamespace%7D/%7Bname%7D@%7Bversion",
+      "end_line": 285,
+      "start_line": 285
+    },
+    {
+      "url": "https://pkg.go.dev/%7Bnamespace%7D/%7Bname",
+      "end_line": 287,
+      "start_line": 287
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/%7Bname%7D/%7Bversion%7D/download",
+      "end_line": 304,
+      "start_line": 304
+    },
+    {
+      "url": "https://rubygems.org/downloads/%7Bname%7D-%7Bversion%7D.gem",
+      "end_line": 318,
+      "start_line": 318
+    },
+    {
+      "url": "http://registry.npmjs.org/%7Bname%7D/-/%7Bname%7D-%7Bversion%7D.tgz",
+      "end_line": 332,
+      "start_line": 332
+    },
+    {
+      "url": "https://hackage.haskell.org/package/%7Bname%7D-%7Bversion%7D/%7Bname%7D-%7Bversion%7D.tar.gz",
+      "end_line": 346,
+      "start_line": 346
+    },
+    {
+      "url": "https://www.nuget.org/api/v2/package/%7Bname%7D/%7Bversion",
+      "end_line": 360,
+      "start_line": 360
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/route.py",
+  "type": "file",
+  "name": "route.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 7991,
+  "md5": "43363cc81f92d420c403ee474c41a63d",
+  "sha1": "962d358121853e9b918ca9465a6866a897ce9bfd",
+  "sha256": "8bdfa5735d70dc38dd1c1712b91f7c79e2e316f2fe6e2c3e58b3d0611737dc08",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 16.16,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "http://www.artima.com/weblogs/viewpost.jsp?thread=101605",
+      "end_line": 46,
+      "start_line": 46
+    },
+    {
+      "url": "https://github.com/douban/brownant",
+      "end_line": 49,
+      "start_line": 49
+    },
+    {
+      "url": "http://nexb.com/",
+      "end_line": 153,
+      "start_line": 153
+    },
+    {
+      "url": "http://deja.com/",
+      "end_line": 153,
+      "start_line": 153
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/sqlalchemy",
+  "type": "directory",
+  "name": "sqlalchemy",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/sqlalchemy/mixin.py",
+  "type": "file",
+  "name": "mixin.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 4023,
+  "md5": "65fcd3f2b2675d1f2ad22dc80c580a36",
+  "sha1": "fc0759e9d7f701cbe315a7146bdb64dd0c214d85",
+  "sha256": "11b113a99261d9362f301f1dd998b2ef6ad5d99957aa5328a1c25150d89f1c27",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 34.52,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/contrib/url2purl.py",
+  "type": "file",
+  "name": "url2purl.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 23380,
+  "md5": "d647377001879db839f5eeae4bc0340a",
+  "sha1": "f0b494fc980f595550b4ce14218241b21231ef98",
+  "sha256": "416f713dc92f91b35e76617abbae9e8edf0628dc8ffdd14ea36895d62c4582ac",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 5.61,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://rubygems.org/gems/i18n-js-3.0.11.gem",
+      "end_line": 263,
+      "start_line": 263
+    },
+    {
+      "url": "https://rubygems.org/downloads/jwt-0.1.8.gem",
+      "end_line": 272,
+      "start_line": 272
+    },
+    {
+      "url": "https://cran.r-project.org/src/contrib/jsonlite_1.8.8.tar.gz",
+      "end_line": 280,
+      "start_line": 280
+    },
+    {
+      "url": "https://packagemanager.rstudio.com/cran/2022-06-23/src/contrib/curl_4.3.2.tar.gz",
+      "end_line": 281,
+      "start_line": 281
+    },
+    {
+      "url": "https://pypi.org/packages/source/a/anyjson/anyjson-0.3.3.tar.gz",
+      "end_line": 294,
+      "start_line": 294
+    },
+    {
+      "url": "https://pypi.python.org/packages/source/a/anyjson/anyjson-0.3.3.tar.gz",
+      "end_line": 295,
+      "start_line": 295
+    },
+    {
+      "url": "https://pypi.python.org/packages/2.6/t/threadpool/threadpool-1.2.7-py2.6.egg",
+      "end_line": 296,
+      "start_line": 296
+    },
+    {
+      "url": "https://pypi.python.org/packages/any/s/setuptools/setuptools-0.6c11-1.src.rpm",
+      "end_line": 297,
+      "start_line": 297
+    },
+    {
+      "url": "https://files.pythonhosted.org/packages/84/d8/451842a5496844bb5c7634b231a2e4caf0d867d2e25f09b840d3b07f3d4b/multi_key_dict-2.0.win32.exe",
+      "end_line": 298,
+      "start_line": 298
+    },
+    {
+      "url": "http://nuget.org/packages/EntityFramework/4.2.0.0",
+      "end_line": 343,
+      "start_line": 343
+    },
+    {
+      "url": "https://www.nuget.org/api/v2/package/Newtonsoft.Json/11.0.1",
+      "end_line": 344,
+      "start_line": 344
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/newtonsoft.json/10.0.1/newtonsoft.json.10.0.1.nupkg",
+      "end_line": 350,
+      "start_line": 350
+    },
+    {
+      "url": "https://sourceforge.net/projects/turbovnc/files/3.1/turbovnc-3.1.tar.gz/download",
+      "end_line": 361,
+      "start_line": 361
+    },
+    {
+      "url": "https://sourceforge.net/projects/scribus/files/scribus/1.6.0/scribus-1.6.0.tar.gz/download",
+      "end_line": 362,
+      "start_line": 362
+    },
+    {
+      "url": "https://sourceforge.net/projects/ventoy/files/v1.0.96/Ventoy%201.0.96%20release%20source%20code.tar.gz/download",
+      "end_line": 363,
+      "start_line": 363
+    },
+    {
+      "url": "https://sourceforge.net/projects/geoserver/files/GeoServer/2.23.4/geoserver-2.23.4-war.zip/download",
+      "end_line": 364,
+      "start_line": 364
+    },
+    {
+      "url": "https://sourceforge.net/projects/spacesniffer/files/spacesniffer_1_3_0_2.zip/download",
+      "end_line": 378,
+      "start_line": 378
+    },
+    {
+      "url": "http://master.dl.sourceforge.net/project/libpng/zlib/1.2.3/zlib-1.2.3.tar.bz2",
+      "end_line": 398,
+      "start_line": 398
+    },
+    {
+      "url": "http://master.dl.sourceforge.net/project/aloyscore/aloyscore/0.1a1%2520stable/0.1a1_stable_AloysCore.zip",
+      "end_line": 413,
+      "start_line": 413
+    },
+    {
+      "url": "http://master.dl.sourceforge.net/",
+      "end_line": 416,
+      "start_line": 416
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/rand/0.7.2/download",
+      "end_line": 430,
+      "start_line": 430
+    },
+    {
+      "url": "https://raw.githubusercontent.com/volatilityfoundation/dwarf2json/master/LICENSE.txt",
+      "end_line": 436,
+      "start_line": 436
+    },
+    {
+      "url": "https://api.github.com/repos/nexB/scancode-toolkit/commits/40593af0df6c8378d2b180324b97cb439fa11d66",
+      "end_line": 450,
+      "start_line": 450
+    },
+    {
+      "url": "https://api.github.com/repos/nexB/scancode-toolkit/",
+      "end_line": 451,
+      "start_line": 451
+    },
+    {
+      "url": "https://codeload.github.com/nexB/scancode-toolkit/tar.gz/v3.1.1",
+      "end_line": 473,
+      "start_line": 473
+    },
+    {
+      "url": "https://codeload.github.com/berngp/grails-rest/zip/release/0.7",
+      "end_line": 474,
+      "start_line": 474
+    },
+    {
+      "url": "https://github.com/nexB/scancode-toolkit/archive/v3.1.1.zip",
+      "end_line": 490,
+      "start_line": 490
+    },
+    {
+      "url": "https://github.com/downloads/mozilla/rhino/rhino1_7R4.zip",
+      "end_line": 498,
+      "start_line": 498
+    },
+    {
+      "url": "https://github.com/pypa/get-virtualenv/raw/20.0.31/public/virtualenv.pyz",
+      "end_line": 505,
+      "start_line": 505
+    },
+    {
+      "url": "https://github.com/fanf2/unifdef/blob/master/unifdef.c",
+      "end_line": 511,
+      "start_line": 511
+    },
+    {
+      "url": "https://github.com/pombredanne/schematics.git",
+      "end_line": 522,
+      "start_line": 522
+    },
+    {
+      "url": "https://github.com/TG1999/fetchcode/master",
+      "end_line": 553,
+      "start_line": 553
+    },
+    {
+      "url": "https://github.com/TG1999/fetchcode/tree/master",
+      "end_line": 558,
+      "start_line": 558
+    },
+    {
+      "url": "https://bitbucket.org/TG1999/first_repo/src/master",
+      "end_line": 577,
+      "start_line": 577
+    },
+    {
+      "url": "https://bitbucket.org/TG1999/first_repo/src",
+      "end_line": 578,
+      "start_line": 578
+    },
+    {
+      "url": "https://bitbucket.org/TG1999/first_repo/src/master/new_folder",
+      "end_line": 579,
+      "start_line": 579
+    },
+    {
+      "url": "https://bitbucket.org/TG1999/first_repo/new_folder/",
+      "end_line": 604,
+      "start_line": 604
+    },
+    {
+      "url": "https://bitbucket.org/TG1999/first_repo/src/master/new_folder/",
+      "end_line": 609,
+      "start_line": 609
+    },
+    {
+      "url": "https://gitlab.com/TG1999/firebase/-/tree/1a122122/views",
+      "end_line": 628,
+      "start_line": 628
+    },
+    {
+      "url": "https://gitlab.com/TG1999/firebase/-/tree",
+      "end_line": 629,
+      "start_line": 629
+    },
+    {
+      "url": "https://gitlab.com/TG1999/firebase/-/master",
+      "end_line": 630,
+      "start_line": 630
+    },
+    {
+      "url": "https://gitlab.com/tg1999/Firebase/-/tree/master",
+      "end_line": 631,
+      "start_line": 631
+    },
+    {
+      "url": "https://gitlab.com/TG1999/firebase/master",
+      "end_line": 642,
+      "start_line": 642
+    },
+    {
+      "url": "https://gitlab.com/TG1999/firebase/-/tree/master",
+      "end_line": 647,
+      "start_line": 647
+    },
+    {
+      "url": "https://gitlab.com/hoppr/hoppr/-/archive/v1.11.1-dev.2/hoppr-v1.11.1-dev.2.tar.gz",
+      "end_line": 661,
+      "start_line": 661
+    },
+    {
+      "url": "https://hackage.haskell.org/package/cli-extras-0.2.0.0/cli-extras-0.2.0.0.tar.gz",
+      "end_line": 672,
+      "start_line": 672
+    },
+    {
+      "url": "https://hackage.haskell.org/package/cli-extras-0.2.0.0/",
+      "end_line": 683,
+      "start_line": 683
+    },
+    {
+      "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com",
+      "end_line": 693,
+      "start_line": 693
+    },
+    {
+      "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/",
+      "end_line": 696,
+      "start_line": 696
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/__init__.py",
+  "type": "file",
+  "name": "__init__.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 17354,
+  "md5": "758e5d4036e28998595c4922ae0ecfaf",
+  "sha1": "fb0a4801b107e54c0de43263f1c9ee410a37c39d",
+  "sha256": "0bb5b6d91162629746a04a1230c4c8c17a5bbc51218569d43a421d7bfaa3ba1e",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 7.96,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://github.com/package-url/purl-spec",
+      "end_line": 55,
+      "start_line": 55
+    },
+    {
+      "url": "https://github.com/python/mypy/pull/13133",
+      "end_line": 364,
+      "start_line": 364
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info",
+  "type": "directory",
+  "name": "packageurl_python.egg-info",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".egg-info",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/dependency_links.txt",
+  "type": "file",
+  "name": "dependency_links.txt",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".txt",
+  "size": 1,
+  "md5": "68b329da9893e34099c7d8ad5cb9c940",
+  "sha1": "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc",
+  "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "sha512": "",
+  "mime_type": "application/octet-stream",
+  "file_type": "very short file (no magic)",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/not-zip-safe",
+  "type": "file",
+  "name": "not-zip-safe",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 1,
+  "md5": "68b329da9893e34099c7d8ad5cb9c940",
+  "sha1": "adc83b19e793491b1c6ea0fd8b46cd9f32e592fc",
+  "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "sha512": "",
+  "mime_type": "application/octet-stream",
+  "file_type": "very short file (no magic)",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/PKG-INFO",
+  "type": "file",
+  "name": "PKG-INFO",
+  "status": "application-package",
+  "tag": "",
+  "extension": "",
+  "size": 5089,
+  "md5": "660fa8b16d9fe52496e1b394c99e0a37",
+  "sha1": "4afdbea5e86ccaf19ad508ded1ca5e2ff67c22e5",
+  "sha256": "f0522e387aafcec09c5d0a8fa2b1d60601eb86c49667a35749c51481030036cf",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "Objective-C",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [
+    {
+      "md5": null,
+      "name": "packageurl-python",
+      "purl": "pkg:pypi/packageurl-python@0.15.0",
+      "sha1": null,
+      "size": null,
+      "type": "pypi",
+      "holder": null,
+      "sha256": null,
+      "sha512": null,
+      "parties": [
+        {
+          "url": null,
+          "name": "the purl authors",
+          "role": "author",
+          "type": "person",
+          "email": null
+        }
+      ],
+      "subpath": null,
+      "vcs_url": null,
+      "version": "0.15.0",
+      "keywords": [
+        "package",
+        "url",
+        "package manager",
+        "package url",
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities",
+        "Typing :: Typed"
+      ],
+      "copyright": null,
+      "namespace": null,
+      "extra_data": {},
+      "qualifiers": {},
+      "description": "A purl aka. Package URL parser and builder\n=================\npackageurl-python\n=================\n\nPython library to parse and build \"purl\" aka. Package URLs.\nSee https://github.com/package-url/purl-spec for details.\n\nJoin the discussion at https://gitter.im/package-url/Lobby or enter a ticket for support.\n\nLicense: MIT\n\nTests and build status\n======================\n\n+----------------------+\n| **Tests and build**  |\n+======================+\n| |ci-tests|           |\n+----------------------+\n\nInstall\n=======\n::\n\n    pip install packageurl-python\n\nUsage\n=====\n::\n\n    >>> from packageurl import PackageURL\n\n    >>> purl = PackageURL.from_string(\"pkg:maven/org.apache.commons/io@1.3.4\")\n    >>> print(purl.to_dict())\n    {'type': 'maven', 'namespace': 'org.apache.commons', 'name': 'io', 'version': '1.3.4', 'qualifiers': None, 'subpath': None}\n\n    >>> print(purl.to_string())\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(str(purl))\n    pkg:maven/org.apache.commons/io@1.3.4\n\n    >>> print(repr(purl))\n    PackageURL(type='maven', namespace='org.apache.commons', name='io', version='1.3.4', qualifiers={}, subpath=None)\n\nUtilities\n=========\n\nDjango models\n^^^^^^^^^^^^^\n\n`packageurl.contrib.django.models.PackageURLMixin` is a Django abstract model mixin to\nuse Package URLs in Django.\n\nSQLAlchemy mixin\n^^^^^^^^^^^^^^^^\n\n`packageurl.contrib.sqlalchemy.mixin.PackageURLMixin` is a SQLAlchemy declarative mixin\nto use Package URLs in SQLAlchemy models.\n\nURL to PURL\n^^^^^^^^^^^\n\n`packageurl.contrib.url2purl.get_purl(url)` returns a Package URL inferred from an URL.\n\n::\n\n    >>> from packageurl.contrib import url2purl\n    >>> url2purl.get_purl(\"https://github.com/package-url/packageurl-python\")\n    PackageURL(type='github', namespace='package-url', name='packageurl-python', version=None, qualifiers={}, subpath=None)\n\nPURL to URL\n^^^^^^^^^^^\n\n- `packageurl.contrib.purl2url.get_repo_url(purl)` returns a repository URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_download_url(purl)` returns a download URL inferred\n  from a Package URL.\n- `packageurl.contrib.purl2url.get_inferred_urls(purl)` return all inferred URLs\n  (repository, download) from a Package URL.\n\n::\n\n    >>> from packageurl.contrib import purl2url\n\n    >>> purl2url.get_repo_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/gems/bundler/versions/2.3.23\"\n\n    >>> purl2url.get_download_url(\"pkg:gem/bundler@2.3.23\")\n    \"https://rubygems.org/downloads/bundler-2.3.23.gem\"\n\n    >>> purl2url.get_inferred_urls(\"pkg:gem/bundler@2.3.23\")\n    [\"https://rubygems.org/gems/bundler/versions/2.3.23\", \"https://rubygems.org/downloads/bundler-2.3.23.gem\"]\n\nRun tests\n=========\n\nInstall test dependencies::\n\n    python3 thirdparty/virtualenv.pyz --never-download --no-periodic-update .\n    bin/pip install -e .\"[test]\"\n\nRun tests::\n\n    bin/py.test tests\n\nMake a new release\n==================\n\n- Start a new release branch\n- Update the CHANGELOG.rst, AUTHORS.rst, and README.rst if needed\n- Bump version in setup.cfg\n- Run all tests\n- Install restview and validate that all .rst docs are correct\n- Commit and push this branch\n- Make a PR and merge once approved\n- Tag and push that tag. This triggers the pypi-release.yml workflow that takes care of\n  building the dist release files and upload those to pypi::\n\n    VERSION=v0.x.x\n    git tag -a $VERSION -m \"Tag $VERSION\"\n    git push origin $VERSION\n\n- Review the GitHub release created by the workflow at\n  https://github.com/package-url/packageurl-python/releases\n\n.. |ci-tests| image:: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml/badge.svg?branch=main\n    :target: https://github.com/package-url/packageurl-python/actions/workflows/ci.yml\n    :alt: CI Tests and build status",
+      "notice_text": null,
+      "api_data_url": "https://pypi.org/pypi/packageurl-python/0.15.0/json",
+      "dependencies": [
+        {
+          "purl": "pkg:pypi/isort",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "isort; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/black",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "black; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/mypy",
+          "scope": "lint",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "mypy; extra == \"lint\""
+        },
+        {
+          "purl": "pkg:pypi/pytest",
+          "scope": "test",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "pytest; extra == \"test\""
+        },
+        {
+          "purl": "pkg:pypi/setuptools",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "setuptools; extra == \"build\""
+        },
+        {
+          "purl": "pkg:pypi/wheel",
+          "scope": "build",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "wheel; extra == \"build\""
+        },
+        {
+          "purl": "pkg:pypi/sqlalchemy",
+          "scope": "sqlalchemy",
+          "extra_data": {},
+          "is_runtime": true,
+          "is_optional": true,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "sqlalchemy>=2.0.0; extra == \"sqlalchemy\""
+        }
+      ],
+      "download_url": null,
+      "homepage_url": "https://github.com/package-url/packageurl-python",
+      "release_date": null,
+      "code_view_url": null,
+      "datasource_id": "pypi_editable_egg_pkginfo",
+      "file_references": [],
+      "source_packages": [],
+      "bug_tracking_url": null,
+      "primary_language": "Python",
+      "license_detections": [
+        {
+          "matches": [
+            {
+              "score": 100.0,
+              "matcher": "1-spdx-id",
+              "end_line": 1,
+              "rule_url": null,
+              "from_file": null,
+              "start_line": 1,
+              "matched_text": "MIT",
+              "match_coverage": 100.0,
+              "matched_length": 1,
+              "rule_relevance": 100,
+              "rule_identifier": "spdx-license-identifier-mit-5da48780aba670b0860c46d899ed42a0f243ff06",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            }
+          ],
+          "identifier": "mit-a822f434-d61f-f2b1-c792-8b8cb9e7b9bf",
+          "license_expression": "mit",
+          "license_expression_spdx": "MIT"
+        },
+        {
+          "matches": [
+            {
+              "score": 100.0,
+              "matcher": "1-hash",
+              "end_line": 1,
+              "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/pypi_mit_license.RULE",
+              "from_file": null,
+              "start_line": 1,
+              "matched_text": "- 'License :: OSI Approved :: MIT License'",
+              "match_coverage": 100.0,
+              "matched_length": 5,
+              "rule_relevance": 100,
+              "rule_identifier": "pypi_mit_license.RULE",
+              "license_expression": "mit",
+              "spdx_license_expression": "MIT"
+            }
+          ],
+          "identifier": "mit-24a5293c-14d7-5403-efac-1a8b7532c0e8",
+          "license_expression": "mit",
+          "license_expression_spdx": "MIT"
+        }
+      ],
+      "repository_download_url": "https://pypi.org/packages/source/p/packageurl-python/packageurl-python-0.15.0.tar.gz",
+      "repository_homepage_url": "https://pypi.org/project/packageurl-python",
+      "other_license_detections": [],
+      "other_license_expression": null,
+      "declared_license_expression": "mit",
+      "extracted_license_statement": "license: MIT\nclassifiers:\n  - 'License :: OSI Approved :: MIT License'\n",
+      "other_license_expression_spdx": null,
+      "declared_license_expression_spdx": "MIT"
+    }
+  ],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/requires.txt",
+  "type": "file",
+  "name": "requires.txt",
+  "status": "application-package",
+  "tag": "",
+  "extension": ".txt",
+  "size": 98,
+  "md5": "8c910b0decab8d283f8b48547a3d10f1",
+  "sha1": "33ad6927d199e5325f0c8fb655e56048a6afd4b6",
+  "sha256": "199d49ced7ca4add6810eed36d7f98be769bc242def8506179d477410e140e58",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [
+    {
+      "md5": null,
+      "name": null,
+      "purl": null,
+      "sha1": null,
+      "size": null,
+      "type": "pypi",
+      "holder": null,
+      "sha256": null,
+      "sha512": null,
+      "parties": [],
+      "subpath": null,
+      "vcs_url": null,
+      "version": null,
+      "keywords": [],
+      "copyright": null,
+      "namespace": null,
+      "extra_data": {},
+      "qualifiers": {},
+      "description": null,
+      "notice_text": null,
+      "api_data_url": null,
+      "dependencies": [
+        {
+          "purl": "pkg:pypi/setuptools",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "setuptools"
+        },
+        {
+          "purl": "pkg:pypi/wheel",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "wheel"
+        },
+        {
+          "purl": "pkg:pypi/isort",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "isort"
+        },
+        {
+          "purl": "pkg:pypi/black",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "black"
+        },
+        {
+          "purl": "pkg:pypi/mypy",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "mypy"
+        },
+        {
+          "purl": "pkg:pypi/sqlalchemy",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "sqlalchemy>=2.0.0"
+        },
+        {
+          "purl": "pkg:pypi/pytest",
+          "scope": "install",
+          "extra_data": {
+            "link": null,
+            "is_url": null,
+            "is_wheel": false,
+            "is_archive": null,
+            "is_vcs_url": null,
+            "is_editable": false,
+            "hash_options": [],
+            "is_constraint": false,
+            "is_local_path": null,
+            "is_name_at_url": false
+          },
+          "is_runtime": true,
+          "is_optional": false,
+          "is_resolved": false,
+          "resolved_package": {},
+          "extracted_requirement": "pytest"
+        }
+      ],
+      "download_url": null,
+      "homepage_url": null,
+      "release_date": null,
+      "code_view_url": null,
+      "datasource_id": "pip_requirements",
+      "file_references": [],
+      "source_packages": [],
+      "bug_tracking_url": null,
+      "primary_language": "Python",
+      "license_detections": [],
+      "repository_download_url": null,
+      "repository_homepage_url": null,
+      "other_license_detections": [],
+      "other_license_expression": null,
+      "declared_license_expression": null,
+      "extracted_license_statement": null,
+      "other_license_expression_spdx": null,
+      "declared_license_expression_spdx": null
+    }
+  ],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/SOURCES.txt",
+  "type": "file",
+  "name": "SOURCES.txt",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".txt",
+  "size": 998,
+  "md5": "5f7ce033aaab7de3b51111884702bef6",
+  "sha1": "fb63c0d87ff97b7ef492965a266f6647cff5103a",
+  "sha256": "db27745532bfd76164282fb6c8569cbbe57ffd5e3c25fc7b50bb75efbe7f581c",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 6,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/rules/mit_14.RULE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "mit.LICENSE",
+          "match_coverage": 100.0,
+          "matched_length": 2,
+          "rule_relevance": 100,
+          "rule_identifier": "mit_14.RULE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9967e727-165e-9bb5-f090-7de5e47a3929",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 1.42,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl_python.egg-info/top_level.txt",
+  "type": "file",
+  "name": "top_level.txt",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".txt",
+  "size": 11,
+  "md5": "beef66a5b18220cf8ad9d992e8b8b8af",
+  "sha1": "3fa499510a390a276444e1f9ae6110c693f65bab",
+  "sha256": "83604b8bb5f6c944ad0b4eb8124554952bd41b087c94765799055da3f93e968f",
+  "sha512": "",
+  "mime_type": "text/plain",
+  "file_type": "ASCII text",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/py.typed",
+  "type": "file",
+  "name": "py.typed",
+  "status": "ignored-empty-file",
+  "tag": "",
+  "extension": ".typed",
+  "size": null,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "inode/x-empty",
+  "file_type": "empty",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/src/packageurl/utils.py",
+  "type": "file",
+  "name": "utils.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 2299,
+  "md5": "7c153eba1090923846d32892fd4ff29e",
+  "sha1": "15e94c7470a4161b962f4bd07f738ae52e47165c",
+  "sha256": "97d4b71cac91a67d31dfb4872e5a2e4c1203bd123645d91839101d97b210937a",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 50.61,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://github.com/moby/moby/blob/6c10086976d07d4746e03dcfd188972a2f07e1c9/vendor.mod#L51",
+      "end_line": 43,
+      "start_line": 43
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests",
+  "type": "directory",
+  "name": "tests",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib",
+  "type": "directory",
+  "name": "contrib",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/data",
+  "type": "directory",
+  "name": "data",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/data/url2purl.json",
+  "type": "file",
+  "name": "url2purl.json",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".json",
+  "size": 34250,
+  "md5": "177fe00e327425c144ceb02c3cfa6f89",
+  "sha1": "a4f717622f51ee1e33e8659908c616caab643c89",
+  "sha256": "29bd48777f5f0b24439bbadc0b31846400785d882c3148ef81f75bd0473b5e6e",
+  "sha512": "",
+  "mime_type": "application/json",
+  "file_type": "JSON data",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "http://central.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar",
+      "end_line": 2,
+      "start_line": 2
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar",
+      "end_line": 3,
+      "start_line": 3
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/",
+      "end_line": 7,
+      "start_line": 7
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/jdbm/jdbm/",
+      "end_line": 8,
+      "start_line": 8
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/jdbm/jdbm/0.20-dev/",
+      "end_line": 9,
+      "start_line": 9
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/jdbm/jdbm/020-dev/jdbm-020-dev",
+      "end_line": 10,
+      "start_line": 10
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/jdbm/jdbm/0.20-dev/jdbm-0.20-dev.jar",
+      "end_line": 11,
+      "start_line": 11
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar",
+      "end_line": 12,
+      "start_line": 12
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1-sources.jar",
+      "end_line": 13,
+      "start_line": 13
+    },
+    {
+      "url": "http://repo1.maven.org/maven2/jdbm/jdbm/0.20-dev/jdbm-0.20-dev.pom",
+      "end_line": 14,
+      "start_line": 14
+    },
+    {
+      "url": "http://central.maven.org/maven2/ant/ant-optional/1.5.3-1/ant-optional-1.5.3-1.jar",
+      "end_line": 15,
+      "start_line": 15
+    },
+    {
+      "url": "http://central.maven.org/maven2/ant/ant/1.5/ant-1.5.jar",
+      "end_line": 16,
+      "start_line": 16
+    },
+    {
+      "url": "http://central.maven.org/maven2/antlr/antlr/2.7.7/antlr-2.7.7.jar",
+      "end_line": 17,
+      "start_line": 17
+    },
+    {
+      "url": "http://central.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar",
+      "end_line": 18,
+      "start_line": 18
+    },
+    {
+      "url": "http://central.maven.org/maven2/fr/opensagres/xdocreport/fr.opensagres.xdocreport.converter.docx.xwpf/1.0.5/fr.opensagres.xdocreport.converter.docx.xwpf-1.0.5.jar",
+      "end_line": 19,
+      "start_line": 19
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/eclipse/jetty/orbit/org.apache.jasper.glassfish/2.2.2.v201112011158/org.apache.jasper.glassfish-2.2.2.v201112011158-sources.jar",
+      "end_line": 20,
+      "start_line": 20
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/eclipse/jetty/orbit/org.apache.taglibs.standard.glassfish/1.2.0.v201112081803/org.apache.taglibs.standard.glassfish-1.2.0.v201112081803-sources.jar",
+      "end_line": 21,
+      "start_line": 21
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/springframework/security/kerberos/spring-security-kerberos-core/1.0.1.RELEASE/spring-security-kerberos-core-1.0.1.RELEASE-sources.jar",
+      "end_line": 22,
+      "start_line": 22
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/springframework/security/kerberos/spring-security-kerberos-web/1.0.1.RELEASE/spring-security-kerberos-web-1.0.1.RELEASE-sources.jar",
+      "end_line": 23,
+      "start_line": 23
+    },
+    {
+      "url": "http://central.maven.org/maven2/xmlunit/xmlunit/1.1/xmlunit-1.1.jar",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "http://central.maven.org/maven2/xom/xom/1.0/xom-1.0.jar",
+      "end_line": 25,
+      "start_line": 25
+    },
+    {
+      "url": "http://central.maven.org/maven2/xom/xom/1.1/xom-1.1-sources.jar",
+      "end_line": 26,
+      "start_line": 26
+    },
+    {
+      "url": "http://central.maven.org/maven2/xpp3/xpp3/1.1.3.4.O/xpp3-1.1.3.4.O.jar",
+      "end_line": 27,
+      "start_line": 27
+    },
+    {
+      "url": "http://central.maven.org/maven2/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar",
+      "end_line": 28,
+      "start_line": 28
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/",
+      "end_line": 29,
+      "start_line": 29
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6",
+      "end_line": 30,
+      "start_line": 30
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar",
+      "end_line": 31,
+      "start_line": 31
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar.asc",
+      "end_line": 32,
+      "start_line": 32
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar.asc.md5",
+      "end_line": 33,
+      "start_line": 33
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar.asc.sha1",
+      "end_line": 34,
+      "start_line": 34
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar.md5",
+      "end_line": 35,
+      "start_line": 35
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar.sha1",
+      "end_line": 36,
+      "start_line": 36
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6-javadoc.jar",
+      "end_line": 37,
+      "start_line": 37
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6-sources.jar",
+      "end_line": 38,
+      "start_line": 38
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6-tests.jar",
+      "end_line": 39,
+      "start_line": 39
+    },
+    {
+      "url": "http://central.maven.org/maven2/javax/activation/activation/1.1/activation-1.1-sources.jar",
+      "end_line": 40,
+      "start_line": 40
+    },
+    {
+      "url": "http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.8.5/aws-java-sdk-1.8.5.jar.asc",
+      "end_line": 41,
+      "start_line": 41
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/mongodb/casbah-commons_2.10/2.6.1/casbah-commons_2.10-2.6.1-test.jar",
+      "end_line": 42,
+      "start_line": 42
+    },
+    {
+      "url": "http://central.maven.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6-javadoc.jar",
+      "end_line": 43,
+      "start_line": 43
+    },
+    {
+      "url": "http://central.maven.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6-tests.jar",
+      "end_line": 44,
+      "start_line": 44
+    },
+    {
+      "url": "http://central.maven.org/maven2/commons-io/commons-io/2.3/commons-io-2.3-test-sources.jar",
+      "end_line": 45,
+      "start_line": 45
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/drools/drools-guvnor/5.1.0/drools-guvnor-5.1.0.war",
+      "end_line": 46,
+      "start_line": 46
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/geronimo/specs/geronimo-servlet_3.0_spec/1.0/geronimo-servlet_3.0_spec-1.0-source-release.tar.gz",
+      "end_line": 47,
+      "start_line": 47
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/apache/geronimo/gshell/gshell-assembly/1.0-alpha-1/gshell-assembly-1.0-alpha-1-full.zip",
+      "end_line": 48,
+      "start_line": 48
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/jasypt/jasypt/1.9.0/jasypt-1.9.0-lite.jar",
+      "end_line": 49,
+      "start_line": 49
+    },
+    {
+      "url": "http://central.maven.org/maven2/com/sun/jersey/jersey-archive/1.19/jersey-archive-1.19.zip",
+      "end_line": 50,
+      "start_line": 50
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.11.v20180605/jetty-distribution-9.4.11.v20180605.tar.gz",
+      "end_line": 51,
+      "start_line": 51
+    },
+    {
+      "url": "http://central.maven.org/maven2/com/github/jnr/jffi/1.2.10/jffi-1.2.10-native.jar",
+      "end_line": 52,
+      "start_line": 52
+    },
+    {
+      "url": "http://central.maven.org/maven2/org/jmxtrans/jmxtrans/251/jmxtrans-251.rpm",
+      "end_line": 53,
+      "start_line": 53
+    },
+    {
+      "url": "http://central.maven.org/maven2/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar",
+      "end_line": 54,
+      "start_line": 54
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/test_get_path_segments.py",
+  "type": "file",
+  "name": "test_get_path_segments.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 1785,
+  "md5": "9fa3733702d46492b7d49ce386f3a771",
+  "sha1": "e13e37afe03e76a953dd5e6c4eecff41be2cb995",
+  "sha256": "67f087b00e3b96901c1375ce108579485b87bd27557aa1e36fd11933aa82ac5b",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 64.45,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://github.com/Hello+world!/Hello+world%2521/master",
+      "end_line": 31,
+      "start_line": 31
+    },
+    {
+      "url": "https://github.com/TG1999",
+      "end_line": 44,
+      "start_line": 44
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/test_purl2url.py",
+  "type": "file",
+  "name": "test_purl2url.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 9468,
+  "md5": "b6b5cb8298d4811567cff9a226ecffb8",
+  "sha1": "10f06bd554d41654d50905d514c27430a1a830c0",
+  "sha256": "f37f67c269e4e50efcb9cd8e5a6a75ed4ada18383fa8d047badfe925e66c7b14",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable, with very long lines",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 11.64,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    },
+    {
+      "url": "https://github.com/tg1999/fetchcode",
+      "end_line": 34,
+      "start_line": 34
+    },
+    {
+      "url": "https://github.com/tg1999/fetchcode/tree/master",
+      "end_line": 35,
+      "start_line": 35
+    },
+    {
+      "url": "https://github.com/nexb/scancode-toolkit/tree/v3.1.1",
+      "end_line": 37,
+      "start_line": 37
+    },
+    {
+      "url": "https://crates.io/crates/rand/0.7.2",
+      "end_line": 39,
+      "start_line": 39
+    },
+    {
+      "url": "https://crates.io/crates/abc",
+      "end_line": 40,
+      "start_line": 40
+    },
+    {
+      "url": "https://rubygems.org/gems/bundler/versions/2.3.23",
+      "end_line": 41,
+      "start_line": 41
+    },
+    {
+      "url": "https://rubygems.org/gems/package-name",
+      "end_line": 43,
+      "start_line": 43
+    },
+    {
+      "url": "https://bitbucket.org/birkenfeld/pygments-main",
+      "end_line": 44,
+      "start_line": 44
+    },
+    {
+      "url": "https://gitlab.com/tg1999/firebase",
+      "end_line": 48,
+      "start_line": 48
+    },
+    {
+      "url": "https://gitlab.com/hoppr/hoppr",
+      "end_line": 52,
+      "start_line": 52
+    },
+    {
+      "url": "https://pypi.org/project/sortedcontainers/",
+      "end_line": 53,
+      "start_line": 53
+    },
+    {
+      "url": "https://pypi.org/project/sortedcontainers/2.4.0/",
+      "end_line": 54,
+      "start_line": 54
+    },
+    {
+      "url": "https://pypi.org/project/packageurl-python/",
+      "end_line": 55,
+      "start_line": 55
+    },
+    {
+      "url": "https://www.npmjs.com/package/is-npm",
+      "end_line": 56,
+      "start_line": 56
+    },
+    {
+      "url": "https://www.npmjs.com/package/is-npm/v/1.0.0",
+      "end_line": 57,
+      "start_line": 57
+    },
+    {
+      "url": "https://www.nuget.org/packages/System.Text.Json",
+      "end_line": 58,
+      "start_line": 58
+    },
+    {
+      "url": "https://www.nuget.org/packages/System.Text.Json/6.0.6",
+      "end_line": 59,
+      "start_line": 59
+    },
+    {
+      "url": "https://hackage.haskell.org/package/cli-extras",
+      "end_line": 60,
+      "start_line": 60
+    },
+    {
+      "url": "https://hackage.haskell.org/package/cli-extras-0.2.0.0",
+      "end_line": 61,
+      "start_line": 61
+    },
+    {
+      "url": "https://pkg.go.dev/xorm.io/xorm",
+      "end_line": 62,
+      "start_line": 62
+    },
+    {
+      "url": "https://pkg.go.dev/xorm.io/xorm@v0.8.2",
+      "end_line": 63,
+      "start_line": 63
+    },
+    {
+      "url": "https://pkg.go.dev/gopkg.in/ldap.v3@v3.1.0",
+      "end_line": 64,
+      "start_line": 64
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/rand/0.7.2/download",
+      "end_line": 74,
+      "start_line": 74
+    },
+    {
+      "url": "https://rubygems.org/downloads/bundler-2.3.23.gem",
+      "end_line": 75,
+      "start_line": 75
+    },
+    {
+      "url": "http://registry.npmjs.org/is-npm/-/is-npm-1.0.0.tgz",
+      "end_line": 76,
+      "start_line": 76
+    },
+    {
+      "url": "https://hackage.haskell.org/package/cli-extras-0.2.0.0/cli-extras-0.2.0.0.tar.gz",
+      "end_line": 77,
+      "start_line": 77
+    },
+    {
+      "url": "https://www.nuget.org/api/v2/package/System.Text.Json/6.0.6",
+      "end_line": 78,
+      "start_line": 78
+    },
+    {
+      "url": "https://github.com/nexb/scancode-toolkit/archive/refs/tags/v3.1.1.tar.gz",
+      "end_line": 79,
+      "start_line": 79
+    },
+    {
+      "url": "https://bitbucket.org/robeden/trove/get/3.0.3.tar.gz",
+      "end_line": 80,
+      "start_line": 80
+    },
+    {
+      "url": "https://bitbucket.org/robeden/trove/get/v3.0.3.tar.gz",
+      "end_line": 81,
+      "start_line": 81
+    },
+    {
+      "url": "https://gitlab.com/tg1999/firebase/-/archive/1a122122/firebase-1a122122.tar.gz",
+      "end_line": 82,
+      "start_line": 82
+    },
+    {
+      "url": "https://gitlab.com/tg1999/firebase/-/archive/v1a122122/firebase-v1a122122.tar.gz",
+      "end_line": 83,
+      "start_line": 83
+    },
+    {
+      "url": "https://gitlab.com/hoppr/hoppr/-/archive/v1.11.1-dev.2/hoppr-v1.11.1-dev.2.tar.gz",
+      "end_line": 84,
+      "start_line": 84
+    },
+    {
+      "url": "https://github.com/yarnpkg/yarn/releases/download/v1.3.2/yarn-v1.3.2.tar.gz&version_prefix=v",
+      "end_line": 86,
+      "start_line": 86
+    },
+    {
+      "url": "https://github.com/yarnpkg/yarn/releases/download/v1.3.2/yarn-v1.3.2.tar.gz",
+      "end_line": 86,
+      "start_line": 86
+    },
+    {
+      "url": "https://salsa.debian.org/lxc-team/lxc/-/archive/master/lxc-master.tar.gz",
+      "end_line": 87,
+      "start_line": 87
+    },
+    {
+      "url": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android-notifier/android-notifier-desktop-0.5.1-1.i386.rpm",
+      "end_line": 88,
+      "start_line": 88
+    },
+    {
+      "url": "https://bitbucket.org/robeden/trove/downloads/trove-3.0.3.zip",
+      "end_line": 89,
+      "start_line": 89
+    },
+    {
+      "url": "http://master.dl.sourceforge.net/project/zclasspath/maven2/org/zclasspath/zclasspath/1.5/zclasspath-1.5.jar",
+      "end_line": 90,
+      "start_line": 90
+    },
+    {
+      "url": "https://files.pythonhosted.org/packages/87/44/0fa8e9d0cccb8eb86fc1b5170208229dc6d6e9fd6e57ea1fe19cbeea68f5/aboutcode_toolkit-3.4.0rc1-py2.py3-none-any.whl",
+      "end_line": 91,
+      "start_line": 91
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/test_url2purl.py",
+  "type": "file",
+  "name": "test_url2purl.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 3312,
+  "md5": "bf9fb110b0481d8e178d97258727d1e0",
+  "sha1": "08dd58c03a3ff5963b95b7c7a8551ec08f65f9e4",
+  "sha256": "1c4bc0ebf23cbef4a56a5569a5388a514ea6b00ab00055846c4a555cd4ca743e",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 33.88,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/contrib/test_utils.py",
+  "type": "file",
+  "name": "test_utils.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 2901,
+  "md5": "92228df0951ded4f08f1b1bb22fe792a",
+  "sha1": "cc8fa60d0a7b86722a3526c53883254ba4f27b0e",
+  "sha256": "da2a8f2c1dee99c15e5e0b26734ae815b970edf98093396dab025671ee68a28c",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, ASCII text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 41.67,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/data",
+  "type": "directory",
+  "name": "data",
+  "status": "scanned",
+  "tag": "",
+  "extension": "",
+  "size": 4096,
+  "md5": "",
+  "sha1": "",
+  "sha256": "",
+  "sha512": "",
+  "mime_type": "",
+  "file_type": "",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": false,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/data/test-suite-data.json",
+  "type": "file",
+  "name": "test-suite-data.json",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".json",
+  "size": 12288,
+  "md5": "4f626931df3d970aebecb93b5b4ce991",
+  "sha1": "4ef0de91a6b1db7075d3e18c01de92a3c454866b",
+  "sha256": "5accd8be0656439eedc8ef85c5c18fa1b465f7acfc2d56dd9c045f30a970d425",
+  "sha512": "",
+  "mime_type": "application/json",
+  "file_type": "JSON data",
+  "programming_language": "",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "",
+  "detected_license_expression_spdx": "",
+  "license_detections": [],
+  "license_clues": [],
+  "percentage_of_license_text": null,
+  "compliance_alert": "",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [],
+  "extra_data": {}
+},
+{
+  "path": "packageurl-python-0.15.0.tar.gz-extract/packageurl-python-0.15.0/tests/test_packageurl.py",
+  "type": "file",
+  "name": "test_packageurl.py",
+  "status": "scanned",
+  "tag": "",
+  "extension": ".py",
+  "size": 11234,
+  "md5": "fc653b2f438e67d5aeed3d3e62afb0a1",
+  "sha1": "26100c46df9ac2fe94a90311a8bb74084d504896",
+  "sha256": "ebe41da2dec1ba4b1dfff19717a49a78fa2d5140db091b98ae45ccadc67f6abc",
+  "sha512": "",
+  "mime_type": "text/x-script.python",
+  "file_type": "Python script, UTF-8 Unicode text executable",
+  "programming_language": "Python",
+  "is_binary": false,
+  "is_text": true,
+  "is_archive": false,
+  "is_media": false,
+  "is_key_file": false,
+  "detected_license_expression": "mit",
+  "detected_license_expression_spdx": "MIT",
+  "license_detections": [
+    {
+      "matches": [
+        {
+          "score": 100.0,
+          "matcher": "1-spdx-id",
+          "end_line": 4,
+          "rule_url": null,
+          "from_file": null,
+          "start_line": 4,
+          "matched_text": "# SPDX-License-Identifier: MIT",
+          "match_coverage": 100.0,
+          "matched_length": 4,
+          "rule_relevance": 100,
+          "rule_identifier": "spdx-license-identifier-mit-f5be3fda2f20a26515ed3dabedb3804346819bf7",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        },
+        {
+          "score": 100.0,
+          "matcher": "2-aho",
+          "end_line": 22,
+          "rule_url": "https://github.com/nexB/scancode-toolkit/tree/develop/src/licensedcode/data/licenses/mit.LICENSE",
+          "from_file": null,
+          "start_line": 6,
+          "matched_text": "# Permission is hereby granted, free of charge, to any person obtaining a copy\n# of this software and associated documentation files (the \"Software\"), to deal\n# in the Software without restriction, including without limitation the rights\n# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n# copies of the Software, and to permit persons to whom the Software is\n# furnished to do so, subject to the following conditions:\n#\n# The above copyright notice and this permission notice shall be included in all\n# copies or substantial portions of the Software.\n#\n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n# SOFTWARE.",
+          "match_coverage": 100.0,
+          "matched_length": 161,
+          "rule_relevance": 100,
+          "rule_identifier": "mit.LICENSE",
+          "license_expression": "mit",
+          "spdx_license_expression": "MIT"
+        }
+      ],
+      "identifier": "mit-9f63102f-f88c-587a-4ff1-d647d8e1703b",
+      "license_expression": "mit",
+      "license_expression_spdx": "MIT"
+    }
+  ],
+  "license_clues": [],
+  "percentage_of_license_text": 13.17,
+  "compliance_alert": "ok",
+  "copyrights": [],
+  "holders": [],
+  "authors": [],
+  "package_data": [],
+  "for_packages": [
+    "pkg:pypi/packageurl-python@0.15.0?uuid=0f1c8554-78bc-4c37-824e-324cef7386f1"
+  ],
+  "emails": [],
+  "urls": [
+    {
+      "url": "https://github.com/package-url/packageurl-python",
+      "end_line": 24,
+      "start_line": 24
+    }
+  ],
+  "extra_data": {}
+}],
+"relations": [
+]
+}
