@@ -11,18 +11,38 @@ inputs:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
     default: "${{ github.workspace }}/scancode-inputs"
   input-urls:
-    description: 'Provide one or more URLs to download for the pipeline run execution'
+    description: "Provide one or more URLs to download for the pipeline run execution."
     required: false
     default: ""
   project-name:
-    description: "Name of the project"
+    description: "Name of the project."
     default: "scancode-action"
   outputs-archive-name:
-    description: "Name of the outputs archive"
+    description: "Name of the outputs archive."
     default: "scancode-outputs"
+  check-compliance:
+    description: |
+      Check for compliance issues in the project.
+      Exits with a non-zero status if compliance issues are detected.
+    required: false
+    default: "false"
+  compliance-fail-level:
+    description: "Failure level for compliance check. Options: ERROR, WARNING, MISSING."
+    required: false
+    default: "ERROR"
+  compliance-fail-on-vulnerabilities:
+    description: |
+      Exit with a non-zero status if known vulnerabilities are detected in discovered 
+      packages and dependencies.
+    required: false
+    default: "false"
   python-version:
-    description: "Python version"
-    default: "3.11"
+    description: "Python version."
+    default: "3.12"
+  scancodeio-repo-branch:
+    description: "Branch to install ScanCode.io from the GitHub repository (optional)"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -50,8 +70,17 @@ runs:
     - name: Install ScanCode.io
       shell: bash
       run: |
-        pip install --upgrade scancodeio
-        scanpipe migrate
+        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
+          echo "Installing the latest ScanCode.io release from PyPI"
+          pip install --upgrade scancodeio
+        else
+          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+        fi
+
+    - name: Run migrations to prepare the database
+      shell: bash
+      run: scanpipe migrate --verbosity 0
 
     - name: Generate `--pipeline` CLI arguments
       shell: bash
@@ -104,8 +133,9 @@ runs:
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: | 
-        scanpipe output --project ${{ inputs.project-name }} --format ${{ inputs.output-formats }} --no-color
+      run: scanpipe output
+        --project ${{ inputs.project-name }}
+        --format ${{ inputs.output-formats }}
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4
@@ -113,3 +143,17 @@ runs:
       with:
         name: ${{ inputs.outputs-archive-name }}
         path: ${{ env.PROJECT_OUTPUT_DIRECTORY }}/*
+
+    - name: Check compliance
+      if: inputs.check-compliance == 'true'
+      shell: bash
+      run: |
+        cmd="scanpipe check-compliance \
+          --project ${{ inputs.project-name }} \
+          --fail-level ${{ inputs.compliance-fail-level }}"
+
+        if [[ "${{ inputs.compliance-fail-on-vulnerabilities }}" == "true" ]]; then
+          cmd="$cmd --fail-on-vulnerabilities"
+        fi
+
+        eval "$cmd"

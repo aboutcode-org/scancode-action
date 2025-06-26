@@ -3,7 +3,7 @@ on: [push]
 jobs:
   scan-codebase:
     runs-on: ubuntu-24.04
-    name: Scan codebase and check for compliance issues
+    name: Scan codebase and find vulnerabilities
     steps:
       - name: Get the action.yml from the current branch
         uses: actions/checkout@v4
@@ -16,6 +16,9 @@ jobs:
           path: scancode-inputs
       - uses: ./
         with:
-          pipelines: "scan_codebase"
+          pipelines: "scan_codebase,find_vulnerabilities"
+          scancodeio-repo-branch: "main"
           check-compliance: true
-          compliance-fail-level: "WARNING"
+          compliance-fail-on-vulnerabilities: true
+        env:
+          VULNERABLECODE_URL: https://public.vulnerablecode.io/

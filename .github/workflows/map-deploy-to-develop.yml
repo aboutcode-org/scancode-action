@@ -2,14 +2,20 @@ on: [push]
 
 jobs:
   scan-codebase:
-    runs-on: ubuntu-22.04
-    name: Map deploy to develop with ScanCode.io
+    runs-on: ubuntu-24.04
+    name: Map deploy to develop
     steps:
-      - uses: nexB/scancode-action@alpha
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - uses: ./
         with:
           pipelines: "map_deploy_to_develop"
           input-urls:
-            https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
-            https://github.com/nexB/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
+            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
+            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
         env:
           PURLDB_URL: https://public.purldb.io/
