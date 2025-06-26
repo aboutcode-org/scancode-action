@@ -77,6 +77,11 @@ steps:
     # Failure level for compliance check. Options: ERROR, WARNING, MISSING.
     # Default is 'ERROR'
     compliance-fail-level:
+      
+    # Exit with a non-zero status if known vulnerabilities are detected in discovered 
+    # packages and dependencies.
+    # Default is false
+    compliance-fail-on-vulnerabilities:
 
     # Python version that will be installed to run ScanCode.io
     # Default is '3.12'
@@ -127,6 +132,23 @@ In the example provided, a public instance is referenced.
 However, you also have the option to run your own VulnerableCode instance. 
 For details on setting up and configuring your own instance, please refer to the 
 [VulnerableCode documentation](https://vulnerablecode.readthedocs.io/en/latest/index.html).
+
+#### Fail on known vulnerabilities
+
+When enabled, the workflow will fail if any known vulnerabilities are found in the 
+project's discovered packages or dependencies.
+Activate this behavior by enabling `check-compliance` and setting 
+`compliance-fail-on-vulnerabilities` to true.
+
+```yaml
+- uses: aboutcode-org/scancode-action@beta
+  with:
+    pipelines: "scan_codebase,find_vulnerabilities"
+    check-compliance: true
+    compliance-fail-on-vulnerabilities: true
+  env:
+    VULNERABLECODE_URL: https://public.vulnerablecode.io/
+```
 
 ### Choose the output formats
 
