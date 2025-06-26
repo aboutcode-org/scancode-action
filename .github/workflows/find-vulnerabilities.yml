@@ -17,5 +17,8 @@ jobs:
       - uses: ./
         with:
           pipelines: "scan_codebase,find_vulnerabilities"
+          scancodeio-repo-branch: "main"
+          check-compliance: true
+          compliance-fail-on-vulnerabilities: true
         env:
           VULNERABLECODE_URL: https://public.vulnerablecode.io/

@@ -24,10 +24,18 @@ inputs:
     description: |
       Check for compliance issues in the project.
       Exits with a non-zero status if compliance issues are detected.
+    required: false
+    default: "false"
   compliance-fail-level:
     description: "Failure level for compliance check. Options: ERROR, WARNING, MISSING."
-    default: "ERROR"
     required: false
+    default: "ERROR"
+  compliance-fail-on-vulnerabilities:
+    description: |
+      Exit with a non-zero status if known vulnerabilities are detected in discovered 
+      packages and dependencies.
+    required: false
+    default: "false"
   python-version:
     description: "Python version."
     default: "3.12"
@@ -127,16 +135,23 @@ runs:
         --project ${{ inputs.project-name }} 
         --format ${{ inputs.output-formats }}
 
-    - name: Check compliance
-      if: inputs.check-compliance == 'true'
-      shell: bash
-      run: scanpipe check-compliance
-        --project ${{ inputs.project-name }}
-        --fail-level ${{ inputs.compliance-fail-level }}
-
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
         name: ${{ inputs.outputs-archive-name }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
+
+    - name: Check compliance
+      if: inputs.check-compliance == 'true'
+      shell: bash
+      run: |
+        cmd="scanpipe check-compliance \
+          --project ${{ inputs.project-name }} \
+          --fail-level ${{ inputs.compliance-fail-level }}"
+
+        if [[ "${{ inputs.compliance-fail-on-vulnerabilities }}" == "true" ]]; then
+          cmd="$cmd --fail-on-vulnerabilities"
+        fi
+
+        eval "$cmd"
