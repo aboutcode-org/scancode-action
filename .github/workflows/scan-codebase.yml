@@ -1,0 +1,21 @@
+on: [push]
+
+jobs:
+  scan-codebase:
+    runs-on: ubuntu-24.04
+    name: Scan codebase and check for compliance issues
+    steps:
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/checkout@v4
+        with:
+          path: scancode-inputs
+      - uses: ./
+        with:
+          pipelines: "scan_codebase"
+          check-compliance: true
+          compliance-fail-level: "WARNING"
