@@ -27,7 +27,7 @@ stages:
     jobs:
       - job: RunScanCode
         steps:
-          - template: scancode-template.yml
+          - template: azure-pipelines/templates/scancode-template.yml@scancode-action
             parameters:
               pipelines: "scan_codebase"
               outputFormats: "json xlsx spdx cyclonedx"
@@ -36,7 +36,7 @@ stages:
 ### Parameters
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     # Names of the pipelines (comma-separated) and in order.
     # Default is 'scan_codebase'
@@ -94,7 +94,7 @@ stages:
     jobs:
       - job: RunScanCode
         steps:
-          - template: scancode-template.yml
+          - template: azure-pipelines/templates/scancode-template.yml@scancode-action
 ```
 
 ### Run a specific pipeline
@@ -102,7 +102,7 @@ stages:
 [Built-in pipelines list](https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html)
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     pipelines: "scan_codebase"
 ```
@@ -110,7 +110,7 @@ stages:
 ### Run multiple pipelines
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     pipelines: "scan_codebase,find_vulnerabilities"
   env:
@@ -135,7 +135,7 @@ Activate this behavior by enabling checkCompliance and setting
 complianceFailOnVulnerabilities to true.
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     pipelines: "scan_codebase,find_vulnerabilities"
     checkCompliance: true
@@ -147,7 +147,7 @@ complianceFailOnVulnerabilities to true.
 ### Choose the output formats
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     outputFormats: "json xlsx spdx cyclonedx"
 ```
@@ -159,7 +159,7 @@ complianceFailOnVulnerabilities to true.
 ### Provide download URLs inputs
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     pipelines: "map_deploy_to_develop"
     inputUrls: "https://domain.url/source.zip#from https://domain.url/binaries.zip#to"
@@ -177,7 +177,7 @@ stages:
               mkdir -p $(Build.SourcesDirectory)/scancode-inputs
               wget --directory-prefix=$(Build.SourcesDirectory)/scancode-inputs https://github.com/$(Build.Repository.Name)/archive/$(Build.SourceBranch).zip
             displayName: 'Download repository archive to scancode-inputs/ directory'
-          - template: scancode-template.yml
+          - template: azure-pipelines/templates/scancode-template.yml@scancode-action
             parameters:
               pipelines: "scan_single_package"
 ```
@@ -185,7 +185,7 @@ stages:
 ### Check for compliance issues
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     checkCompliance: true
     complianceFailLevel: "WARNING"
@@ -199,7 +199,7 @@ stages:
 ### Define a custom project name
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     projectName: "my-project-name"
 ```
@@ -207,7 +207,7 @@ stages:
 ### Install ScanCode.io from a repository branch
 
 ```yaml
-- template: scancode-template.yml
+- template: azure-pipelines/templates/scancode-template.yml@scancode-action
   parameters:
     scancodeioRepoBranch: "main"
 ```
