@@ -67,91 +67,105 @@ runs:
         sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password '${{ env.SCANCODEIO_DB_PASSWORD }}'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
-    - name: Install ScanCode.io
+    - name: Define `scanpipe` Docker command
       shell: bash
       run: |
-        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
-          echo "Installing the latest ScanCode.io release from PyPI"
-          pip install --upgrade scancodeio
-        else
-          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
-          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
-        fi
+        echo 'SCANPIPE_CMD=docker run --rm \
+          -v "${{ github.workspace }}/scancode-inputs":/scancode/input:ro \
+          -v "${{ github.workspace }}/scancode-outputs":/scancode/output \
+          -w /scancode \
+          ghcr.io/aboutcode-org/scancode.io:latest scanpipe' >> $GITHUB_ENV
 
-    - name: Run migrations to prepare the database
-      shell: bash
-      run: scanpipe migrate --verbosity 0
-
-    - name: Generate `--pipeline` CLI arguments
+    - name: Define `scanpipe` Docker command
       shell: bash
       run: |
-        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
-        PIPELINE_CLI_ARGS=""
-        for pipeline in "${PIPELINES[@]}"; do
-          PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
-        done
-        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
+        ${{ env.SCANPIPE_CMD }} --help
 
-    - name: Generate `--input-url` CLI arguments
-      shell: bash
-      run: |
-        INPUT_URL_CLI_ARGS=""
-        for url in ${{ inputs.input-urls }}; do
-          INPUT_URL_CLI_ARGS+=" --input-url $url"
-        done
-        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
-
-    - name: Create project
-      shell: bash
-      run: |
-        scanpipe create-project ${{ inputs.project-name }} \
-        ${{ env.PIPELINE_CLI_ARGS }} \
-        ${{ env.INPUT_URL_CLI_ARGS }}
-
-    - name: Set project work directory in the environment
-      shell: bash
-      run: |
-        project_status=$(scanpipe status --project ${{ inputs.project-name }})
-        work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
-        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
-
-    - name: Copy input files to project work directory
-      shell: bash
-      run: |
-        SOURCE_PATH="${{ inputs.inputs-path }}"
-        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
-        if [ -d "$SOURCE_PATH" ]; then
-          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
-        fi
-
-    - name: Run the pipelines
-      shell: bash
-      run: scanpipe execute --project ${{ inputs.project-name }} --no-color
-
-    - name: Generate outputs
-      id: scanpipe
-      shell: bash
-      run: scanpipe output
-        --project ${{ inputs.project-name }} 
-        --format ${{ inputs.output-formats }}
-
-    - name: Upload outputs
-      uses: actions/upload-artifact@v4
-      id: artifact-upload-step
-      with:
-        name: ${{ inputs.outputs-archive-name }}
-        path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
-
-    - name: Check compliance
-      if: inputs.check-compliance == 'true'
-      shell: bash
-      run: |
-        cmd="scanpipe check-compliance \
-          --project ${{ inputs.project-name }} \
-          --fail-level ${{ inputs.compliance-fail-level }}"
-
-        if [[ "${{ inputs.compliance-fail-on-vulnerabilities }}" == "true" ]]; then
-          cmd="$cmd --fail-on-vulnerabilities"
-        fi
-
-        eval "$cmd"
+#    - name: Install ScanCode.io
+#      shell: bash
+#      run: |
+#        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
+#          echo "Installing the latest ScanCode.io release from PyPI"
+#          pip install --upgrade scancodeio
+#        else
+#          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+#          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+#        fi
+#
+#    - name: Run migrations to prepare the database
+#      shell: bash
+#      run: scanpipe migrate --verbosity 0
+#
+#    - name: Generate `--pipeline` CLI arguments
+#      shell: bash
+#      run: |
+#        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
+#        PIPELINE_CLI_ARGS=""
+#        for pipeline in "${PIPELINES[@]}"; do
+#          PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
+#        done
+#        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
+#
+#    - name: Generate `--input-url` CLI arguments
+#      shell: bash
+#      run: |
+#        INPUT_URL_CLI_ARGS=""
+#        for url in ${{ inputs.input-urls }}; do
+#          INPUT_URL_CLI_ARGS+=" --input-url $url"
+#        done
+#        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+#
+#    - name: Create project
+#      shell: bash
+#      run: |
+#        scanpipe create-project ${{ inputs.project-name }} \
+#        ${{ env.PIPELINE_CLI_ARGS }} \
+#        ${{ env.INPUT_URL_CLI_ARGS }}
+#
+#    - name: Set project work directory in the environment
+#      shell: bash
+#      run: |
+#        project_status=$(scanpipe status --project ${{ inputs.project-name }})
+#        work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
+#        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+#
+#    - name: Copy input files to project work directory
+#      shell: bash
+#      run: |
+#        SOURCE_PATH="${{ inputs.inputs-path }}"
+#        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+#        if [ -d "$SOURCE_PATH" ]; then
+#          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+#        fi
+#
+#    - name: Run the pipelines
+#      shell: bash
+#      run: scanpipe execute --project ${{ inputs.project-name }} --no-color
+#
+#    - name: Generate outputs
+#      id: scanpipe
+#      shell: bash
+#      run: scanpipe output
+#        --project ${{ inputs.project-name }}
+#        --format ${{ inputs.output-formats }}
+#
+#    - name: Upload outputs
+#      uses: actions/upload-artifact@v4
+#      id: artifact-upload-step
+#      with:
+#        name: ${{ inputs.outputs-archive-name }}
+#        path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
+#
+#    - name: Check compliance
+#      if: inputs.check-compliance == 'true'
+#      shell: bash
+#      run: |
+#        cmd="scanpipe check-compliance \
+#          --project ${{ inputs.project-name }} \
+#          --fail-level ${{ inputs.compliance-fail-level }}"
+#
+#        if [[ "${{ inputs.compliance-fail-on-vulnerabilities }}" == "true" ]]; then
+#          cmd="$cmd --fail-on-vulnerabilities"
+#        fi
+#
+#        eval "$cmd"
