@@ -5,10 +5,12 @@ jobs:
     runs-on: ubuntu-24.04
     name: Scan a package archive
     steps:
-      - name: Get the action.yml from the current branch
+      - name: Get the action.yml and scripts from the current branch
         uses: actions/checkout@v4
         with:
-          sparse-checkout: action.yml
+          sparse-checkout: |
+            action.yml
+            scripts/
           sparse-checkout-cone-mode: false
 
       - uses: ./
