@@ -70,11 +70,7 @@ runs:
     - name: Define `scanpipe` Docker command
       shell: bash
       run: |
-        echo 'SCANPIPE_CMD=docker run --rm \
-          -v "${{ github.workspace }}/scancode-inputs":/scancode/input:ro \
-          -v "${{ github.workspace }}/scancode-outputs":/scancode/output \
-          -w /scancode \
-          ghcr.io/aboutcode-org/scancode.io:latest scanpipe' >> $GITHUB_ENV
+        echo "SCANPIPE_CMD=docker run --rm -v \"${{ github.workspace }}/scancode-inputs\":/scancode/input:ro -v \"${{ github.workspace }}/scancode-outputs\":/scancode/output -w /scancode ghcr.io/aboutcode-org/scancode.io:latest scanpipe" >> $GITHUB_ENV
 
     - name: Define `scanpipe` Docker command
       shell: bash
