@@ -120,8 +120,12 @@ runs:
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
         DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        mkdir -p "$DESTINATION_PATH"
+
         if [ -d "$SOURCE_PATH" ]; then
           cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+        elif [ -f "$SOURCE_PATH" ]; then
+          cp "$SOURCE_PATH" "$DESTINATION_PATH"
         fi
 
     - name: Run the pipelines
