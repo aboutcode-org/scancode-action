@@ -9,7 +9,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
-    default: "${{ github.workspace }}/scancode-inputs"
+    default: "scancode-inputs"
   input-urls:
     description: "Provide one or more URLs to download for the pipeline run execution."
     required: false
@@ -116,13 +116,29 @@ runs:
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Copy input files to project work directory
+      if: ${{ !inputs.input-urls }}
       shell: bash
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
+        [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${{ github.workspace }}/$SOURCE_PATH"
         DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        mkdir -p "$DESTINATION_PATH"
+
         if [ -d "$SOURCE_PATH" ]; then
-          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+          if [ "$(ls -A "$SOURCE_PATH")" ]; then
+            echo "Copying contents of directory: $SOURCE_PATH → $DESTINATION_PATH"
+            cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+          else
+            echo "Input directory '$SOURCE_PATH' is empty, nothing to copy."
+          fi
+        else
+          echo "Copying file: $SOURCE_PATH → $DESTINATION_PATH"
+          cp "$SOURCE_PATH" "$DESTINATION_PATH"
         fi
+
+        echo ""
+        echo "Input files now in: $DESTINATION_PATH"
+        ls -lh "$DESTINATION_PATH"
 
     - name: Run the pipelines
       shell: bash
