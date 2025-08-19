@@ -9,7 +9,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
-    default: "${{ github.workspace }}/scancode-inputs"
+    default: "scancode-inputs"
   input-urls:
     description: "Provide one or more URLs to download for the pipeline run execution."
     required: false
@@ -119,6 +119,7 @@ runs:
       shell: bash
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
+        [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${{ github.workspace }}/$SOURCE_PATH"
         DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
         mkdir -p "$DESTINATION_PATH"
 
