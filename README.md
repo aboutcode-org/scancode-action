@@ -126,7 +126,7 @@ steps:
 
 ### Specify pipeline options
 
-Use the "pipeline_name:option1,option2" syntax to select optional steps for the 
+Use the `pipeline_name:option1,option2` syntax to select optional steps for the 
 `map_deploy_to_develop` pipeline
 
 ```yaml
