@@ -135,7 +135,7 @@ runs:
         fi
 
         echo ""
-        echo "✅ Input files now in: $DESTINATION_PATH"
+        echo "Input files now in: $DESTINATION_PATH"
         ls -lh "$DESTINATION_PATH"
 
     - name: Run the pipelines
