@@ -123,10 +123,20 @@ runs:
         mkdir -p "$DESTINATION_PATH"
 
         if [ -d "$SOURCE_PATH" ]; then
-          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
-        elif [ -f "$SOURCE_PATH" ]; then
+          if [ "$(ls -A "$SOURCE_PATH")" ]; then
+            echo "Copying contents of directory: $SOURCE_PATH → $DESTINATION_PATH"
+            cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+          else
+            echo "Input directory '$SOURCE_PATH' is empty, nothing to copy."
+          fi
+        else
+          echo "Copying file: $SOURCE_PATH → $DESTINATION_PATH"
           cp "$SOURCE_PATH" "$DESTINATION_PATH"
         fi
+
+        echo ""
+        echo "✅ Input files now in: $DESTINATION_PATH"
+        ls -lh "$DESTINATION_PATH"
 
     - name: Run the pipelines
       shell: bash
