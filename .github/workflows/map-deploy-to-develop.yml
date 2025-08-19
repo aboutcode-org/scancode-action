@@ -13,7 +13,7 @@ jobs:
 
       - uses: ./
         with:
-          pipelines: "map_deploy_to_develop"
+          pipelines: "map_deploy_to_develop:Java"
           input-urls:
             https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
             https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
