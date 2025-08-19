@@ -116,6 +116,7 @@ runs:
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Copy input files to project work directory
+      if: ${{ !inputs.input-urls }}
       shell: bash
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
