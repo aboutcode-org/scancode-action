@@ -32,7 +32,7 @@ inputs:
     default: "ERROR"
   compliance-fail-on-vulnerabilities:
     description: |
-      Exit with a non-zero status if known vulnerabilities are detected in discovered 
+      Exit with a non-zero status if known vulnerabilities are detected in discovered
       packages and dependencies.
     required: false
     default: "false"
@@ -148,7 +148,7 @@ runs:
       id: scanpipe
       shell: bash
       run: scanpipe output
-        --project ${{ inputs.project-name }} 
+        --project ${{ inputs.project-name }}
         --format ${{ inputs.output-formats }}
 
     - name: Upload outputs
@@ -157,6 +157,7 @@ runs:
       with:
         name: ${{ inputs.outputs-archive-name }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
+        overwrite: true
 
     - name: Check compliance
       if: inputs.check-compliance == 'true'
