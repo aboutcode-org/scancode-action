@@ -59,6 +59,10 @@ runs:
         echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
+        # Sanitize project name for artifact usage
+        SAFE_PROJECT_NAME="${{ inputs.project-name }}"
+        SAFE_PROJECT_NAME="${SAFE_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
+        echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> $GITHUB_ENV
 
     - name: Detect if ScanCode.io is already installed
       shell: bash
@@ -170,7 +174,8 @@ runs:
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
-        name: ${{ inputs.outputs-archive-name }}
+        # Include the project name in case of multiple runs of the action
+        name: ${{ inputs.outputs-archive-name }}-${{ env.SAFE_PROJECT_NAME }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
         overwrite: true
 
