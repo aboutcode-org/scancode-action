@@ -50,7 +50,7 @@ parameters:
   
   - name: pythonVersion
     type: string
-    default: "3.12"
+    default: "3.13"
     displayName: "Python version"
   
   - name: scancodeioRepoBranch

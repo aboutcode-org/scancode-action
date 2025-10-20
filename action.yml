@@ -39,7 +39,7 @@ inputs:
     default: "false"
   python-version:
     description: "Python version."
-    default: "3.12"
+    default: "3.13"
   scancodeio-repo-branch:
     description: "Branch to install ScanCode.io from the GitHub repository (optional)"
     required: false

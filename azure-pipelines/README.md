@@ -76,7 +76,7 @@ stages:
     complianceFailOnVulnerabilities:
 
     # Python version that will be installed to run ScanCode.io
-    # Default is '3.12'
+    # Default is '3.13'
     pythonVersion:
 
     # Install ScanCode.io from a specific GitHub branch (optional)
