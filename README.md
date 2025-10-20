@@ -1,7 +1,10 @@
 # `@aboutcode-org/scancode-action`
 
-Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines from your 
-Workflows.
+Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
+from your **GitHub Workflows**.
+
+For **Azure DevOps Pipelines** support and setup instructions, see the
+[Azure Pipelines documentation](https://github.com/aboutcode-org/scancode-action/blob/main/azure-pipelines/README.md).
 
 > [!IMPORTANT]
 > The scancode-action is currently in the **beta stage**, and we invite you to 
