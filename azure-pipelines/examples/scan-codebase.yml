@@ -1,0 +1,18 @@
+trigger: [push]
+
+resources:
+  repositories:
+    - repository: scancode-action
+      type: github
+      name:  aboutcode-org/scancode-action
+      ref: main
+
+jobs:
+  - job: scan_codebase
+    displayName: 'Scan codebase and check for compliance issues'
+    steps:
+      - template: azure-pipelines/templates/scancode-template.yml@scancode-action
+        parameters:
+          pipelines: 'scan_codebase'
+          checkCompliance: true
+          complianceFailLevel: 'WARNING'
