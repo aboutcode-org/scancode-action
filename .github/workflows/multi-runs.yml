@@ -1,0 +1,36 @@
+on: [push]
+
+jobs:
+  multi-runs:
+    runs-on: ubuntu-24.04
+    name: Ensure the action can be executed multiple times
+    steps:
+      - name: Get the action.yml from the current branch
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/checkout@v4
+        with:
+          path: scancode-inputs
+
+      - uses: ./
+        with:
+          project-name: "scan-1"
+          pipelines: "scan_codebase"
+
+      - uses: ./
+        with:
+          project-name: "scan-2"
+          pipelines: "scan_codebase"
+
+      - name: Verify scanpipe and scancode commands availability
+        shell: bash
+        run: |
+          echo "Checking ScanCode CLI availability..."
+          which scanpipe || { echo "scanpipe not found in PATH"; exit 1; }
+          which scancode || { echo "scancode not found in PATH"; exit 1; }
+          echo "Versions:"
+          scanpipe --version
+          scancode --version

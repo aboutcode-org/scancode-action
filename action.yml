@@ -1,5 +1,6 @@
 name: "ScanCode action"
 description: "Run ScanCode.io pipelines in your workflows"
+
 inputs:
   pipelines:
     description: "Names of the pipelines (comma-separated) and in order."
@@ -63,19 +64,23 @@ runs:
       shell: bash
       run: |
         sudo systemctl start postgresql.service
-        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
-        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password '${{ env.SCANCODEIO_DB_PASSWORD }}'"
-        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
+        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }} || true
+        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'" || true
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }} || true
 
-    - name: Install ScanCode.io
+    - name: Install ScanCode.io (only if not already installed)
       shell: bash
       run: |
-        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
-          echo "Installing the latest ScanCode.io release from PyPI"
-          pip install --upgrade scancodeio
+        if ! command -v scanpipe &> /dev/null; then
+          if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
+            echo "Installing the latest ScanCode.io release from PyPI"
+            pip install --upgrade scancodeio
+          else
+            echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+            pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+          fi
         else
-          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
-          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+          echo "ScanCode.io already installed, skipping installation."
         fi
 
     - name: Run migrations to prepare the database
