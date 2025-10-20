@@ -60,30 +60,40 @@ runs:
         echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
 
+    - name: Detect if ScanCode.io is already installed
+      shell: bash
+      run: |
+        if command -v scanpipe &> /dev/null; then
+          echo "ScanCode.io already installed."
+          echo "SCANCODEIO_IS_INSTALLED=true" >> $GITHUB_ENV
+        else
+          echo "ScanCode.io not found."
+          echo "SCANCODEIO_IS_INSTALLED=false" >> $GITHUB_ENV
+        fi
+
     - name: Start and setup the PostgreSQL service
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
         sudo systemctl start postgresql.service
-        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }} || true
-        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'" || true
-        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }} || true
+        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
+        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'"
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
     - name: Install ScanCode.io (only if not already installed)
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
-        if ! command -v scanpipe &> /dev/null; then
-          if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
-            echo "Installing the latest ScanCode.io release from PyPI"
-            pip install --upgrade scancodeio
-          else
-            echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
-            pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
-          fi
+        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
+          echo "Installing the latest ScanCode.io release from PyPI"
+          pip install --upgrade scancodeio
         else
-          echo "ScanCode.io already installed, skipping installation."
+          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
         fi
 
     - name: Run migrations to prepare the database
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: scanpipe migrate --verbosity 0
 

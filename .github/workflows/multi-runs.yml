@@ -32,5 +32,4 @@ jobs:
           which scanpipe || { echo "scanpipe not found in PATH"; exit 1; }
           which scancode || { echo "scancode not found in PATH"; exit 1; }
           echo "Versions:"
-          scanpipe --version
-          scancode --version
+          scanpipe shell -c "import scancodeio; from scancode_config import __version__ as scancode_version;print(f'ScanCode.io version: {scancodeio.__version__}');print(f'ScanCode-toolkit version: v{scancode_version}')"
