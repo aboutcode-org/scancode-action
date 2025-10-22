@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    stages {
+        stage('Scan') {
+            steps {
+                sh '''
+                    docker run --rm \
+                        -v "$PWD":/codebase \
+                        ghcr.io/aboutcode-org/scancode.io:latest \
+                        run scan_codebase /codebase \
+                        > results.json
+                '''
+            }
+        }
+    }
+}

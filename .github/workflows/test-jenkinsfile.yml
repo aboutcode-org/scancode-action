@@ -1,0 +1,21 @@
+name: Test Jenkinsfile
+
+on: [push]
+
+jobs:
+  test-jenkinsfile:
+    name: Scan codebase using the Jenkinsfile
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Jenkinsfile
+        run: |
+          docker run --rm \
+            -v "$PWD":/workspace \
+            -w /workspace \
+            jenkins/jenkinsfile-runner:latest \
+            -w /workspace \
+            -f /workspace/jenkins/Jenkinsfile
