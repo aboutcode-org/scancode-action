@@ -1,0 +1,161 @@
+parameters:
+  - name: pipelines
+    type: string
+    default: "scan_codebase"
+    displayName: "Pipeline names (comma-separated)"
+  
+  - name: outputFormats
+    type: string
+    default: "json xlsx spdx cyclonedx"
+    displayName: "Output formats"
+  
+  - name: inputsPath
+    type: string
+    default: "$(Build.SourcesDirectory)/scancode-inputs"
+    displayName: "Path for pipeline inputs"
+  
+  - name: inputUrls
+    type: string
+    default: ""
+    displayName: "URLs to download (space-separated)"
+  
+  - name: projectName
+    type: string
+    default: "scancode-devops"
+    displayName: "Project name"
+  
+  - name: outputsArchiveName
+    type: string
+    default: "scancode-outputs"
+    displayName: "Outputs archive name"
+  
+  - name: checkCompliance
+    type: boolean
+    default: false
+    displayName: "Check for compliance issues"
+  
+  - name: complianceFailLevel
+    type: string
+    default: "ERROR"
+    displayName: "Compliance failure level"
+    values:
+      - ERROR
+      - WARNING
+      - MISSING
+  
+  - name: complianceFailOnVulnerabilities
+    type: boolean
+    default: false
+    displayName: "Fail on vulnerabilities"
+  
+  - name: pythonVersion
+    type: string
+    default: "3.13"
+    displayName: "Python version"
+  
+  - name: scancodeioRepoBranch
+    type: string
+    default: ""
+    displayName: "ScanCode.io GitHub branch (optional)"
+
+steps:
+  - task: UsePythonVersion@0
+    displayName: 'Set up Python'
+    inputs:
+      versionSpec: '${{ parameters.pythonVersion }}'
+      addToPath: true
+
+  - script: |
+      echo "##vso[task.setvariable variable=SECRET_KEY]$(openssl rand -base64 32)"
+      echo "##vso[task.setvariable variable=SCANCODEIO_DB_NAME]scancodeio"
+      echo "##vso[task.setvariable variable=SCANCODEIO_DB_USER]scancodeio"
+      echo "##vso[task.setvariable variable=SCANCODEIO_DB_PASSWORD]scancodeio"
+    displayName: 'Set up environment variables'
+
+  - script: |
+      sudo systemctl start postgresql.service
+      sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb $(SCANCODEIO_DB_USER)
+      sudo -u postgres psql -c "ALTER USER $(SCANCODEIO_DB_USER) WITH encrypted password '$(SCANCODEIO_DB_PASSWORD)'"
+      sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 $(SCANCODEIO_DB_NAME)
+    displayName: 'Start and setup PostgreSQL service'
+
+  - script: |
+      if [ -z "${{ parameters.scancodeioRepoBranch }}" ]; then
+        echo "Installing the latest ScanCode.io release from PyPI"
+        pip install --upgrade scancodeio
+      else
+        echo "Installing ScanCode.io from the GitHub branch: ${{ parameters.scancodeioRepoBranch }}"
+        pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ parameters.scancodeioRepoBranch }}
+      fi
+    displayName: 'Install ScanCode.io'
+
+  - script: |
+      scanpipe migrate --verbosity 0
+    displayName: 'Run database migrations'
+
+  - script: |
+      IFS=',' read -ra PIPELINES <<< "${{ parameters.pipelines }}"
+      PIPELINE_CLI_ARGS=""
+      for pipeline in "${PIPELINES[@]}"; do
+        PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
+      done
+      echo "##vso[task.setvariable variable=PIPELINE_CLI_ARGS]${PIPELINE_CLI_ARGS}"
+    displayName: 'Generate pipeline CLI arguments'
+
+  - script: |
+      INPUT_URL_CLI_ARGS=""
+      for url in ${{ parameters.inputUrls }}; do
+        INPUT_URL_CLI_ARGS+=" --input-url $url"
+      done
+      echo "##vso[task.setvariable variable=INPUT_URL_CLI_ARGS]${INPUT_URL_CLI_ARGS}"
+    displayName: 'Generate input URL CLI arguments'
+
+  - script: |
+      scanpipe create-project ${{ parameters.projectName }} \
+      $(PIPELINE_CLI_ARGS) \
+      $(INPUT_URL_CLI_ARGS)
+    displayName: 'Create ScanCode project'
+
+  - script: |
+      project_status=$(scanpipe status --project ${{ parameters.projectName }})
+      work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
+      echo "##vso[task.setvariable variable=PROJECT_WORK_DIRECTORY]$work_directory"
+    displayName: 'Set project work directory'
+
+  - script: |
+      SOURCE_PATH="${{ parameters.inputsPath }}"
+      DESTINATION_PATH="$(PROJECT_WORK_DIRECTORY)/input/"
+      if [ -d "$SOURCE_PATH" ]; then
+        cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+      fi
+    displayName: 'Copy input files to project work directory'
+
+  - script: |
+      scanpipe execute --project ${{ parameters.projectName }} --no-color
+    displayName: 'Run ScanCode pipelines'
+
+  - script: |
+      scanpipe output \
+        --project ${{ parameters.projectName }} \
+        --format ${{ parameters.outputFormats }}
+    displayName: 'Generate outputs'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Upload ScanCode outputs'
+    inputs:
+      targetPath: '$(PROJECT_WORK_DIRECTORY)/output/'
+      artifact: '${{ parameters.outputsArchiveName }}'
+      publishLocation: 'pipeline'
+
+  - script: |
+      cmd="scanpipe check-compliance \
+        --project ${{ parameters.projectName }} \
+        --fail-level ${{ parameters.complianceFailLevel }}"
+
+      if [[ "${{ parameters.complianceFailOnVulnerabilities }}" == "true" ]]; then
+        cmd="$cmd --fail-on-vulnerabilities"
+      fi
+
+      eval "$cmd"
+    displayName: 'Check compliance'
+    condition: eq('${{ parameters.checkCompliance }}', 'true')

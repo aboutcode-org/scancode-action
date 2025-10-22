@@ -1,7 +1,10 @@
 # `@aboutcode-org/scancode-action`
 
-Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines from your 
-Workflows.
+Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
+from your **GitHub Workflows**.
+
+For **Azure DevOps Pipelines** support and setup instructions, see the
+[Azure Pipelines documentation](https://github.com/aboutcode-org/scancode-action/blob/main/azure-pipelines/README.md).
 
 > [!IMPORTANT]
 > The scancode-action is currently in the **beta stage**, and we invite you to 
@@ -18,6 +21,7 @@ Workflows.
   - [Scan repo codebase](#scan-repo-codebase)
   - [Run a specific pipeline](#run-a-specific-pipeline)
   - [Run multiple pipelines](#run-multiple-pipelines)
+  - [Specify pipeline options](#specify-pipeline-options)
   - [Choose the output formats](#choose-the-output-formats)
   - [Provide download URLs inputs](#provide-download-urls-inputs)
   - [Fetch pipelines inputs](#fetch-pipelines-inputs)
@@ -84,7 +88,7 @@ steps:
     compliance-fail-on-vulnerabilities:
 
     # Python version that will be installed to run ScanCode.io
-    # Default is '3.12'
+    # Default is '3.13'
     python-version:
 ```
 
@@ -121,6 +125,17 @@ steps:
     pipelines: "scan_codebase,find_vulnerabilities"
   env:
     VULNERABLECODE_URL: https://public.vulnerablecode.io/
+```
+
+### Specify pipeline options
+
+Use the `pipeline_name:option1,option2` syntax to select optional steps for the 
+`map_deploy_to_develop` pipeline
+
+```yaml
+- uses: aboutcode-org/scancode-action@beta
+  with:
+    pipelines: "map_deploy_to_develop:Java,JavaScript"
 ```
 
 #### Configuring `find_vulnerabilities` Pipeline

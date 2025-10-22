@@ -1,5 +1,6 @@
 name: "ScanCode action"
 description: "Run ScanCode.io pipelines in your workflows"
+
 inputs:
   pipelines:
     description: "Names of the pipelines (comma-separated) and in order."
@@ -9,7 +10,7 @@ inputs:
     default: "json xlsx spdx cyclonedx"
   inputs-path:
     description: "Relative path within the $GITHUB_WORKSPACE for pipeline inputs"
-    default: "${{ github.workspace }}/scancode-inputs"
+    default: "scancode-inputs"
   input-urls:
     description: "Provide one or more URLs to download for the pipeline run execution."
     required: false
@@ -32,13 +33,13 @@ inputs:
     default: "ERROR"
   compliance-fail-on-vulnerabilities:
     description: |
-      Exit with a non-zero status if known vulnerabilities are detected in discovered 
+      Exit with a non-zero status if known vulnerabilities are detected in discovered
       packages and dependencies.
     required: false
     default: "false"
   python-version:
     description: "Python version."
-    default: "3.12"
+    default: "3.13"
   scancodeio-repo-branch:
     description: "Branch to install ScanCode.io from the GitHub repository (optional)"
     required: false
@@ -58,16 +59,33 @@ runs:
         echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
+        # Sanitize project name for artifact usage
+        SAFE_PROJECT_NAME="${{ inputs.project-name }}"
+        SAFE_PROJECT_NAME="${SAFE_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
+        echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> $GITHUB_ENV
+
+    - name: Detect if ScanCode.io is already installed
+      shell: bash
+      run: |
+        if command -v scanpipe &> /dev/null; then
+          echo "ScanCode.io already installed."
+          echo "SCANCODEIO_IS_INSTALLED=true" >> $GITHUB_ENV
+        else
+          echo "ScanCode.io not found."
+          echo "SCANCODEIO_IS_INSTALLED=false" >> $GITHUB_ENV
+        fi
 
     - name: Start and setup the PostgreSQL service
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
-        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH encrypted password '${{ env.SCANCODEIO_DB_PASSWORD }}'"
+        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
-    - name: Install ScanCode.io
+    - name: Install ScanCode.io (only if not already installed)
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
         if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
@@ -79,6 +97,7 @@ runs:
         fi
 
     - name: Run migrations to prepare the database
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: scanpipe migrate --verbosity 0
 
@@ -116,13 +135,29 @@ runs:
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Copy input files to project work directory
+      if: ${{ !inputs.input-urls }}
       shell: bash
       run: |
         SOURCE_PATH="${{ inputs.inputs-path }}"
+        [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${{ github.workspace }}/$SOURCE_PATH"
         DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        mkdir -p "$DESTINATION_PATH"
+
         if [ -d "$SOURCE_PATH" ]; then
-          cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+          if [ "$(ls -A "$SOURCE_PATH")" ]; then
+            echo "Copying contents of directory: $SOURCE_PATH → $DESTINATION_PATH"
+            cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
+          else
+            echo "Input directory '$SOURCE_PATH' is empty, nothing to copy."
+          fi
+        else
+          echo "Copying file: $SOURCE_PATH → $DESTINATION_PATH"
+          cp "$SOURCE_PATH" "$DESTINATION_PATH"
         fi
+
+        echo ""
+        echo "Input files now in: $DESTINATION_PATH"
+        ls -lh "$DESTINATION_PATH"
 
     - name: Run the pipelines
       shell: bash
@@ -132,15 +167,17 @@ runs:
       id: scanpipe
       shell: bash
       run: scanpipe output
-        --project ${{ inputs.project-name }} 
+        --project ${{ inputs.project-name }}
         --format ${{ inputs.output-formats }}
 
     - name: Upload outputs
       uses: actions/upload-artifact@v4
       id: artifact-upload-step
       with:
-        name: ${{ inputs.outputs-archive-name }}
+        # Include the project name in case of multiple runs of the action
+        name: ${{ inputs.outputs-archive-name }}-${{ env.SAFE_PROJECT_NAME }}
         path: ${{ env.PROJECT_WORK_DIRECTORY }}/output/*
+        overwrite: true
 
     - name: Check compliance
       if: inputs.check-compliance == 'true'
