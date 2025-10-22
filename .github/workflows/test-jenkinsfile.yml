@@ -17,5 +17,11 @@ jobs:
             -v "$PWD":/workspace \
             -w /workspace \
             jenkins/jenkinsfile-runner:latest \
-            -w /workspace \
+            run \
             -f /workspace/jenkins/Jenkinsfile
+
+      - name: Upload results.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: jenkinsfile-results
+          path: results.json
