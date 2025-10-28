@@ -3,8 +3,19 @@
 Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
 from your **GitHub Workflows**.
 
-For **Azure DevOps Pipelines** support and setup instructions, see the
-[Azure Pipelines documentation](https://github.com/aboutcode-org/scancode-action/blob/main/azure-pipelines/README.md).
+# `@aboutcode-org/scancode-action`
+
+Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
+from your **GitHub Workflows**.
+
+## Supported Platforms
+
+| Platform | Documentation |
+|----------|---------------|
+| **GitHub Actions** | See [GitHub Actions documentation](https://github.com/aboutcode-org/scancode-action/blob/main/README.md) |
+| **GitLab CI/CD** | See [GitLab documentation](https://github.com/aboutcode-org/scancode-action/blob/main/gitlab/README.md) |
+| **Jenkins** | See [Jenkins documentation](https://github.com/aboutcode-org/scancode-action/blob/main/jenkins/README.md) |
+| **Azure Pipelines** | See [Azure Pipelines documentation](https://github.com/aboutcode-org/scancode-action/blob/main/azure-pipelines/README.md) |
 
 > [!IMPORTANT]
 > The scancode-action is currently in the **beta stage**, and we invite you to 

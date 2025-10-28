@@ -76,7 +76,7 @@ pipeline {
 }
 ```
 
-### Step 3: Access Your Results
+### Step 2: Access Your Results
 
 After the build completes:
 1. Go to the build page
