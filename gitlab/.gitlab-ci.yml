@@ -1,0 +1,33 @@
+# GitLab CI/CD Pipeline with ScanCode.io Integration
+
+stages:
+  - scan
+
+# ScanCode.io Scan Job
+scancode_scan:
+  stage: scan
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - echo "Running ScanCode.io scan..."
+
+    # Run the scan and save results
+    - |
+      docker run --rm \
+        -v "$(pwd)":/codedrop \
+        ghcr.io/aboutcode-org/scancode.io:latest \
+        run scan_codebase /codedrop \
+        > scancode_results.json
+
+    - echo "Scan completed!"
+
+  artifacts:
+    name: "scancode-results-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - scancode_results.json
+    expire_in: 30 days
+    when: always
