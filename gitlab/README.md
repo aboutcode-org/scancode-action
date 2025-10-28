@@ -5,7 +5,6 @@ pipeline.
 
 - [Overview](#overview)
 - [Quick Start](#quick-start)
-- [Simple Example](#simple-example)
 - [Specify Pipeline](#specify-pipeline)
 - [Additional Resources](#additional-resources)
 

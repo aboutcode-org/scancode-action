@@ -3,11 +3,6 @@
 Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
 from your **GitHub Workflows**.
 
-# `@aboutcode-org/scancode-action`
-
-Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines directly
-from your **GitHub Workflows**.
-
 ## Supported Platforms
 
 | Platform | Documentation |
