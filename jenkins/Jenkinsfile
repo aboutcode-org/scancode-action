@@ -1,0 +1,34 @@
+// Jenkins Pipeline with ScanCode.io Integration
+// This pipeline scans your codebase and archives the results
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('Scan codebase') {
+            steps {
+                echo 'Running ScanCode.io scan...'
+                
+                // Run the scan and save results
+                sh '''
+                    docker run --rm \
+                      -v "${WORKSPACE}":/codedrop \
+                      ghcr.io/aboutcode-org/scancode.io:latest \
+                      run scan_codebase /codedrop \
+                      > scancode_results.json
+                '''
+                
+                echo 'Scan completed!'
+            }
+        }
+        
+        stage('Archive Results') {
+            steps {
+                // Save the results as a build artifact
+                archiveArtifacts artifacts: 'scancode_results.json', fingerprint: true
+                echo 'Results archived successfully'
+            }
+        }
+    }
+
+}
