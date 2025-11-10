@@ -1,0 +1,21 @@
+@Library('scancode-pipeline@main') _
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('ScanCode Analysis') {
+            steps {
+                scanCodePipeline([
+                    projectName: "${env.JOB_NAME}",
+                    inputsPath: '.',
+                    pipelines: 'scan_codebase'
+                ])
+            }
+        }
+    }
+}
