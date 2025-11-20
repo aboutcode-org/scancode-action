@@ -25,7 +25,8 @@ from your **GitHub Workflows**.
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
-- [Where does the scan results go?](#where-does-the-scan-results-go)
+  - [Run source to binary mapping using GitHub action template](#run-source-to-binary-mapping-using-github-action-template)
+- [Where does the scan results go?](#where-are-the-scan-results)
 
 ## Usage
 
@@ -225,6 +226,18 @@ Activate this behavior by enabling `check-compliance` and setting
   with:
     scancodeio-repo-branch: "main"
 ```
+
+### Run source to binary mapping using GitHub action template
+1. Add job to build your binary and upload it as a GitHub actions artifact.
+2. Add a job to run `map-deploy-to-develop` pipeline.
+   ```yaml
+     run-d2d-pipeline:
+       needs: # Job id from step 1
+       uses: aboutcode-org/scancode-action/.github/workflows/map-deploy-to-develop-template.yml
+       with:
+         artifact-name: # Label of uploaded artifact from step 1
+         steps: "python,java" # Comma separated optional steps. See https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html#map-deploy-to-develop
+   ```
 
 ## Where are the Scan Results?
 
