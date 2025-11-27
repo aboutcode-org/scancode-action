@@ -25,7 +25,7 @@ from your **GitHub Workflows**.
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
-  - [Run source to binary mapping using GitHub action template](#run-source-to-binary-mapping-using-github-action-template)
+  - [Run source to binary mapping](#run-source-to-binary-mapping)
 - [Where does the scan results go?](#where-are-the-scan-results)
 
 ## Usage
@@ -227,17 +227,66 @@ Activate this behavior by enabling `check-compliance` and setting
     scancodeio-repo-branch: "main"
 ```
 
-### Run source to binary mapping using GitHub action template
-1. Add job to build your binary and upload it as a GitHub actions artifact.
-2. Add a job to run `map-deploy-to-develop` pipeline.
+### Run source to binary mapping
+
+Use this [workflow template](.github/workflows/map-deploy-to-develop-template.yml) for validating the integrity of open-source binary. It compares a project’s binary to its source code. Workflow will generate mapping between compiled binary and its original source code, which helps in spotting any malicious, unexpected, or otherwise undesirable code that may have made its way into the final binary.
+
+#### To use follow these steps:
+
+1. In your workflow add job to build binary and upload it as a GitHub actions artifact.
+2. Now add a second job to run source binary mapping using [template](.github/workflows/map-deploy-to-develop-template.yml).
    ```yaml
-     run-d2d-pipeline:
+     map-source-binary:
        needs: # Job id from step 1
        uses: aboutcode-org/scancode-action/.github/workflows/map-deploy-to-develop-template.yml
        with:
          artifact-name: # Label of uploaded artifact from step 1
          steps: "python,java" # Comma separated optional steps. See https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html#map-deploy-to-develop
    ```
+
+#### An end-to-end working example for Python projects:
+
+```yaml
+    name: Run source to binary mapping on tag
+
+    on:
+    workflow_dispatch:
+    push:
+        tags:
+        - "v*.*.*"
+
+    jobs:
+    build-python-wheel:
+        name: Build python wheel
+        runs-on: ubuntu-24.04
+
+        steps:
+        - uses: actions/checkout@v4
+        - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+            python-version: 3.12
+
+        - name: Install pypa/build and twine
+            run: python -m pip install --user --upgrade build twine packaging pip setuptools
+
+        - name: Build a binary wheel
+            run: python -m build --wheel --outdir dist/
+
+        - name: Upload wheel
+            uses: actions/upload-artifact@v4
+            with:
+            name: wheel_archives
+            path: dist/*.whl
+
+    map-source-binary:
+        name: Generate source to binary mapping
+        needs: build-python-wheel
+        uses: aboutcode-org/scancode-action/.github/workflows/map-deploy-to-develop-template.yml
+        with:
+        artifact-name: wheel_archives
+        steps: "python"
+```
 
 ## Where are the Scan Results?
 
