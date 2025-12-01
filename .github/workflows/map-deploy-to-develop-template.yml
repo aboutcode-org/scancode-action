@@ -10,6 +10,10 @@ on:
         description: "Comma separated D2D steps to run"
         required: false
         type: string
+      repository:
+        description: "Project's repository. Defaults to workflow's repository."
+        required: false
+        type: string
 
 jobs:
   run-d2d-pipeline:
@@ -17,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository || github.repository }}
 
       - name: Download build artifact
         uses: actions/download-artifact@v4

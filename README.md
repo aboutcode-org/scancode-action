@@ -244,49 +244,8 @@ Use this [workflow template](.github/workflows/map-deploy-to-develop-template.ym
          steps: "python,java" # Comma separated optional steps. See https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html#map-deploy-to-develop
    ```
 
-#### An end-to-end working example for Python projects:
+See an end-to-end working example for a python project [here](.github/workflows/map-source-binary-boolean-py.yml)
 
-```yaml
-    name: Run source to binary mapping on tag
-
-    on:
-    workflow_dispatch:
-    push:
-        tags:
-        - "v*.*.*"
-
-    jobs:
-    build-python-wheel:
-        name: Build python wheel
-        runs-on: ubuntu-24.04
-
-        steps:
-        - uses: actions/checkout@v4
-        - name: Set up Python
-            uses: actions/setup-python@v5
-            with:
-            python-version: 3.12
-
-        - name: Install pypa/build and twine
-            run: python -m pip install --user --upgrade build twine packaging pip setuptools
-
-        - name: Build a binary wheel
-            run: python -m build --wheel --outdir dist/
-
-        - name: Upload wheel
-            uses: actions/upload-artifact@v4
-            with:
-            name: wheel_archives
-            path: dist/*.whl
-
-    map-source-binary:
-        name: Generate source to binary mapping
-        needs: build-python-wheel
-        uses: aboutcode-org/scancode-action/.github/workflows/map-deploy-to-develop-template.yml
-        with:
-        artifact-name: wheel_archives
-        steps: "python"
-```
 
 ## Where are the Scan Results?
 
