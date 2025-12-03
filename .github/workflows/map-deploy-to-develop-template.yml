@@ -1,0 +1,46 @@
+name: Run D2D on build and source archives
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: "Artifact containing the build archive"
+        required: true
+        type: string
+      steps:
+        description: "Comma separated D2D steps to run"
+        required: false
+        type: string
+      repository:
+        description: "Project's repository. Defaults to workflow's repository."
+        required: false
+        type: string
+
+jobs:
+  run-d2d-pipeline:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository || github.repository }}
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs['artifact-name'] }}
+          path: ../scancode-inputs/
+
+      - name: Prepare D2D inputs
+        shell: bash
+        run: |
+          for file in ../scancode-inputs/*; do
+            base=$(basename "$file")
+            mv "$file" "../scancode-inputs/to_$base"
+          done
+          git archive --format=tar.gz -o ../scancode-inputs/from.tar.gz HEAD
+
+      - name: Run D2D pipeline
+        uses: aboutcode-org/scancode-action@beta
+        with:
+          pipelines: ${{ inputs.steps && format('map_deploy_to_develop:%s', inputs.steps) || 'map_deploy_to_develop' }}
+          inputs-path: ../scancode-inputs

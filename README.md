@@ -25,7 +25,8 @@ from your **GitHub Workflows**.
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
-- [Where does the scan results go?](#where-does-the-scan-results-go)
+  - [Run source to binary mapping](#run-source-to-binary-mapping)
+- [Where does the scan results go?](#where-are-the-scan-results)
 
 ## Usage
 
@@ -225,6 +226,26 @@ Activate this behavior by enabling `check-compliance` and setting
   with:
     scancodeio-repo-branch: "main"
 ```
+
+### Run source to binary mapping
+
+Use this [workflow template](.github/workflows/map-deploy-to-develop-template.yml) for validating the integrity of open-source binary. It compares a project’s binary to its source code. Workflow will generate mapping between compiled binary and its original source code, which helps in spotting any malicious, unexpected, or otherwise undesirable code that may have made its way into the final binary.
+
+#### To use follow these steps:
+
+1. In your workflow add job to build binary and upload it as a GitHub actions artifact.
+2. Now add a second job to run source binary mapping using [template](.github/workflows/map-deploy-to-develop-template.yml).
+   ```yaml
+     map-source-binary:
+       needs: # Job id from step 1
+       uses: aboutcode-org/scancode-action/.github/workflows/map-deploy-to-develop-template.yml
+       with:
+         artifact-name: # Label of uploaded artifact from step 1
+         steps: "python,java" # Comma separated optional steps. See https://scancodeio.readthedocs.io/en/latest/built-in-pipelines.html#map-deploy-to-develop
+   ```
+
+See an end-to-end working example for a python project [here](.github/workflows/map-source-binary-boolean-py.yml)
+
 
 ## Where are the Scan Results?
 
