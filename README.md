@@ -11,6 +11,12 @@ from your **GitHub Workflows**.
 > effective tool for the community. 
 > Thank you for your support!
 
+- [Understanding ScanCode Action](#understanding-scancode-action)
+  - [What Does This Action Do?](#what-does-this-action-do)
+  - [What Does "Build Passed" Mean?](#what-does-build-passed-mean)
+  - [Where Are My Scan Results?](#where-are-my-scan-results)
+  - [How to Interpret Results](#how-to-interpret-results)
+  - [Enforcing Compliance](#enforcing-compliance)
 - [Usage](#usage)
   - [Basic](#basic)
   - [Inputs](#inputs)
@@ -27,6 +33,56 @@ from your **GitHub Workflows**.
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
   - [Run source to binary mapping](#run-source-to-binary-mapping)
 - [Where does the scan results go?](#where-are-the-scan-results)
+
+
+## Understanding ScanCode Action
+
+### What Does This Action Do?
+
+The ScanCode Action integrates [ScanCode.io](https://github.com/aboutcode-org/scancode.io) into your CI/CD workflow to automatically analyze your codebase for:
+- **Package information**: Identifies open-source packages and dependencies
+- **Copyright data**: Detects copyright statements and holders
+- **License information**: Discovers licenses used in your code and dependencies
+- **Vulnerabilities**: Optionally checks for known security issues (when using `find_vulnerabilities` pipeline)
+
+### What Does "Build Passed" Mean?
+
+When your GitHub Actions workflow shows a **green checkmark** and "build passed", it means:
+1. The `scan_codebase` pipeline (or your chosen pipeline) completed successfully
+2. ScanCode.io finished scanning your code without errors
+3. Output artifacts were generated and are ready for review
+
+**Important**: A passed build does NOT automatically mean your code is compliant or free of issues. It simply means the scan completed successfully. You must review the scan results to understand what was found.
+
+### Where Are My Scan Results?
+
+After the workflow completes:
+1. Go to your GitHub Actions run page
+2. Scroll to the bottom of the workflow summary page
+3. Look for the **"Artifacts"** section
+4. Download the `scancode-outputs` archive
+5. Inside you'll find results in your chosen formats: `json`, `xlsx`, `spdx`, `cyclonedx`
+
+### How to Interpret Results
+
+The scan results contain detailed information about every file analyzed:
+- **JSON format**: Machine-readable, ideal for automated processing
+- **XLSX format**: Human-readable spreadsheet, great for manual review
+- **SPDX format**: Standard format for software bill of materials (SBOM)
+- **CycloneDX format**: Another SBOM standard format
+
+### Enforcing Compliance
+
+To make your workflow **fail** when issues are detected, use the `check-compliance` option:
+
+```yaml
+- uses: aboutcode-org/scancode-action@beta
+  with:
+    check-compliance: true
+    compliance-fail-level: "WARNING"  # Options: ERROR, WARNING, MISSING
+```
+
+This requires setting up [policies](https://scancodeio.readthedocs.io/en/latest/policies.html) to define what's acceptable for your project.
 
 ## Usage
 
