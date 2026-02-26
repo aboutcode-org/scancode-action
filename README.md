@@ -25,6 +25,7 @@ from your **GitHub Workflows**.
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
+  - [Install ScanCode.io with optional dependencies](#install-scancodeio-with-optional-dependencies)
   - [Run source to binary mapping](#run-source-to-binary-mapping)
 - [Where does the scan results go?](#where-are-the-scan-results)
 
@@ -225,6 +226,14 @@ Activate this behavior by enabling `check-compliance` and setting
 - uses: aboutcode-org/scancode-action@beta
   with:
     scancodeio-repo-branch: "main"
+```
+
+### Install ScanCode.io with optional dependencies
+
+```yaml
+- uses: aboutcode-org/scancode-action@beta
+  with:
+    scancodeio-extras: "android_analysis,mining"
 ```
 
 ### Run source to binary mapping

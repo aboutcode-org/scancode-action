@@ -44,6 +44,10 @@ inputs:
     description: "Branch to install ScanCode.io from the GitHub repository (optional)"
     required: false
     default: ""
+  scancodeio-extras:
+    description: "ScanCode.io optional dependencies (comma-separated) (optional)."
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -84,16 +88,27 @@ runs:
         sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
 
+    - name: Generate scancodeio pip install argument
+      if: env.SCANCODEIO_IS_INSTALLED != 'true'
+      shell: bash
+      run: |
+        SCANCODEIO_PIP_PACKAGE_ARG="scancodeio"
+        TRIMMED_EXTRAS="$(echo "${{ inputs.scancodeio-extras }}" | tr -d '[:space:]')"
+        if [ -n "$TRIMMED_EXTRAS" ]; then
+          SCANCODEIO_PIP_PACKAGE_ARG+="[$TRIMMED_EXTRAS]"
+        fi
+        echo "SCANCODEIO_PIP_PACKAGE_ARG=${SCANCODEIO_PIP_PACKAGE_ARG}" >> $GITHUB_ENV
+
     - name: Install ScanCode.io (only if not already installed)
       if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
         if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
-          echo "Installing the latest ScanCode.io release from PyPI"
-          pip install --upgrade scancodeio
+          echo "Installing the latest ${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} release from PyPI"
+          pip install --upgrade "${{ env.SCANCODEIO_PIP_PACKAGE_ARG }}"
         else
-          echo "Installing ScanCode.io from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
-          pip install git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}
+          echo "Installing ${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
+          pip install "${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} @ git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}"
         fi
 
     - name: Run migrations to prepare the database
