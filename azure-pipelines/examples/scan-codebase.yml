@@ -6,13 +6,13 @@ resources:
       type: github
       name:  aboutcode-org/scancode-action
       ref: main
+      endpoint:github-https://github.com/praseeda-10
 
 jobs:
-  - job: scan_codebase
-    displayName: 'Scan codebase and check for compliance issues'
-    steps:
-      - template: azure-pipelines/templates/scancode-template.yml@scancode-action
+  -job: scan_codebase
+  displayName: 'Scan codebase with ScanCode.io'
+  steps:
+    -template: azure-pipelines/templates/scancode-template.yml@scancode-action
         parameters:
           pipelines: 'scan_codebase'
-          checkCompliance: true
-          complianceFailLevel: 'WARNING'
+          outputFormats: 'json xlsx spdx cyclonedx'

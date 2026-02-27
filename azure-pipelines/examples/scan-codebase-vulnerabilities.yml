@@ -1,0 +1,21 @@
+trigger: [push]
+
+resources:
+  repositories:
+    - repository: scancode-action
+      type: github
+      name: aboutcode-org/scancode-action
+      ref: main
+      endpoint: github-https://github.com/praseeda-10
+
+jobs:
+  - job: scan_codebase_and_find_vulnerabilities
+    displayName: 'Scan codebase and check for vulnerabilities'
+    variables:
+      VULNERABLECODE_URL: 'https://public.vulnerablecode.io/'
+    steps:
+      - template: azure-pipelines/templates/scancode-template.yml@scancode-action
+        parameters:
+          pipelines: 'scan_codebase,find_vulnerabilities'
+          checkCompliance: true
+          complianceFailOnVulnerabilities: true

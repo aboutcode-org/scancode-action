@@ -1,0 +1,23 @@
+trigger: [push]
+
+resources:
+  repositories:
+    - repository: scancode-action
+      type: github
+      name: aboutcode-org/scancode-action
+      ref: main
+      endpoint: github-https://github.com/praseeda-10
+
+jobs:
+  - job: run_multiple_pipelines
+    displayName: 'Run multiple ScanCode.io pipelines'
+    steps:
+      - template: azure-pipelines/templates/scancode-template.yml@scancode-action
+        parameters:
+          pipelines: 'scan_codebase,find_vulnerabilities'
+          outputFormats: 'json xlsx spdx cyclonedx'
+          projectName: 'my-project'
+
+
+
+
