@@ -13,7 +13,7 @@ jobs:
 
       - uses: ./
         with:
-          scancodeio-repo-branch: "bump-android"
+          scancodeio-repo-branch: "main"
           scancodeio-extras: "android_analysis"
           pipelines: "android_d2d"
           input-urls:
