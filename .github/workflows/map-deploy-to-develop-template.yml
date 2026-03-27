@@ -22,6 +22,14 @@ jobs:
       contents: read
 
     steps:
+      - name: Checkout the action from the current branch
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          sparse-checkout: action.yml
+          sparse-checkout-cone-mode: false
+          path: scancode-action
+          persist-credentials: false
+
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
@@ -32,19 +40,19 @@ jobs:
         uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3  # v8.0.0
         with:
           name: ${{ inputs['artifact-name'] }}
-          path: ../scancode-inputs/
+          path: scancode-inputs/
 
       - name: Prepare D2D inputs
         shell: bash
         run: |
-          for file in ../scancode-inputs/*; do
+          for file in scancode-inputs/*; do
             base=$(basename "$file")
-            mv "$file" "../scancode-inputs/to_$base"
+            mv "$file" "scancode-inputs/to_$base"
           done
-          git archive --format=tar.gz -o ../scancode-inputs/from.tar.gz HEAD
+          git archive --format=tar.gz -o scancode-inputs/from.tar.gz HEAD
 
       - name: Run D2D pipeline
-        uses: aboutcode-org/scancode-action@main
+        uses: ./scancode-action
         with:
           pipelines: ${{ inputs.steps && format('map_deploy_to_develop:%s', inputs.steps) || 'map_deploy_to_develop' }}
-          inputs-path: ../scancode-inputs
+          inputs-path: scancode-inputs
