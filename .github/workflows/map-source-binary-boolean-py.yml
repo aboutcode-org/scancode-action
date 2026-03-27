@@ -1,56 +1,58 @@
-name: Run source to binary mapping on boolean.py
+# Replace the whl build step by pre-built file
 
-on:
-  workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - main
-
-jobs:
-  build-python-wheel:
-      name: Build python wheel
-      runs-on: ubuntu-24.04
-      permissions:
-        contents: read
-
-      steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-        with:
-          repository: ${{ inputs.repository || github.repository }}
-          persist-credentials: false
-
-      - name: Checkout the action from the current branch
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
-        with:
-          sparse-checkout: action.yml
-          sparse-checkout-cone-mode: false
-          path: scancode-action
-          persist-credentials: false
-
-      - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
-        with:
-          python-version: 3.12
-
-      - name: Install pypa/build and twine
-        run: python -m pip install --user --upgrade build twine packaging pip setuptools
-
-      - name: Build a binary wheel
-        run: python -m build --wheel --outdir dist/
-
-      - name: Upload wheel
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        with:
-          name: wheel_archives
-          path: dist/*.whl
-
-  map-source-binary:
-      name: Generate source to binary mapping
-      needs: build-python-wheel
-      uses: ./.github/workflows/map-deploy-to-develop-template.yml
-      with:
-        artifact-name: wheel_archives
-        repository: bastikr/boolean.py
-        steps: "python"
+#name: Run source to binary mapping on boolean.py
+#
+#on:
+#  workflow_dispatch:
+#  pull_request:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  build-python-wheel:
+#      name: Build python wheel
+#      runs-on: ubuntu-24.04
+#      permissions:
+#        contents: read
+#
+#      steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+#        with:
+#          repository: ${{ inputs.repository || github.repository }}
+#          persist-credentials: false
+#
+#      - name: Checkout the action from the current branch
+#        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+#        with:
+#          sparse-checkout: action.yml
+#          sparse-checkout-cone-mode: false
+#          path: scancode-action
+#          persist-credentials: false
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+#        with:
+#          python-version: 3.12
+#
+#      - name: Install pypa/build and twine
+#        run: python -m pip install --user --upgrade build twine packaging pip setuptools
+#
+#      - name: Build a binary wheel
+#        run: python -m build --wheel --outdir dist/
+#
+#      - name: Upload wheel
+#        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+#        with:
+#          name: wheel_archives
+#          path: dist/*.whl
+#
+#  map-source-binary:
+#      name: Generate source to binary mapping
+#      needs: build-python-wheel
+#      uses: ./.github/workflows/map-deploy-to-develop-template.yml
+#      with:
+#        artifact-name: wheel_archives
+#        repository: bastikr/boolean.py
+#        steps: "python"
