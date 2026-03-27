@@ -141,7 +141,11 @@ runs:
       run: |
         INPUT_URL_CLI_ARGS=""
         for url in $INPUT_URLS; do
-          INPUT_URL_CLI_ARGS+=" --input-url $url"
+          if [[ "$url" =~ ^(https?|docker|pkg): ]]; then
+            INPUT_URL_CLI_ARGS+=" --input-url $url"
+          else
+            echo "::warning::Skipping unsupported URL scheme: $url"
+          fi
         done
         echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
