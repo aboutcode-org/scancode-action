@@ -62,23 +62,23 @@ runs:
       env:
         INPUT_PROJECT_NAME: ${{ inputs.project-name }}
       run: |
-        echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
-        echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
+        echo "SECRET_KEY=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
+        echo "SCANCODEIO_DB_NAME=scancodeio" >> "$GITHUB_ENV"
+        echo "SCANCODEIO_DB_USER=scancodeio" >> "$GITHUB_ENV"
+        echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> "$GITHUB_ENV"
         # Sanitize project name for artifact usage
         SAFE_PROJECT_NAME="${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
-        echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> $GITHUB_ENV
+        echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> "$GITHUB_ENV"
 
     - name: Detect if ScanCode.io is already installed
       shell: bash
       run: |
         if command -v scanpipe &> /dev/null; then
           echo "ScanCode.io already installed."
-          echo "SCANCODEIO_IS_INSTALLED=true" >> $GITHUB_ENV
+          echo "SCANCODEIO_IS_INSTALLED=true" >> "$GITHUB_ENV"
         else
           echo "ScanCode.io not found."
-          echo "SCANCODEIO_IS_INSTALLED=false" >> $GITHUB_ENV
+          echo "SCANCODEIO_IS_INSTALLED=false" >> "$GITHUB_ENV"
         fi
 
     - name: Start and setup the PostgreSQL service
@@ -101,7 +101,7 @@ runs:
         if [ -n "$TRIMMED_EXTRAS" ]; then
           SCANCODEIO_PIP_PACKAGE_ARG+="[$TRIMMED_EXTRAS]"
         fi
-        echo "SCANCODEIO_PIP_PACKAGE_ARG=${SCANCODEIO_PIP_PACKAGE_ARG}" >> $GITHUB_ENV
+        echo "SCANCODEIO_PIP_PACKAGE_ARG=${SCANCODEIO_PIP_PACKAGE_ARG}" >> "$GITHUB_ENV"
 
     - name: Install ScanCode.io (only if not already installed)
       if: env.SCANCODEIO_IS_INSTALLED != 'true'
@@ -132,7 +132,7 @@ runs:
         for pipeline in "${PIPELINES[@]}"; do
           PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
         done
-        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> $GITHUB_ENV
+        echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> "$GITHUB_ENV"
 
     - name: Generate `--input-url` CLI arguments
       shell: bash
@@ -147,7 +147,7 @@ runs:
             echo "::warning::Skipping unsupported URL scheme: $url"
           fi
         done
-        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
+        echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> "$GITHUB_ENV"
 
     - name: Create project
       shell: bash
@@ -165,7 +165,7 @@ runs:
       run: |
         project_status=$(scanpipe status --project "$INPUT_PROJECT_NAME")
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
-        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
+        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> "$GITHUB_ENV"
 
     - name: Copy input files to project work directory
       if: ${{ !inputs.input-urls }}
