@@ -172,6 +172,15 @@ runs:
       run: |
         SOURCE_PATH="$INPUT_INPUTS_PATH"
         [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${WORKSPACE}/$SOURCE_PATH"
+
+        # Prevent path traversal outside the workspace
+        REAL_SOURCE=$(realpath -m "$SOURCE_PATH")
+        REAL_WORKSPACE=$(realpath "$WORKSPACE")
+        if [[ "$REAL_SOURCE" != "$REAL_WORKSPACE"* ]]; then
+          echo "::error::inputs-path resolves outside the workspace. Aborting."
+          exit 1
+        fi
+
         DESTINATION_PATH="${PROJECT_WORK_DIRECTORY}/input/"
         mkdir -p "$DESTINATION_PATH"
 
