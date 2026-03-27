@@ -59,14 +59,15 @@ runs:
 
     - name: Set up environment
       shell: bash
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_NAME=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_USER=scancodeio" >> $GITHUB_ENV
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> $GITHUB_ENV
         # Sanitize project name for artifact usage
-        SAFE_PROJECT_NAME="${{ inputs.project-name }}"
-        SAFE_PROJECT_NAME="${SAFE_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
+        SAFE_PROJECT_NAME="${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
         echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> $GITHUB_ENV
 
     - name: Detect if ScanCode.io is already installed
@@ -85,16 +86,18 @@ runs:
       shell: bash
       run: |
         sudo systemctl start postgresql.service
-        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb ${{ env.SCANCODEIO_DB_USER }}
-        sudo -u postgres psql -c "ALTER USER ${{ env.SCANCODEIO_DB_USER }} WITH ENCRYPTED PASSWORD '${{ env.SCANCODEIO_DB_PASSWORD }}'"
-        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 ${{ env.SCANCODEIO_DB_NAME }}
+        sudo -u postgres createuser --no-createrole --no-superuser --login --inherit --createdb "$SCANCODEIO_DB_USER"
+        sudo -u postgres psql -c "ALTER USER $SCANCODEIO_DB_USER WITH ENCRYPTED PASSWORD '$SCANCODEIO_DB_PASSWORD'"
+        sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 "$SCANCODEIO_DB_NAME"
 
     - name: Generate scancodeio pip install argument
       if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
+      env:
+        INPUT_EXTRAS: ${{ inputs.scancodeio-extras }}
       run: |
         SCANCODEIO_PIP_PACKAGE_ARG="scancodeio"
-        TRIMMED_EXTRAS="$(echo "${{ inputs.scancodeio-extras }}" | tr -d '[:space:]')"
+        TRIMMED_EXTRAS="$(echo "$INPUT_EXTRAS" | tr -d '[:space:]')"
         if [ -n "$TRIMMED_EXTRAS" ]; then
           SCANCODEIO_PIP_PACKAGE_ARG+="[$TRIMMED_EXTRAS]"
         fi
@@ -103,13 +106,15 @@ runs:
     - name: Install ScanCode.io (only if not already installed)
       if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
+      env:
+        INPUT_REPO_BRANCH: ${{ inputs.scancodeio-repo-branch }}
       run: |
-        if [ -z "${{ inputs.scancodeio-repo-branch }}" ]; then
-          echo "Installing the latest ${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} release from PyPI"
-          pip install --upgrade "${{ env.SCANCODEIO_PIP_PACKAGE_ARG }}"
+        if [ -z "$INPUT_REPO_BRANCH" ]; then
+          echo "Installing the latest ${SCANCODEIO_PIP_PACKAGE_ARG} release from PyPI"
+          pip install --upgrade "$SCANCODEIO_PIP_PACKAGE_ARG"
         else
-          echo "Installing ${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} from the GitHub branch: ${{ inputs.scancodeio-repo-branch }}"
-          pip install "${{ env.SCANCODEIO_PIP_PACKAGE_ARG }} @ git+https://github.com/aboutcode-org/scancode.io.git@${{ inputs.scancodeio-repo-branch }}"
+          echo "Installing ${SCANCODEIO_PIP_PACKAGE_ARG} from the GitHub branch: $INPUT_REPO_BRANCH"
+          pip install "${SCANCODEIO_PIP_PACKAGE_ARG} @ git+https://github.com/aboutcode-org/scancode.io.git@${INPUT_REPO_BRANCH}"
         fi
 
     - name: Run migrations to prepare the database
@@ -119,8 +124,10 @@ runs:
 
     - name: Generate `--pipeline` CLI arguments
       shell: bash
+      env:
+        INPUT_PIPELINES: ${{ inputs.pipelines }}
       run: |
-        IFS=',' read -ra PIPELINES <<< "${{ inputs.pipelines }}"
+        IFS=',' read -ra PIPELINES <<< "$INPUT_PIPELINES"
         PIPELINE_CLI_ARGS=""
         for pipeline in "${PIPELINES[@]}"; do
           PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
@@ -129,45 +136,54 @@ runs:
 
     - name: Generate `--input-url` CLI arguments
       shell: bash
+      env:
+        INPUT_URLS: ${{ inputs.input-urls }}
       run: |
         INPUT_URL_CLI_ARGS=""
-        for url in ${{ inputs.input-urls }}; do
+        for url in $INPUT_URLS; do
           INPUT_URL_CLI_ARGS+=" --input-url $url"
         done
         echo "INPUT_URL_CLI_ARGS=${INPUT_URL_CLI_ARGS}" >> $GITHUB_ENV
 
     - name: Create project
       shell: bash
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
       run: |
-        scanpipe create-project ${{ inputs.project-name }} \
-        ${{ env.PIPELINE_CLI_ARGS }} \
-        ${{ env.INPUT_URL_CLI_ARGS }}
+        scanpipe create-project "$INPUT_PROJECT_NAME" \
+          $PIPELINE_CLI_ARGS \
+          $INPUT_URL_CLI_ARGS
 
     - name: Set project work directory in the environment
       shell: bash
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
       run: |
-        project_status=$(scanpipe status --project ${{ inputs.project-name }})
+        project_status=$(scanpipe status --project "$INPUT_PROJECT_NAME")
         work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
         echo "PROJECT_WORK_DIRECTORY=$work_directory" >> $GITHUB_ENV
 
     - name: Copy input files to project work directory
       if: ${{ !inputs.input-urls }}
       shell: bash
+      env:
+        INPUT_INPUTS_PATH: ${{ inputs.inputs-path }}
+        WORKSPACE: ${{ github.workspace }}
       run: |
-        SOURCE_PATH="${{ inputs.inputs-path }}"
-        [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${{ github.workspace }}/$SOURCE_PATH"
-        DESTINATION_PATH="${{ env.PROJECT_WORK_DIRECTORY }}/input/"
+        SOURCE_PATH="$INPUT_INPUTS_PATH"
+        [[ "$SOURCE_PATH" != /* ]] && SOURCE_PATH="${WORKSPACE}/$SOURCE_PATH"
+        DESTINATION_PATH="${PROJECT_WORK_DIRECTORY}/input/"
         mkdir -p "$DESTINATION_PATH"
 
         if [ -d "$SOURCE_PATH" ]; then
           if [ "$(ls -A "$SOURCE_PATH")" ]; then
-            echo "Copying contents of directory: $SOURCE_PATH → $DESTINATION_PATH"
+            echo "Copying contents of directory: $SOURCE_PATH -> $DESTINATION_PATH"
             cp -r "$SOURCE_PATH"/* "$DESTINATION_PATH"
           else
             echo "Input directory '$SOURCE_PATH' is empty, nothing to copy."
           fi
         elif [[ -f "$SOURCE_PATH" ]]; then
-          echo "Copying file: $SOURCE_PATH → $DESTINATION_PATH"
+          echo "Copying file: $SOURCE_PATH -> $DESTINATION_PATH"
           cp "$SOURCE_PATH" "$DESTINATION_PATH"
         fi
 
@@ -177,14 +193,20 @@ runs:
 
     - name: Run the pipelines
       shell: bash
-      run: scanpipe execute --project ${{ inputs.project-name }} --no-color
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
+      run: scanpipe execute --project "$INPUT_PROJECT_NAME" --no-color
 
     - name: Generate outputs
       id: scanpipe
       shell: bash
-      run: scanpipe output
-        --project ${{ inputs.project-name }}
-        --format ${{ inputs.output-formats }}
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
+        INPUT_OUTPUT_FORMATS: ${{ inputs.output-formats }}
+      run: |
+        scanpipe output \
+          --project "$INPUT_PROJECT_NAME" \
+          --format $INPUT_OUTPUT_FORMATS
 
     - name: Upload outputs
       uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
@@ -198,12 +220,16 @@ runs:
     - name: Check compliance
       if: inputs.check-compliance == 'true'
       shell: bash
+      env:
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
+        INPUT_FAIL_LEVEL: ${{ inputs.compliance-fail-level }}
+        INPUT_FAIL_ON_VULNS: ${{ inputs.compliance-fail-on-vulnerabilities }}
       run: |
         cmd="scanpipe check-compliance \
-          --project ${{ inputs.project-name }} \
-          --fail-level ${{ inputs.compliance-fail-level }}"
+          --project $INPUT_PROJECT_NAME \
+          --fail-level $INPUT_FAIL_LEVEL"
 
-        if [[ "${{ inputs.compliance-fail-on-vulnerabilities }}" == "true" ]]; then
+        if [[ "$INPUT_FAIL_ON_VULNS" == "true" ]]; then
           cmd="$cmd --fail-on-vulnerabilities"
         fi
 
