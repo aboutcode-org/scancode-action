@@ -109,7 +109,7 @@ runs:
           --network host \
           --read-only \
           --tmpfs /tmp \
-          --tmpfs /opt/scancodeio/.cache \
+          --tmpfs /opt/scancodeio/.cache:mode=1777 \
           --cap-drop ALL \
           --security-opt no-new-privileges \
           -e SECRET_KEY \
