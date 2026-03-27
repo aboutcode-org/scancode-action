@@ -109,6 +109,7 @@ runs:
           --network host \
           --read-only \
           --tmpfs /tmp \
+          --tmpfs /opt/scancodeio/.cache \
           --cap-drop ALL \
           --security-opt no-new-privileges \
           -e SECRET_KEY \
@@ -121,8 +122,6 @@ runs:
           "$SCANCODEIO_IMAGE" \
           scanpipe "$@"
         EOF
-        chmod +x "$RUNNER_TEMP/scanpipe"
-        echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
 
     - name: Pull the ScanCode.io image
       shell: bash
