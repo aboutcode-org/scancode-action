@@ -37,52 +37,61 @@ inputs:
       packages and dependencies.
     required: false
     default: "false"
-  python-version:
-    description: "Python version."
-    default: "3.13"
-  scancodeio-repo-branch:
-    description: "Branch to install ScanCode.io from the GitHub repository (optional)"
-    required: false
-    default: ""
-  scancodeio-extras:
-    description: "ScanCode.io optional dependencies (comma-separated) (optional)."
-    required: false
-    default: ""
+  scancodeio-image:
+    description: "ScanCode.io Docker image to use."
+    default: "ghcr.io/aboutcode-org/scancode.io:sha256-057627791ae2748b9ce980b0bd21bd6b521c77b7b2e24c074ef7ba98119a611f"
 
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
-      with:
-        python-version: ${{ inputs.python-version }}
+    - name: Validate inputs
+      shell: bash
+      env:
+        INPUT_IMAGE: ${{ inputs.scancodeio-image }}
+        INPUT_PROJECT_NAME: ${{ inputs.project-name }}
+        INPUT_FAIL_LEVEL: ${{ inputs.compliance-fail-level }}
+        INPUT_PIPELINES: ${{ inputs.pipelines }}
+      run: |
+        # Docker image ref: registry/name:tag or registry/name@sha256:digest
+        if [[ ! "$INPUT_IMAGE" =~ ^[a-zA-Z0-9./_:@-]+$ ]]; then
+          echo "::error::Invalid image name: $INPUT_IMAGE"
+          exit 1
+        fi
+
+        # Project name: alphanumeric, spaces, hyphens, underscores, dots
+        if [[ ! "$INPUT_PROJECT_NAME" =~ ^[a-zA-Z0-9[:space:]._-]+$ ]]; then
+          echo "::error::Invalid project name: $INPUT_PROJECT_NAME"
+          exit 1
+        fi
+
+        # Fail level: only known values
+        if [[ ! "$INPUT_FAIL_LEVEL" =~ ^(ERROR|WARNING|MISSING)$ ]]; then
+          echo "::error::Invalid compliance-fail-level: $INPUT_FAIL_LEVEL"
+          exit 1
+        fi
+
+        # Pipeline names: alphanumeric, underscores, commas
+        if [[ ! "$INPUT_PIPELINES" =~ ^[a-zA-Z0-9_,[:space:]]+$ ]]; then
+          echo "::error::Invalid pipelines value: $INPUT_PIPELINES"
+          exit 1
+        fi
 
     - name: Set up environment
       shell: bash
       env:
         INPUT_PROJECT_NAME: ${{ inputs.project-name }}
+        INPUT_IMAGE: ${{ inputs.scancodeio-image }}
       run: |
         echo "SECRET_KEY=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
         echo "SCANCODEIO_DB_NAME=scancodeio" >> "$GITHUB_ENV"
         echo "SCANCODEIO_DB_USER=scancodeio" >> "$GITHUB_ENV"
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> "$GITHUB_ENV"
-        # Sanitize project name for artifact usage
+        echo "SCANCODEIO_WORKSPACE_LOCATION=/workspace/.scancodeio" >> "$GITHUB_ENV"
+        echo "SCANCODEIO_IMAGE=$INPUT_IMAGE" >> "$GITHUB_ENV"
         SAFE_PROJECT_NAME="${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
         echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> "$GITHUB_ENV"
 
-    - name: Detect if ScanCode.io is already installed
-      shell: bash
-      run: |
-        if command -v scanpipe &> /dev/null; then
-          echo "ScanCode.io already installed."
-          echo "SCANCODEIO_IS_INSTALLED=true" >> "$GITHUB_ENV"
-        else
-          echo "ScanCode.io not found."
-          echo "SCANCODEIO_IS_INSTALLED=false" >> "$GITHUB_ENV"
-        fi
-
     - name: Start and setup the PostgreSQL service
-      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: |
         sudo systemctl start postgresql.service
@@ -90,35 +99,36 @@ runs:
         sudo -u postgres psql -c "ALTER USER $SCANCODEIO_DB_USER WITH ENCRYPTED PASSWORD '$SCANCODEIO_DB_PASSWORD'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 "$SCANCODEIO_DB_NAME"
 
-    - name: Generate scancodeio pip install argument
-      if: env.SCANCODEIO_IS_INSTALLED != 'true'
+    - name: Write scanpipe wrapper script
       shell: bash
-      env:
-        INPUT_EXTRAS: ${{ inputs.scancodeio-extras }}
       run: |
-        SCANCODEIO_PIP_PACKAGE_ARG="scancodeio"
-        TRIMMED_EXTRAS="$(echo "$INPUT_EXTRAS" | tr -d '[:space:]')"
-        if [ -n "$TRIMMED_EXTRAS" ]; then
-          SCANCODEIO_PIP_PACKAGE_ARG+="[$TRIMMED_EXTRAS]"
-        fi
-        echo "SCANCODEIO_PIP_PACKAGE_ARG=${SCANCODEIO_PIP_PACKAGE_ARG}" >> "$GITHUB_ENV"
+        cat > "$RUNNER_TEMP/scanpipe" << 'EOF'
+        #!/usr/bin/env bash
+        set -euo pipefail
+        exec docker run --rm \
+          --network host \
+          --read-only \
+          --tmpfs /tmp \
+          --cap-drop ALL \
+          --security-opt no-new-privileges \
+          -e SECRET_KEY \
+          -e SCANCODEIO_DB_NAME \
+          -e SCANCODEIO_DB_USER \
+          -e SCANCODEIO_DB_PASSWORD \
+          -e SCANCODEIO_DB_HOST=localhost \
+          -e SCANCODEIO_WORKSPACE_LOCATION \
+          -v "$GITHUB_WORKSPACE:/workspace" \
+          "$SCANCODEIO_IMAGE" \
+          scanpipe "$@"
+        EOF
+        chmod +x "$RUNNER_TEMP/scanpipe"
+        echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
 
-    - name: Install ScanCode.io (only if not already installed)
-      if: env.SCANCODEIO_IS_INSTALLED != 'true'
+    - name: Pull the ScanCode.io image
       shell: bash
-      env:
-        INPUT_REPO_BRANCH: ${{ inputs.scancodeio-repo-branch }}
-      run: |
-        if [ -z "$INPUT_REPO_BRANCH" ]; then
-          echo "Installing the latest ${SCANCODEIO_PIP_PACKAGE_ARG} release from PyPI"
-          pip install --upgrade "$SCANCODEIO_PIP_PACKAGE_ARG"
-        else
-          echo "Installing ${SCANCODEIO_PIP_PACKAGE_ARG} from the GitHub branch: $INPUT_REPO_BRANCH"
-          pip install "${SCANCODEIO_PIP_PACKAGE_ARG} @ git+https://github.com/aboutcode-org/scancode.io.git@${INPUT_REPO_BRANCH}"
-        fi
+      run: docker pull "$SCANCODEIO_IMAGE"
 
     - name: Run migrations to prepare the database
-      if: env.SCANCODEIO_IS_INSTALLED != 'true'
       shell: bash
       run: scanpipe migrate --verbosity 0
 
@@ -130,6 +140,7 @@ runs:
         IFS=',' read -ra PIPELINES <<< "$INPUT_PIPELINES"
         PIPELINE_CLI_ARGS=""
         for pipeline in "${PIPELINES[@]}"; do
+          pipeline="$(echo "$pipeline" | tr -d '[:space:]')"
           PIPELINE_CLI_ARGS+=" --pipeline $pipeline"
         done
         echo "PIPELINE_CLI_ARGS=${PIPELINE_CLI_ARGS}" >> "$GITHUB_ENV"
@@ -164,8 +175,9 @@ runs:
         INPUT_PROJECT_NAME: ${{ inputs.project-name }}
       run: |
         project_status=$(scanpipe status --project "$INPUT_PROJECT_NAME")
-        work_directory=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
-        echo "PROJECT_WORK_DIRECTORY=$work_directory" >> "$GITHUB_ENV"
+        container_work_dir=$(echo "$project_status" | grep -oP 'Work directory:\s*\K[^\n]+')
+        host_work_dir="$GITHUB_WORKSPACE${container_work_dir#/workspace}"
+        echo "PROJECT_WORK_DIRECTORY=$host_work_dir" >> "$GITHUB_ENV"
 
     - name: Copy input files to project work directory
       if: ${{ !inputs.input-urls }}
