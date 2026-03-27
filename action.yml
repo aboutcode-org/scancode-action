@@ -225,12 +225,14 @@ runs:
         INPUT_FAIL_LEVEL: ${{ inputs.compliance-fail-level }}
         INPUT_FAIL_ON_VULNS: ${{ inputs.compliance-fail-on-vulnerabilities }}
       run: |
-        cmd="scanpipe check-compliance \
-          --project $INPUT_PROJECT_NAME \
-          --fail-level $INPUT_FAIL_LEVEL"
+        cmd=(
+          scanpipe check-compliance
+          --project "$INPUT_PROJECT_NAME"
+          --fail-level "$INPUT_FAIL_LEVEL"
+        )
 
         if [[ "$INPUT_FAIL_ON_VULNS" == "true" ]]; then
-          cmd="$cmd --fail-on-vulnerabilities"
+          cmd+=(--fail-on-vulnerabilities)
         fi
 
-        eval "$cmd"
+        "${cmd[@]}"
