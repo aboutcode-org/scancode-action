@@ -90,6 +90,8 @@ runs:
         echo "SCANCODEIO_IMAGE=$INPUT_IMAGE" >> "$GITHUB_ENV"
         SAFE_PROJECT_NAME="${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
         echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> "$GITHUB_ENV"
+        mkdir -p "$GITHUB_WORKSPACE/.scancodeio"
+        chmod 777 "$GITHUB_WORKSPACE/.scancodeio"
 
     - name: Start and setup the PostgreSQL service
       shell: bash
