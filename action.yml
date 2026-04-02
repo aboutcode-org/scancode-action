@@ -39,7 +39,7 @@ inputs:
     default: "false"
   scancodeio-image:
     description: "ScanCode.io Docker image to use."
-    default: "ghcr.io/aboutcode-org/scancode.io@sha256:6fc8023bc588602ef2ec2b699c2503d8771fe5ef16470475fe64b641f0955f5b"
+    default: "ghcr.io/aboutcode-org/scancode.io@v37.1.0"
 
 runs:
   using: "composite"
@@ -70,7 +70,7 @@ runs:
           exit 1
         fi
 
-        # Pipeline names: alphanumeric, underscores, commas
+        # Pipeline names: alphanumeric, underscores, commas, colons
         if [[ ! "$INPUT_PIPELINES" =~ ^[a-zA-Z0-9_,:[:space:]]+$ ]]; then
           echo "::error::Invalid pipelines value: $INPUT_PIPELINES"
           exit 1
@@ -86,12 +86,12 @@ runs:
         echo "SCANCODEIO_DB_NAME=scancodeio" >> "$GITHUB_ENV"
         echo "SCANCODEIO_DB_USER=scancodeio" >> "$GITHUB_ENV"
         echo "SCANCODEIO_DB_PASSWORD=scancodeio" >> "$GITHUB_ENV"
+        # Workspace location mounted into the container, so outputs are directly accessible
         echo "SCANCODEIO_WORKSPACE_LOCATION=/workspace/.scancodeio" >> "$GITHUB_ENV"
         echo "SCANCODEIO_IMAGE=$INPUT_IMAGE" >> "$GITHUB_ENV"
+        # Sanitize project name for artifact usage
         SAFE_PROJECT_NAME="${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}"
         echo "SAFE_PROJECT_NAME=$SAFE_PROJECT_NAME" >> "$GITHUB_ENV"
-        mkdir -p "$GITHUB_WORKSPACE/.scancodeio"
-        chmod 777 "$GITHUB_WORKSPACE/.scancodeio"
 
     - name: Start and setup the PostgreSQL service
       shell: bash
@@ -101,29 +101,10 @@ runs:
         sudo -u postgres psql -c "ALTER USER $SCANCODEIO_DB_USER WITH ENCRYPTED PASSWORD '$SCANCODEIO_DB_PASSWORD'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 "$SCANCODEIO_DB_NAME"
 
-    - name: Write scanpipe wrapper script
+    - name: Install scanpipe wrapper script
       shell: bash
       run: |
-        cat > "$RUNNER_TEMP/scanpipe" << 'EOF'
-        #!/usr/bin/env bash
-        set -euo pipefail
-        exec docker run --rm \
-          --network host \
-          --read-only \
-          --tmpfs /tmp \
-          --tmpfs /opt/scancodeio/.cache:mode=1777 \
-          --cap-drop ALL \
-          --security-opt no-new-privileges \
-          -e SECRET_KEY \
-          -e SCANCODEIO_DB_NAME \
-          -e SCANCODEIO_DB_USER \
-          -e SCANCODEIO_DB_PASSWORD \
-          -e SCANCODEIO_DB_HOST=localhost \
-          -e SCANCODEIO_WORKSPACE_LOCATION \
-          -v "$GITHUB_WORKSPACE:/workspace" \
-          "$SCANCODEIO_IMAGE" \
-          scanpipe "$@"
-        EOF
+        cp "${{ github.action_path }}/scripts/scanpipe.sh" "$RUNNER_TEMP/scanpipe"
         chmod +x "$RUNNER_TEMP/scanpipe"
         echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
 
