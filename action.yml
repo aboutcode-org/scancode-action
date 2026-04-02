@@ -39,7 +39,7 @@ inputs:
     default: "false"
   scancodeio-image:
     description: "ScanCode.io Docker image to use."
-    default: "ghcr.io/aboutcode-org/scancode.io:v37.1.0"
+    default: "ghcr.io/aboutcode-org/scancode.io@sha256:6fc8023bc588602ef2ec2b699c2503d8771fe5ef16470475fe64b641f0955f5b"  # v37.1.0
 
 runs:
   using: "composite"
@@ -98,13 +98,10 @@ runs:
           sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 scancodeio
         fi
 
-    - name: Pull the ScanCode.io image
-      shell: bash
-      run: docker pull "$SCANCODEIO_IMAGE"
-
     - name: Write scanpipe wrapper script
       shell: bash
       run: |
+        if [ -f "$RUNNER_TEMP/scanpipe" ]; then exit 0; fi
         cat > "$RUNNER_TEMP/scanpipe" << 'EOF'
         #!/usr/bin/env bash
         set -euo pipefail
