@@ -39,7 +39,7 @@ inputs:
     default: "false"
   scancodeio-image:
     description: "ScanCode.io Docker image to use."
-    default: "ghcr.io/aboutcode-org/scancode.io@v37.1.0"
+    default: "ghcr.io/aboutcode-org/scancode.io:v37.1.0"
 
 runs:
   using: "composite"
