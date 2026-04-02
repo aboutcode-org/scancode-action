@@ -20,11 +20,11 @@ jobs:
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
-      - uses: ./
-        with:
-          scancodeio-repo-branch: "main"
-          scancodeio-extras: "android_analysis"
-          pipelines: "android_d2d"
-          input-urls:
-            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
-            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
+# scancodeio-extras: "android_analysis" not available with the Docker image for now
+#      - uses: ./
+#        with:
+#          scancodeio-extras: "android_analysis"
+#          pipelines: "android_d2d"
+#          input-urls:
+#            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/from-flume-ng-node-1.9.0.zip#from
+#            https://github.com/aboutcode-org/scancode.io/raw/main/scanpipe/tests/data/d2d/jars/to-flume-ng-node-1.9.0.zip#to
