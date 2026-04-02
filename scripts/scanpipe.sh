@@ -11,6 +11,7 @@ exec docker run --rm \
   -e SCANCODEIO_DB_PASSWORD \
   -e SCANCODEIO_DB_HOST=localhost \
   -e SCANCODEIO_WORKSPACE_LOCATION \
+  -e HOME=/workspace/.home \
   -v "$GITHUB_WORKSPACE:/workspace" \
   "$SCANCODEIO_IMAGE" \
   scanpipe "$@"
