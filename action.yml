@@ -101,10 +101,28 @@ runs:
         sudo -u postgres psql -c "ALTER USER $SCANCODEIO_DB_USER WITH ENCRYPTED PASSWORD '$SCANCODEIO_DB_PASSWORD'"
         sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 "$SCANCODEIO_DB_NAME"
 
-    - name: Install scanpipe wrapper script
+    - name: Write scanpipe wrapper script
       shell: bash
       run: |
-        cp "${{ github.action_path }}/scripts/scanpipe.sh" "$RUNNER_TEMP/scanpipe"
+        cat > "$RUNNER_TEMP/scanpipe" << 'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+exec docker run --rm \
+  --network host \
+  --user "$(id -u):$(id -g)" \
+  --cap-drop ALL \
+  --security-opt no-new-privileges \
+  -e SECRET_KEY \
+  -e SCANCODEIO_DB_NAME \
+  -e SCANCODEIO_DB_USER \
+  -e SCANCODEIO_DB_PASSWORD \
+  -e SCANCODEIO_DB_HOST=localhost \
+  -e SCANCODEIO_WORKSPACE_LOCATION \
+  -e HOME=/workspace/.home \
+  -v "$GITHUB_WORKSPACE:/workspace" \
+  "$SCANCODEIO_IMAGE" \
+  scanpipe "$@"
+EOF
         chmod +x "$RUNNER_TEMP/scanpipe"
         echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
 
