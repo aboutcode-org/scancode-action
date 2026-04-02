@@ -94,7 +94,7 @@ runs:
       run: |
         if ! sudo systemctl is-active --quiet postgresql; then
           sudo systemctl start postgresql.service
-          sudo -u postgres psql -c "CREATE USER scancodeio WITH CREATEDB ENCRYPTED PASSWORD scancodeio;"
+          sudo -u postgres psql -c "CREATE USER scancodeio WITH CREATEDB ENCRYPTED PASSWORD 'scancodeio';"
           sudo -u postgres createdb --owner=scancodeio --encoding=UTF-8 scancodeio
         fi
 
