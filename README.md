@@ -4,11 +4,11 @@ Run [ScanCode.io](https://github.com/aboutcode-org/scancode.io) pipelines direct
 from your **GitHub Workflows**.
 
 > [!IMPORTANT]
-> The scancode-action is currently in the **beta stage**, and we invite you to 
-> contribute to its improvement. Please feel free to submit bug reports or share 
-> your ideas by creating new entries in the "Issues" section. 
-> Your collaboration helps us enhance the action and ensures a more stable and 
-> effective tool for the community. 
+> The scancode-action is currently in the **beta stage**, and we invite you to
+> contribute to its improvement. Please feel free to submit bug reports or share
+> your ideas by creating new entries in the "Issues" section.
+> Your collaboration helps us enhance the action and ensures a more stable and
+> effective tool for the community.
 > Thank you for your support!
 
 - [Usage](#usage)
@@ -24,8 +24,7 @@ from your **GitHub Workflows**.
   - [Fetch pipelines inputs](#fetch-pipelines-inputs)
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
-  - [Install ScanCode.io from a repository branch](#install-scancodeio-from-a-repository-branch)
-  - [Install ScanCode.io with optional dependencies](#install-scancodeio-with-optional-dependencies)
+  - [Use a specific ScanCode.io Docker image](#use-a-specific-scancodeio-docker-image)
   - [Run source to binary mapping](#run-source-to-binary-mapping)
 - [Where does the scan results go?](#where-are-the-scan-results)
 
@@ -86,14 +85,13 @@ steps:
     # Default is false
     compliance-fail-on-vulnerabilities:
 
-    # Python version that will be installed to run ScanCode.io
-    # Default is '3.13'
-    python-version:
+    # ScanCode.io Docker image to use.
+    scancodeio-image:
 ```
 
 ## Examples
 
-See https://github.com/aboutcode-org/scancode-action/tree/main/.github/workflows for 
+See https://github.com/aboutcode-org/scancode-action/tree/main/.github/workflows for
 Workflows examples.
 
 ### Scan repo codebase
@@ -128,7 +126,7 @@ steps:
 
 ### Specify pipeline options
 
-Use the `pipeline_name:option1,option2` syntax to select optional steps for the 
+Use the `pipeline_name:option1,option2` syntax to select optional steps for the
 `map_deploy_to_develop` pipeline
 
 ```yaml
@@ -139,19 +137,19 @@ Use the `pipeline_name:option1,option2` syntax to select optional steps for the
 
 #### Configuring `find_vulnerabilities` Pipeline
 
-The `find_vulnerabilities` pipeline requires access to a VulnerableCode instance, 
+The `find_vulnerabilities` pipeline requires access to a VulnerableCode instance,
 which can be defined using the `VULNERABLECODE_URL` environment variable.
 
-In the example provided, a public instance is referenced. 
-However, you also have the option to run your own VulnerableCode instance. 
-For details on setting up and configuring your own instance, please refer to the 
+In the example provided, a public instance is referenced.
+However, you also have the option to run your own VulnerableCode instance.
+For details on setting up and configuring your own instance, please refer to the
 [VulnerableCode documentation](https://vulnerablecode.readthedocs.io/en/latest/index.html).
 
 #### Fail on known vulnerabilities
 
-When enabled, the workflow will fail if any known vulnerabilities are found in the 
+When enabled, the workflow will fail if any known vulnerabilities are found in the
 project's discovered packages or dependencies.
-Activate this behavior by enabling `check-compliance` and setting 
+Activate this behavior by enabling `check-compliance` and setting
 `compliance-fail-on-vulnerabilities` to true.
 
 ```yaml
@@ -208,8 +206,8 @@ Activate this behavior by enabling `check-compliance` and setting
 ```
 
 > [!NOTE]
-> This feature requires to provide Project policies. 
-> For details on setting up and configuring your own instance, please refer to the 
+> This feature requires to provide Project policies.
+> For details on setting up and configuring your own instance, please refer to the
 > [ScanCode.io Policies documentation](https://scancodeio.readthedocs.io/en/latest/policies.html).
 
 ### Define a custom project name
@@ -220,30 +218,27 @@ Activate this behavior by enabling `check-compliance` and setting
     project-name: "my-project-name"
 ```
 
-### Install ScanCode.io from a repository branch
+### Use a specific ScanCode.io Docker image
+
+The action runs ScanCode.io from a pre-built Docker image. By default, it uses a
+pinned release, but you can point it to another image or tag, for example to run
+against the latest `main` build:
 
 ```yaml
 - uses: aboutcode-org/scancode-action@beta
   with:
-    scancodeio-repo-branch: "main"
-```
-
-### Install ScanCode.io with optional dependencies
-
-```yaml
-- uses: aboutcode-org/scancode-action@beta
-  with:
-    scancodeio-extras: "android_analysis,mining"
+    scancodeio-image: "ghcr.io/aboutcode-org/scancode.io:main"
 ```
 
 ### Run source to binary mapping
 
 Use this [workflow template](.github/workflows/map-deploy-to-develop-template.yml) for validating the integrity of open-source binary. It compares a project’s binary to its source code. Workflow will generate mapping between compiled binary and its original source code, which helps in spotting any malicious, unexpected, or otherwise undesirable code that may have made its way into the final binary.
 
-#### To use follow these steps:
+#### To use follow these steps
 
 1. In your workflow add job to build binary and upload it as a GitHub actions artifact.
 2. Now add a second job to run source binary mapping using [template](.github/workflows/map-deploy-to-develop-template.yml).
+
    ```yaml
      map-source-binary:
        needs: # Job id from step 1
@@ -255,10 +250,9 @@ Use this [workflow template](.github/workflows/map-deploy-to-develop-template.ym
 
 See an end-to-end working example for a python project [here](.github/workflows/map-source-binary-boolean-py.yml)
 
-
 ## Where are the Scan Results?
 
-Upon completion of the workflow, you can **find the scan results** in the dedicated 
-**artifacts section** at the bottom of the workflow summary page. 
-Look for a file named `scancode-outputs` in that section. 
+Upon completion of the workflow, you can **find the scan results** in the dedicated
+**artifacts section** at the bottom of the workflow summary page.
+Look for a file named `scancode-outputs` in that section.
 This file contains the outputs generated by the `scancode-action`.
