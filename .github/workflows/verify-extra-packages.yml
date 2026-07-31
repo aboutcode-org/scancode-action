@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify-extra-packages:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
+    name: Verify scancodeio-extra-packages exposes extra pipelines
+    steps:
+      - name: Build image with minecode-pipelines installed
+        shell: bash
+        run: |
+          # ghcr.io/aboutcode-org/scancode.io v38.0.0 (core)
+          docker build -t scancode-extra-packages-test - <<EOF
+          FROM ghcr.io/aboutcode-org/scancode.io@sha256:e20d2b6e42eb4e192265ccd4b583e37a774240288bae6aa0dc6384d088e1a581
+          RUN pip install --no-cache-dir minecode-pipelines
+          EOF
+
+      - name: Verify mine_pypi pipeline is listed
+        shell: bash
+        run: |
+          docker run --rm scancode-extra-packages-test scanpipe list-pipelines | tee pipelines.txt
+          if ! grep -q "mine_pypi" pipelines.txt; then
+            echo "::error::mine_pypi pipeline not found after installing minecode-pipelines"
+            exit 1
+          fi
