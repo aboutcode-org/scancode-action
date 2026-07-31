@@ -25,7 +25,7 @@ jobs:
       - name: Verify mine_pypi pipeline is listed
         shell: bash
         run: |
-          docker run --rm scancode-extra-packages-test scanpipe list-pipeline | tee pipelines.txt
+          docker run --rm scancode-extra-packages-test scanpipe list-pipelines | tee pipelines.txt
           if ! grep -q "mine_pypi" pipelines.txt; then
             echo "::error::mine_pypi pipeline not found after installing minecode-pipelines"
             exit 1
