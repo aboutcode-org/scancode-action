@@ -40,6 +40,10 @@ inputs:
   scancodeio-image:
     description: "ScanCode.io Docker image to use."
     default: "ghcr.io/aboutcode-org/scancode.io@sha256:6fc8023bc588602ef2ec2b699c2503d8771fe5ef16470475fe64b641f0955f5b"  # v37.1.0
+  scancodeio-extra-packages:
+    description: "Extra Python packages to install on top of the ScanCode.io image (comma-separated, e.g. minecode-pipelines) (optional)."
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -51,10 +55,17 @@ runs:
         INPUT_PROJECT_NAME: ${{ inputs.project-name }}
         INPUT_FAIL_LEVEL: ${{ inputs.compliance-fail-level }}
         INPUT_PIPELINES: ${{ inputs.pipelines }}
+        INPUT_EXTRA_PACKAGES: ${{ inputs.scancodeio-extra-packages }}
       run: |
         # Docker image ref: registry/name:tag or registry/name@sha256:digest
         if [[ ! "$INPUT_IMAGE" =~ ^[a-zA-Z0-9./_:@-]+$ ]]; then
           echo "::error::Invalid image name: $INPUT_IMAGE"
+          exit 1
+        fi
+
+        # Extra packages: pip requirement specifiers, comma-separated
+        if [[ ! "$INPUT_EXTRA_PACKAGES" =~ ^[]a-zA-Z0-9._,\<\>=!~[\ -]*$ ]]; then
+          echo "::error::Invalid scancodeio-extra-packages value: $INPUT_EXTRA_PACKAGES"
           exit 1
         fi
 
@@ -88,6 +99,19 @@ runs:
         echo "SCANCODEIO_IMAGE=$INPUT_IMAGE" >> "$GITHUB_ENV"
         # Sanitize project name for artifact usage
         echo "SAFE_PROJECT_NAME=${INPUT_PROJECT_NAME//[^a-zA-Z0-9._-]/_}" >> "$GITHUB_ENV"
+
+    - name: Build image with extra packages
+      if: ${{ inputs.scancodeio-extra-packages != '' }}
+      shell: bash
+      env:
+        INPUT_EXTRA_PACKAGES: ${{ inputs.scancodeio-extra-packages }}
+      run: |
+        EXTENDED_IMAGE="scancode-action-extended:${GITHUB_RUN_ID}-${GITHUB_JOB}"
+        docker build -t "$EXTENDED_IMAGE" - <<EOF
+        FROM $SCANCODEIO_IMAGE
+        RUN pip install --no-cache-dir ${INPUT_EXTRA_PACKAGES//,/ }
+        EOF
+        echo "SCANCODEIO_IMAGE=$EXTENDED_IMAGE" >> "$GITHUB_ENV"
 
     - name: Start and setup the PostgreSQL service
       shell: bash

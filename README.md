@@ -25,6 +25,7 @@ from your **GitHub Workflows**.
   - [Check for compliance issues](#check-for-compliance-issues)
   - [Define a custom project name](#define-a-custom-project-name)
   - [Use a specific ScanCode.io Docker image](#use-a-specific-scancodeio-docker-image)
+  - [Install extra Python packages in the image](#install-extra-python-packages-in-the-image)
   - [Run source to binary mapping](#run-source-to-binary-mapping)
 - [Where does the scan results go?](#where-are-the-scan-results)
 
@@ -87,6 +88,10 @@ steps:
 
     # ScanCode.io Docker image to use.
     scancodeio-image:
+
+    # Extra Python packages to install on top of the ScanCode.io image
+    # (comma-separated, e.g. minecode-pipelines).
+    scancodeio-extra-packages:
 ```
 
 ## Examples
@@ -228,6 +233,20 @@ against the latest `main` build:
 - uses: aboutcode-org/scancode-action@beta
   with:
     scancodeio-image: "ghcr.io/aboutcode-org/scancode.io:main"
+```
+
+### Install extra Python packages in the image
+
+To run pipelines that are not part of the base image, such as `minecode_pipelines`
+for PURL mining, provide the packages to install via `scancodeio-extra-packages`.
+The action builds a local, throwaway image on top of `scancodeio-image` for this
+run only:
+
+```yaml
+- uses: aboutcode-org/scancode-action@beta
+  with:
+    pipelines: "mine_pypi"
+    scancodeio-extra-packages: "minecode-pipelines"
 ```
 
 ### Run source to binary mapping
