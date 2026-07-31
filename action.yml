@@ -39,7 +39,7 @@ inputs:
     default: "false"
   scancodeio-image:
     description: "ScanCode.io Docker image to use."
-    default: "ghcr.io/aboutcode-org/scancode.io@sha256:6fc8023bc588602ef2ec2b699c2503d8771fe5ef16470475fe64b641f0955f5b"  # v37.1.0
+    default: "ghcr.io/aboutcode-org/scancode.io@sha256:e20d2b6e42eb4e192265ccd4b583e37a774240288bae6aa0dc6384d088e1a581"  # v38.0.0
   scancodeio-extra-packages:
     description: "Extra Python packages to install on top of the ScanCode.io image (comma-separated, e.g. minecode-pipelines) (optional)."
     required: false
